@@ -616,9 +616,235 @@ demo('HTML', '간단한 대시보드, 프로토타입 페이지. 브라우저에
 /* ===================== END CH 00–01 ===================== */
 
 /* ---------- PLACEHOLDERS for CH 02–05 (will be filled next) ---------- */
-pages["2-1"] = '<h1>왜 터미널에서 AI를 쓰나</h1><p class="page-desc">챕터 생성 진행 중입니다. CH 02 승인 후 내용이 채워집니다.</p>';
-pages["2-2"] = '<h1>Claude Code 설치 · 첫 실행</h1><p class="page-desc">챕터 생성 진행 중입니다.</p>';
-pages["2-3"] = '<h1>실제 프로젝트에서 코드 수정하기</h1><p class="page-desc">챕터 생성 진행 중입니다.</p>';
+/* ---------- CH 02 · Claude Code ---------- */
+
+pages["2-1"] = [
+'<h1>왜 터미널에서 AI를 쓰나</h1>',
+'<p class="page-desc">Claude Desktop은 브라우저·앱에서 대화하는 방식입니다. Claude Code는 한 걸음 더 나아가 <b>터미널에서 직접 파일을 읽고 수정하고 실행</b>합니다. "AI에게 물어보고 내가 고치는" 방식에서 "AI가 직접 고치는" 방식으로 바뀝니다.</p>',
+
+'<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 24px">',
+'<div style="background:#fdf0f0;border:1px solid #e8c5c5;border-radius:10px;padding:16px">',
+'<div style="font-size:12px;font-weight:700;color:#a53545;margin-bottom:10px">BEFORE — Claude Desktop 방식</div>',
+'<ul style="font-size:13px;color:#6b5e5a;padding-left:18px;line-height:2.0">',
+'<li>파일 내용을 복사해서 채팅창에 붙여넣기</li>',
+'<li>Claude의 답변을 다시 파일에 수동으로 복사</li>',
+'<li>수정할 파일이 10개면 10번 반복</li>',
+'<li>폴더 구조·파일명을 AI가 모름</li>',
+'</ul>',
+'</div>',
+'<div style="background:#f0f7ed;border:1px solid #b4d1a8;border-radius:10px;padding:16px">',
+'<div style="font-size:12px;font-weight:700;color:#3a6b2e;margin-bottom:10px">AFTER — Claude Code 방식</div>',
+'<ul style="font-size:13px;color:#3a5a30;padding-left:18px;line-height:2.0">',
+'<li>프로젝트 폴더를 통째로 Claude가 인식</li>',
+'<li>파일 읽기·쓰기·생성을 AI가 직접 수행</li>',
+'<li>"이 폴더 안의 모든 파일 정리해줘" 한 번에 처리</li>',
+'<li>터미널 명령도 대신 실행 가능</li>',
+'</ul>',
+'</div>',
+'</div>',
+
+'<h2 class="section-heading">Claude Code가 실제로 하는 것</h2>',
+'<div style="background:#1f1f1f;border-radius:12px;padding:20px;box-shadow:0 4px 16px rgba(0,0,0,0.15);margin:8px 0 20px">',
+'<div style="color:#9aa0a6;font-size:11px;margin-bottom:10px;letter-spacing:0.1em">TERMINAL</div>',
+'<div style="font-family:monospace;font-size:13px;line-height:2.0">',
+'<div><span style="color:#5bb85b">$</span> <span style="color:#e3e3e3">cd ~/Projects/report-tool</span></div>',
+'<div><span style="color:#5bb85b">$</span> <span style="color:#e3e3e3">claude</span></div>',
+'<div style="color:#9aa0a6;margin:8px 0">Claude Code 시작됨 ✓</div>',
+'<div style="color:#8ab4f8;margin-bottom:6px">사용자: 이 폴더 안의 README.md를 읽고, 현재 기능 목록을 표 형태로 정리해줘.</div>',
+'<div style="color:#c4c7c5;margin-left:0">Claude: README.md 읽는 중...</div>',
+'<div style="color:#c4c7c5">파일 확인 완료. 현재 5개 기능이 있습니다. 표 형태로 정리해서 README에 추가할까요?</div>',
+'<div style="color:#8ab4f8;margin-top:6px">사용자: 응, 바로 수정해줘.</div>',
+'<div style="color:#c4c7c5">README.md 수정 완료. 3줄 추가, 1줄 수정했습니다.</div>',
+'</div>',
+'</div>',
+'<div style="font-size:11px;color:#9aa0a6;margin-top:6px;text-align:center">※ 실제 Claude Code 터미널 대화 목업</div>',
+
+'<h2 class="section-heading">Claude Code가 특히 강력한 상황</h2>',
+'<div class="demo-grid">',
+demo('문서 일괄 정리', '폴더 안의 마크다운 파일 20개를 한 번에 읽고, 목차 파일을 자동 생성합니다.'),
+demo('코드 수정·리팩터링', '"이 함수 이름 전체 바꿔줘", "주석 한국어로 번역해줘" — 파일 여러 개를 동시에 처리합니다.'),
+demo('반복 작업 자동화', '"이 폴더 안 CSV 파일들의 헤더를 전부 영문에서 한국어로 바꿔줘" 같은 배치 작업을 즉시 실행합니다.'),
+'</div>',
+
+'<div class="callout">',
+'<div class="callout-title">🎯 이 챕터 끝나면 가능해지는 것</div>',
+'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:1.9">',
+'<li>Claude Code를 설치하고 내 프로젝트 폴더에서 실행</li>',
+'<li>파일 읽기·수정·생성을 Claude에게 직접 위임</li>',
+'<li>슬래시 커맨드(/help, /compact 등)로 세션 제어</li>',
+'</ul>',
+'<p style="margin-top:8px;font-size:13px;color:#6b5e5a">이어지는 순서: <b>2-2</b> 설치·첫 실행 → <b>2-3</b> 실제 프로젝트 실습</p>',
+'</div>'
+].join('');
+
+/* ---------- */
+
+pages["2-2"] = [
+'<h1>Claude Code 설치 · 첫 실행</h1>',
+'<p class="page-desc">Node.js가 설치된 환경이면 npm 명령 하나로 설치가 끝납니다. 설치 후 프로젝트 폴더로 이동해 <code style="background:#f0ece4;padding:2px 6px;border-radius:3px;font-size:13px">claude</code>를 입력하면 바로 시작됩니다.</p>',
+
+'<div class="callout">',
+'<div class="callout-title">🎯 실습 목표</div>',
+'Claude Code를 설치하고, 실습용 폴더에서 첫 대화를 진행합니다. <code style="background:#f0ece4;padding:2px 5px;border-radius:3px;font-size:13px">/help</code> 커맨드로 사용 가능한 명령 목록도 확인합니다.',
+'</div>',
+
+'<h2 class="section-heading">설치 · 첫 실행 — 4단계</h2>',
+'<div class="step-grid">',
+'<div class="step-card">',
+'<div class="step-num">1</div>',
+'<div class="step-title">설치</div>',
+'<div class="step-desc">터미널에서 아래 명령 실행. Node.js 18 이상 필요. 설치는 한 번만 하면 됩니다.</div>',
+'</div>',
+'<div class="step-card">',
+'<div class="step-num">2</div>',
+'<div class="step-title">실습 폴더 이동</div>',
+'<div class="step-desc">작업할 프로젝트 폴더로 이동합니다. Claude는 현재 폴더를 작업 공간으로 인식합니다.</div>',
+'</div>',
+'<div class="step-card">',
+'<div class="step-num">3</div>',
+'<div class="step-title">claude 실행</div>',
+'<div class="step-desc"><code style="background:#f0ece4;padding:2px 5px;border-radius:3px">claude</code> 입력 후 Enter. 최초 실행 시 Anthropic 계정 인증(브라우저 팝업)이 진행됩니다.</div>',
+'</div>',
+'<div class="step-card">',
+'<div class="step-num">4</div>',
+'<div class="step-title">첫 대화 + /help</div>',
+'<div class="step-desc">간단한 파일 작업을 요청해봅니다. <code style="background:#f0ece4;padding:2px 5px;border-radius:3px">/help</code>를 입력하면 슬래시 커맨드 전체 목록이 표시됩니다.</div>',
+'</div>',
+'</div>',
+
+'<h2 class="section-heading">설치 명령</h2>',
+promptBlock('Claude Code 설치',
+`# 1. 설치 (한 번만)
+npm install -g @anthropic-ai/claude-code
+
+# 2. 버전 확인
+claude --version
+
+# 3. 프로젝트 폴더로 이동 후 실행
+cd /path/to/my-project
+claude`),
+
+'<h2 class="section-heading">슬래시 커맨드 — 자주 쓰는 것</h2>',
+'<table>',
+'<thead><tr><th style="width:130px">커맨드</th><th>기능</th><th>언제 쓰나</th></tr></thead>',
+'<tbody>',
+'<tr><td><code>/help</code></td><td>사용 가능한 커맨드 전체 목록 표시</td><td>처음 쓸 때, 기억이 안 날 때</td></tr>',
+'<tr><td><code>/clear</code></td><td>현재 대화 맥락 초기화</td><td>새 작업 시작할 때</td></tr>',
+'<tr><td><code>/compact</code></td><td>긴 대화를 요약해서 토큰 절약</td><td>세션이 길어졌을 때</td></tr>',
+'<tr><td><code>/review</code></td><td>현재 변경 사항 검토 요청</td><td>파일 수정 후 최종 확인</td></tr>',
+'<tr><td><code>/cost</code></td><td>현재 세션 토큰 사용량 확인</td><td>비용 모니터링</td></tr>',
+'</tbody></table>',
+
+'<h2 class="section-heading">터미널 목업 — 첫 실행 흐름</h2>',
+'<div style="background:#1f1f1f;border-radius:12px;padding:20px;box-shadow:0 4px 16px rgba(0,0,0,0.15);margin:8px 0 20px">',
+'<div style="color:#9aa0a6;font-size:11px;margin-bottom:10px;letter-spacing:0.1em">TERMINAL</div>',
+'<div style="font-family:monospace;font-size:13px;line-height:2.0">',
+'<div><span style="color:#5bb85b">$</span> <span style="color:#e3e3e3">npm install -g @anthropic-ai/claude-code</span></div>',
+'<div style="color:#9aa0a6">... 설치 완료</div>',
+'<div style="margin-top:4px"><span style="color:#5bb85b">$</span> <span style="color:#e3e3e3">cd ~/Documents/my-project</span></div>',
+'<div><span style="color:#5bb85b">$</span> <span style="color:#e3e3e3">claude</span></div>',
+'<div style="color:#e3a0aa;margin:8px 0;font-weight:600">✦ Claude Code 시작됨</div>',
+'<div style="color:#9aa0a6;font-size:12px">작업 폴더: ~/Documents/my-project</div>',
+'<div style="color:#9aa0a6;font-size:12px;margin-bottom:10px">파일 5개 감지됨</div>',
+'<div style="color:#8ab4f8">사용자: 이 폴더 구조를 설명해줘.</div>',
+'<div style="color:#c4c7c5;margin-top:4px">Claude: 현재 폴더에 5개 파일이 있습니다...</div>',
+'<div style="color:#8ab4f8;margin-top:8px">사용자: /help</div>',
+'<div style="color:#c4c7c5;margin-top:4px">사용 가능한 커맨드: /clear, /compact, /review, /cost ...</div>',
+'</div>',
+'</div>',
+'<div style="font-size:11px;color:#9aa0a6;margin-top:6px;text-align:center">※ 실제 Claude Code 첫 실행 목업</div>',
+
+'<h2 class="section-heading">첫 실습 — 이렇게 시작해보세요</h2>',
+'<div class="demo-grid">',
+demo('폴더 구조 파악', '"이 폴더에 어떤 파일이 있어? 간단히 설명해줘" — Claude가 폴더를 읽고 현재 상태를 요약합니다.'),
+demo('README 작성', '"이 프로젝트용 README.md 파일을 만들어줘. 한국어로." — 폴더 내용을 분석해 자동 작성합니다.'),
+demo('/compact 활용', '작업이 길어졌다면 /compact 입력. 대화 요약 후 토큰을 절약하며 계속 진행할 수 있습니다.'),
+'</div>',
+
+'<div class="callout" style="background:#fdf5ea;border-color:#c8a855">',
+'<div class="callout-title" style="color:#8a6a10">⚠️ 실행 위치 주의</div>',
+'<code style="background:#f0ece4;padding:2px 5px;border-radius:3px;font-size:13px">claude</code>는 <b>현재 디렉터리를 작업 공간으로 인식</b>합니다. 반드시 작업할 프로젝트 폴더로 이동한 후 실행하십시오. <code>--dir</code> 같은 별도 플래그는 없습니다.',
+'</div>'
+].join('');
+
+/* ---------- */
+
+pages["2-3"] = [
+'<h1>실제 프로젝트에서 코드 수정하기</h1>',
+'<p class="page-desc">설치가 끝났다면 이제 실제 작업을 해봅니다. 이 실습에서는 <b>기존 파일을 읽고 → 수정을 요청하고 → 결과를 확인</b>하는 전체 흐름을 익힙니다. 코딩을 몰라도 됩니다 — 문서 파일도 동일한 방식으로 작동합니다.</p>',
+
+'<div class="callout">',
+'<div class="callout-title">🎯 실습 목표</div>',
+'실습용 폴더에서 Claude Code와 대화하며 파일을 수정합니다. 수정 전 내용 확인 → 수정 요청 → 변경 결과 확인까지의 흐름을 익힙니다.',
+'</div>',
+
+'<h2 class="section-heading">실습 시나리오 — 보고서 파일 정리</h2>',
+'<div class="callout" style="background:#f5f3ff;border-color:#b8a8d8">',
+'<div class="callout-title" style="color:#5a2a74">시나리오 배경</div>',
+'팀 공유 폴더에 월간 보고서 마크다운 파일이 있습니다. 날짜 형식이 제각각이고, 제목 표기도 통일되어 있지 않습니다. Claude Code로 이 파일들을 정리해봅니다.',
+'</div>',
+
+'<h2 class="section-heading">실습 순서 — 5단계</h2>',
+'<div class="step-grid">',
+'<div class="step-card">',
+'<div class="step-num">1</div>',
+'<div class="step-title">폴더 이동 + 실행</div>',
+'<div class="step-desc">실습 폴더로 이동 후 <code style="background:#f0ece4;padding:1px 5px;border-radius:3px">claude</code> 실행. 폴더 안 파일 목록을 Claude가 자동 인식합니다.</div>',
+'</div>',
+'<div class="step-card">',
+'<div class="step-num">2</div>',
+'<div class="step-title">현재 상태 파악</div>',
+'<div class="step-desc">"이 폴더 파일들 읽고 어떤 상태인지 알려줘"로 먼저 현황 파악. 무엇을 바꿀지 파악 후 작업을 지시합니다.</div>',
+'</div>',
+'<div class="step-card">',
+'<div class="step-num">3</div>',
+'<div class="step-title">수정 요청</div>',
+'<div class="step-desc">구체적인 수정 내용을 지시합니다. "전부 바꿔줘"보다 "이 파일의 2번 섹션 제목 형식을 XX로 통일해줘"처럼 명확하게 합니다.</div>',
+'</div>',
+'<div class="step-card">',
+'<div class="step-num">4</div>',
+'<div class="step-title">변경 내용 확인</div>',
+'<div class="step-desc">Claude가 변경할 내용을 먼저 보여줍니다. 동의하면 진행, 아니면 수정 지시를 추가합니다.</div>',
+'</div>',
+'<div class="step-card" style="grid-column: span 1">',
+'<div class="step-num">5</div>',
+'<div class="step-title">/review로 최종 확인</div>',
+'<div class="step-desc"><code style="background:#f0ece4;padding:1px 5px;border-radius:3px">/review</code> 입력 후 변경 사항 전체를 한 번에 검토하고 세션을 마칩니다.</div>',
+'</div>',
+'</div>',
+
+'<h2 class="section-heading">이 실습에서 써볼 프롬프트 예시</h2>',
+promptBlock('Claude Code 실습 — 파일 수정 대화 흐름',
+`# 1단계: 현황 파악
+이 폴더 안의 마크다운 파일들을 읽고,
+파일 목록과 각 파일의 제목·날짜 형식을 표로 정리해줘.
+
+# 2단계: 수정 요청
+모든 파일에서 날짜 형식을 "YYYY년 MM월" 통일해줘.
+제목은 "## 섹션명" 형식으로 맞춰줘.
+수정 전에 변경될 내용을 먼저 보여줘.
+
+# 3단계: 목차 파일 생성
+전체 보고서 목록을 정리한 INDEX.md 파일을 새로 만들어줘.
+파일명, 날짜, 한 줄 요약 포함.`),
+
+'<h2 class="section-heading">작업 중 자주 하는 말</h2>',
+'<div class="demo-grid">',
+demo('"수정 전에 먼저 보여줘"', '변경 사항 미리보기 요청. 실수 방지에 필수. Claude는 기본적으로 변경 전 확인을 요청합니다.'),
+demo('"이 파일만 적용해줘"', '여러 파일이 있을 때 특정 파일에만 먼저 적용하고 확인 후 나머지로 확장합니다.'),
+demo('"원래대로 돌려줘"', '수정이 마음에 안 들면 되돌리기 요청. 변경 전 백업을 Claude가 보관하고 있습니다.'),
+'</div>',
+
+'<div class="callout">',
+'<div class="callout-title">💡 코딩 모르는 분께</div>',
+'Claude Code는 코드 파일뿐 아니라 <b>마크다운, 텍스트, CSV, 설정 파일</b> 등 모든 텍스트 파일을 다룹니다. 문서 정리, 데이터 파일 변환, 보고서 일괄 수정 등에도 동일하게 활용합니다. 지금 익히는 흐름(읽기 → 요청 → 확인)은 파일 종류와 무관하게 동일합니다.',
+'</div>',
+
+'<div class="callout" style="background:#fdf5ea;border-color:#c8a855">',
+'<div class="callout-title" style="color:#8a6a10">⚠️ 중요한 파일 작업 전 확인 사항</div>',
+'Claude Code는 실제로 파일을 수정합니다. <b>중요한 파일은 작업 전 백업</b>을 권장합니다. 또한 사내 보안 정책에 따라 민감 정보가 포함된 파일을 AI 도구로 처리할 때는 정보보안팀 가이드를 따르십시오.',
+'</div>'
+].join('');
 pages["3-1"] = '<h1>MCP가 뭐야 · Claude에 도구를 꽂다</h1><p class="page-desc">챕터 생성 진행 중입니다. CH 03 승인 후 내용이 채워집니다.</p>';
 pages["3-2"] = '<h1>파일시스템 MCP 연결</h1><p class="page-desc">챕터 생성 진행 중입니다.</p>';
 pages["3-3"] = '<h1>외부 서비스 MCP 연결 (Notion/GitHub)</h1><p class="page-desc">챕터 생성 진행 중입니다.</p>';
