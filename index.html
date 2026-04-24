@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude 4시간 실무 가이드 v2</title>
+<title>Claude Cowork 실무 가이드 · 4시간</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 <style>
 :root {
@@ -29,7 +29,6 @@ body {
   font-size: 15px; line-height: 1.65; letter-spacing: -0.01em;
 }
 .app { display: flex; min-height: 100vh; }
-
 .sidebar {
   width: 300px; background: var(--sidebar-bg); color: var(--sidebar-txt);
   position: sticky; top: 0; height: 100vh; overflow-y: auto;
@@ -42,11 +41,10 @@ body {
 .logo {
   width: 46px; height: 46px; background: var(--brand); border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  color: white; font-weight: 700; font-size: 14px; flex-shrink: 0;
+  color: white; font-weight: 700; font-size: 13px; flex-shrink: 0;
 }
 .brand-title { font-weight: 700; color: #fff; font-size: 15px; }
 .brand-sub   { font-size: 12px; color: var(--sidebar-dim); margin-top: 3px; }
-
 .nav-chapter { padding: 2px 12px; }
 .nav-chapter-header {
   display: flex; align-items: center; gap: 10px;
@@ -64,7 +62,6 @@ body {
 .nav-chapter.open .ch-caret { transform: rotate(180deg); }
 .sections { padding-left: 14px; display: none; margin: 2px 0 8px; }
 .nav-chapter.open .sections { display: block; }
-
 .section-item {
   display: flex; align-items: center; gap: 10px;
   padding: 8px 10px 8px 14px; cursor: pointer; border-radius: 4px;
@@ -77,14 +74,12 @@ body {
 }
 .section-item .dot { width: 5px; height: 5px; background: var(--brand-soft); border-radius: 50%; flex-shrink: 0; }
 .section-item .title { flex: 1; }
-
 .tag { font-size: 10px; padding: 2px 6px; border-radius: 3px; font-weight: 700; letter-spacing: .02em; flex-shrink: 0; }
 .tag-plat     { background: #c5dcc8; color: #2f5534; }
 .tag-concept  { background: #c5d5e4; color: #2a4664; }
 .tag-practice { background: #efd9a8; color: #7a5a18; }
 .tag-workshop { background: #dcc8e4; color: #5a2a74; }
 .tag-opening  { background: #f0c8c8; color: #7a1a1a; }
-
 .main { flex: 1; min-width: 0; }
 .top {
   background: var(--bg); padding: 18px 40px; border-bottom: 1px solid var(--border);
@@ -95,20 +90,14 @@ body {
 .breadcrumb .current { color: var(--text); font-weight: 600; }
 .breadcrumb span + span::before { content: "›"; margin: 0 8px; color: var(--muted); }
 .font-ctrl { display: flex; background: #fff; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; }
-.font-ctrl button {
-  background: transparent; border: none; padding: 6px 12px; cursor: pointer;
-  font-size: 12px; color: var(--muted);
-}
+.font-ctrl button { background: transparent; border: none; padding: 6px 12px; cursor: pointer; font-size: 12px; color: var(--muted); }
 .font-ctrl button.active { background: var(--text); color: #fff; }
-
 .content { padding: 40px; max-width: 980px; }
-
 h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; letter-spacing: -.02em; }
 h2 { font-size: 20px; font-weight: 700; margin: 32px 0 12px; letter-spacing: -.02em; }
 h3 { font-size: 16px; font-weight: 600; margin: 20px 0 8px; }
 p  { margin: 8px 0; }
 strong { font-weight: 700; color: var(--text); }
-
 .page-desc { font-size: 15.5px; color: var(--muted); margin-bottom: 24px; line-height: 1.75; }
 .section-heading {
   border-bottom: 2px solid var(--brand); padding-bottom: 6px;
@@ -121,11 +110,8 @@ strong { font-weight: 700; color: var(--text); }
   box-shadow: 0 1px 3px rgba(0,0,0,.04);
 }
 .callout-title { font-weight: 700; margin-bottom: 6px; color: var(--brand); font-size: 14px; }
-
 .card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin: 16px 0; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
 .card-title { font-weight: 700; margin-bottom: 8px; font-size: 16px; }
-.card-desc  { color: var(--muted); font-size: 14px; }
-
 .prompt-block { background: #fcfaf5; border: 1px solid var(--border); border-radius: 8px; margin: 12px 0 20px; overflow: hidden; }
 .prompt-header { background: var(--bg); padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
 .prompt-label { font-size: 13px; font-weight: 600; color: var(--text); }
@@ -133,47 +119,29 @@ strong { font-weight: 700; color: var(--text); }
 .copy-btn:hover { background: var(--brand-soft); }
 .copy-btn.copied { background: #5a7c5a; }
 .prompt-body { padding: 18px 22px; white-space: pre-wrap; font-family: 'Pretendard Variable', monospace; font-size: 13.5px; line-height: 1.75; color: #2c2626; }
-
-.file-card {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 22px; background: #fff;
-  border: 1px solid var(--border); border-radius: 8px; margin: 10px 0;
-  box-shadow: 0 1px 3px rgba(0,0,0,.04); text-decoration: none; color: inherit;
-}
+.file-card { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; background: #fff; border: 1px solid var(--border); border-radius: 8px; margin: 10px 0; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
 .file-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
 .file-info p  { font-size: 13px; color: var(--muted); margin: 0; }
-.dl-btn { background: var(--brand); color: #fff; border: none; padding: 10px 22px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-block; }
-.dl-btn:hover { background: var(--brand-soft); }
-
 ul { padding-left: 22px; margin: 10px 0; }
 li { margin: 6px 0; }
-
-.demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin: 14px 0; }
+.demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 14px 0; }
 .demo-topic { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
 .demo-topic .tt { font-weight: 700; margin-bottom: 6px; color: var(--text); font-size: 14px; }
 .demo-topic .dd { font-size: 13px; color: var(--muted); line-height: 1.6; }
-
 table { width: 100%; border-collapse: collapse; margin: 14px 0; background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
 th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
 th { background: var(--bg); font-weight: 700; font-size: 13px; }
 tr:last-child td { border-bottom: none; }
-
-.pills { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 20px; }
-.pill  { padding: 4px 12px; background: #fff; border: 1px solid var(--border); border-radius: 14px; font-size: 12px; color: var(--muted); }
-.pill.primary { background: var(--brand); color: #fff; border-color: var(--brand); }
-
 .step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
 .step-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
 .step-num { width: 28px; height: 28px; background: var(--brand); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
 .step-title { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
 .step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
-
 .footer-nav { display: flex; justify-content: space-between; margin-top: 50px; padding-top: 24px; border-top: 1px solid var(--border); gap: 12px; }
 .nav-btn { background: #fff; border: 1px solid var(--border); padding: 12px 20px; border-radius: 6px; cursor: pointer; font-size: 14px; color: var(--text); font-weight: 600; transition: all .15s; flex: 1; max-width: 48%; }
 .nav-btn:hover:not(.disabled) { background: var(--brand); color: #fff; border-color: var(--brand); }
 .nav-btn.disabled { opacity: .4; cursor: not-allowed; }
 .nav-btn.next { text-align: right; }
-
 .hamburger { display: none; background: none; border: none; font-size: 22px; cursor: pointer; color: var(--text); }
 @media (max-width: 900px) {
   .sidebar { position: fixed; left: -300px; z-index: 100; transition: left .25s; }
@@ -188,10 +156,10 @@ tr:last-child td { border-bottom: none; }
 <div class="app">
   <aside class="sidebar" id="sidebar">
     <div class="brand">
-      <div class="logo">CL</div>
+      <div class="logo">CW</div>
       <div>
-        <div class="brand-title">Claude 실무 가이드 v2</div>
-        <div class="brand-sub">4시간 · AI 경험자 심화 과정</div>
+        <div class="brand-title">Claude Cowork 가이드</div>
+        <div class="brand-sub">4시간 · Chat → Code → Cowork</div>
       </div>
     </div>
     <nav class="nav" id="nav"></nav>
@@ -212,44 +180,50 @@ tr:last-child td { border-bottom: none; }
 
 <script>
 const chapters = [
-  { num:"CH 00", title:"오프닝", time:"0:00–0:20 · 20분",
+  { num:"CH 00", title:"AI의 진화 · 지금 어디에 있나", time:"0:00–0:20 · 20분",
     sections:[
-      {id:"0",   title:"ChatGPT 쓰던 내가 Claude를 다시 배우는 이유", type:"opening"},
-      {id:"0-1", title:"오늘의 여정 · 4시간 아젠다",                  type:"concept"}
+      {id:"0",   title:"AI 4단계 진화 · 나는 지금 어느 단계?", type:"opening"},
+      {id:"0-1", title:"오늘의 여정 · Cowork가 답인 이유",       type:"concept"}
     ]
   },
-  { num:"CH 01", title:"Claude Desktop 핵심", time:"0:20–1:00 · 40분",
+  { num:"CH 01", title:"Chat · 설명하는 AI", time:"0:20–0:50 · 30분",
     sections:[
-      {id:"1-1", title:"Desktop UI · ChatGPT와 뭐가 다른가",  type:"concept"},
-      {id:"1-2", title:"Projects · 컨텍스트 재사용",           type:"practice", label:"실습 1"},
-      {id:"1-3", title:"Artifacts · 결과물을 자산으로",         type:"practice", label:"실습 2"}
+      {id:"1-1", title:"Chat이란 · Claude Desktop 핵심 기능",    type:"concept"},
+      {id:"1-2", title:"Projects & Artifacts 실습",               type:"practice", label:"실습 1"}
     ]
   },
-  { num:"CH 02", title:"Claude Code", time:"1:00–1:50 · 50분",
+  { num:"CH 02", title:"Code · 개발자의 작업실", time:"0:50–1:20 · 30분",
     sections:[
-      {id:"2-1", title:"왜 터미널에서 AI를 쓰나",               type:"concept"},
-      {id:"2-2", title:"Claude Code 설치 · 첫 실행",            type:"practice", label:"실습 3"},
-      {id:"2-3", title:"실제 프로젝트에서 코드 수정하기",       type:"practice", label:"실습 4"}
+      {id:"2-1", title:"Code란 · 파일을 직접 다루는 AI",          type:"concept"},
+      {id:"2-2", title:"Claude Code 설치 · 첫 실행",              type:"practice", label:"실습 2"}
     ]
   },
-  { num:"CH 03", title:"MCP · 내 Claude에 도구 붙이기", time:"1:50–2:40 · 50분",
+  { num:"CH 03", title:"Cowork · 일하는 AI", time:"1:20–2:10 · 50분",
     sections:[
-      {id:"3-1", title:"MCP가 뭐야 · Claude에 도구를 꽂다",     type:"concept"},
-      {id:"3-2", title:"파일시스템 MCP 연결",                   type:"practice", label:"실습 5"},
-      {id:"3-3", title:"외부 서비스 MCP 연결 (Notion/GitHub)", type:"practice", label:"실습 6"}
+      {id:"3-1", title:"Cowork란 · 작업형 AI의 정의",             type:"concept"},
+      {id:"3-2", title:"Chat vs Code vs Cowork · 완전 비교",      type:"concept"},
+      {id:"3-3", title:"Cowork 시작하기 · 첫 설정",               type:"practice", label:"실습 3"}
     ]
   },
-  { num:"CH 04", title:"Skills & Agents · 반복 업무를 자산으로", time:"2:40–3:40 · 60분",
+  { num:"CH 04", title:"Cowork 핵심 기능 4가지", time:"2:10–2:50 · 40분",
     sections:[
-      {id:"4-1", title:"Skill · 반복 프롬프트를 파일로",        type:"concept"},
-      {id:"4-2", title:"내 업무 Skill 하나 만들기",             type:"practice", label:"실습 7"},
-      {id:"4-3", title:"서브에이전트 · 일을 위임하는 법",       type:"concept"},
-      {id:"4-4", title:"내 전용 에이전트 만들기",               type:"workshop", label:"워크샵"}
+      {id:"4-1", title:"Scheduled · 반복 작업 자동화",             type:"concept"},
+      {id:"4-2", title:"Ideas & Customize · 제안과 맞춤 설정",    type:"concept"},
+      {id:"4-3", title:"Settings · 나만의 작업 규칙",              type:"concept"},
+      {id:"4-4", title:"Connectors · 외부 서비스 연결",            type:"practice", label:"실습 4"}
     ]
   },
-  { num:"CH 05", title:"치트시트 · 30일 루틴", time:"3:40–4:00 · 20분",
+  { num:"CH 05", title:"실전 실습 3개", time:"2:50–3:40 · 50분",
     sections:[
-      {id:"5", title:"손에 쥐고 가는 것 · 30일 루틴", type:"plat"}
+      {id:"5-1", title:"실습 A · 보고서 초안 자동 생성",           type:"practice", label:"실습 A"},
+      {id:"5-2", title:"실습 B · 회의록 할 일 자동 정리",          type:"practice", label:"실습 B"},
+      {id:"5-3", title:"통합 워크샵 · 내 업무에 Cowork 적용",      type:"workshop", label:"워크샵"}
+    ]
+  },
+  { num:"CH 06", title:"안전 + 마무리", time:"3:40–4:00 · 20분",
+    sections:[
+      {id:"6-1", title:"AI 안전하게 쓰기 · 3가지 원칙",           type:"concept"},
+      {id:"6-2", title:"마무리 · 손에 쥐고 가는 것",               type:"plat"}
     ]
   }
 ];
@@ -269,9 +243,6 @@ function promptBlock(title, content) {
 }
 function demo(title, desc) {
   return '<div class="demo-topic"><div class="tt">' + title + '</div><div class="dd">' + desc + '</div></div>';
-}
-function fileCard(name, size) {
-  return '<div class="file-card"><div class="file-info"><h4>' + name + '</h4><p>' + size + '</p></div><span class="dl-btn" style="background:#bbaa95;cursor:not-allowed">준비 중</span></div>';
 }
 function copyPrompt(btn, id) {
   const text = document.getElementById(id).innerText;
@@ -295,1368 +266,775 @@ function copyPrompt(btn, id) {
 /* ===================== PAGES ===================== */
 const pages = {};
 
-/* ---------- CH 00 · 오프닝 ---------- */
-
+/* ---------- CH 00 ---------- */
 pages["0"] = [
-'<h1>ChatGPT 쓰던 내가 Claude를 다시 배우는 이유</h1>',
-'<p class="page-desc">ChatGPT·Gemini를 써봤지만 뭔가 아쉬웠다면 — 그 아쉬움이 오늘 이 자리로 이끌었습니다. Claude는 단순히 "더 나은 챗봇"이 아니라, <b>반복 업무를 자산으로 쌓는 구조</b>가 다릅니다.</p>',
+'<h1>AI 4단계 진화 · 나는 지금 어느 단계?</h1>',
+'<p class="page-desc">ChatGPT, Gemini를 이미 써봤다면 당신은 AI 진화의 2~3단계에 있습니다. 오늘은 아직 대부분의 직장인이 모르는 <b>4단계 — 작업형 AI(Cowork)</b>로 넘어갑니다.</p>',
 
-'<div style="background:#1f1f1f;border-radius:12px;padding:24px;margin:0 0 24px;box-shadow:0 4px 20px rgba(0,0,0,0.18)">',
-'<div style="color:#e3e3e3;font-size:13px;line-height:1.8">',
-'<div style="color:#8B1C2B;font-weight:700;font-size:11px;letter-spacing:0.1em;margin-bottom:14px">CLAUDE DESKTOP · 오늘 배울 것들</div>',
-'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">',
-'<div style="background:#2a2a2a;border-radius:8px;padding:14px"><div style="color:#c4c7c5;font-size:11px;margin-bottom:6px">CH 01</div><div style="font-weight:600">Projects + Artifacts</div><div style="color:#9aa0a6;font-size:12px;margin-top:4px">컨텍스트를 저장하고 결과물을 자산화</div></div>',
-'<div style="background:#2a2a2a;border-radius:8px;padding:14px"><div style="color:#c4c7c5;font-size:11px;margin-bottom:6px">CH 02</div><div style="font-weight:600">Claude Code</div><div style="color:#9aa0a6;font-size:12px;margin-top:4px">터미널에서 AI가 코드를 직접 수정</div></div>',
-'<div style="background:#2a2a2a;border-radius:8px;padding:14px"><div style="color:#c4c7c5;font-size:11px;margin-bottom:6px">CH 03</div><div style="font-weight:600">MCP 연결</div><div style="color:#9aa0a6;font-size:12px;margin-top:4px">파일·Notion·GitHub을 Claude에 꽂기</div></div>',
-'<div style="background:#2a2a2a;border-radius:8px;padding:14px"><div style="color:#c4c7c5;font-size:11px;margin-bottom:6px">CH 04</div><div style="font-weight:600">Skills & Agents</div><div style="color:#9aa0a6;font-size:12px;margin-top:4px">반복 업무를 파일로 쌓고 위임하기</div></div>',
+'<div style="background:#1f1719;border-radius:14px;padding:28px;margin:0 0 28px;box-shadow:0 6px 24px rgba(0,0,0,0.18)">',
+'<div style="font-size:11px;color:#e3a0aa;font-weight:700;letter-spacing:0.12em;margin-bottom:18px">AI 진화 4단계</div>',
+'<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">',
+'<div style="background:#2a2022;border-radius:10px;padding:14px;border-top:3px solid #666">',
+'<div style="font-size:10px;color:#8a7f72;font-weight:700;letter-spacing:0.08em;margin-bottom:8px">STAGE 1</div>',
+'<div style="font-weight:700;color:#c4c7c5;font-size:14px;margin-bottom:6px">대화형</div>',
+'<div style="font-size:12px;color:#8a7f72;line-height:1.6">질문하면 답해주는 AI. GPT-3 시대. 검색의 대체재.</div>',
 '</div>',
-'</div></div>',
+'<div style="background:#2a2022;border-radius:10px;padding:14px;border-top:3px solid #8a7f72">',
+'<div style="font-size:10px;color:#8a7f72;font-weight:700;letter-spacing:0.08em;margin-bottom:8px">STAGE 2</div>',
+'<div style="font-weight:700;color:#c4c7c5;font-size:14px;margin-bottom:6px">생성형</div>',
+'<div style="font-size:12px;color:#8a7f72;line-height:1.6">글·코드·이미지를 만들어주는 AI. ChatGPT, Gemini.</div>',
+'</div>',
+'<div style="background:#2a2022;border-radius:10px;padding:14px;border-top:3px solid #b94556">',
+'<div style="font-size:10px;color:#e3a0aa;font-weight:700;letter-spacing:0.08em;margin-bottom:8px">STAGE 3</div>',
+'<div style="font-weight:700;color:#e3a0aa;font-size:14px;margin-bottom:6px">연결형</div>',
+'<div style="font-size:12px;color:#c4c7c5;line-height:1.6">외부 서비스(드라이브·노션·GitHub)와 연결된 AI.</div>',
+'</div>',
+'<div style="background:#3a1a22;border-radius:10px;padding:14px;border-top:3px solid #8B1C2B;border:1px solid rgba(139,28,43,0.4)">',
+'<div style="font-size:10px;color:#e3a0aa;font-weight:700;letter-spacing:0.08em;margin-bottom:8px">STAGE 4 ← 오늘</div>',
+'<div style="font-weight:700;color:#fff;font-size:14px;margin-bottom:6px">작업형 (Cowork)</div>',
+'<div style="font-size:12px;color:#e3c0c8;line-height:1.6">지시하면 AI가 직접 일을 실행하고 결과물을 저장.</div>',
+'</div>',
+'</div>',
+'</div>',
 
-'<h2 class="section-heading">왜 지금 Claude인가 — 핵심 차이 3가지</h2>',
-'<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0 20px">',
-'<div style="background:#fff3f3;border:1px solid #f3cac8;border-radius:10px;padding:16px">',
-'<div style="font-size:12px;font-weight:700;color:#a53545;margin-bottom:10px">ChatGPT / Gemini 쓰던 방식</div>',
-'<ul style="font-size:13px;color:#6b5e5a;padding-left:18px;line-height:1.9">',
-'<li>매번 같은 배경 설명을 다시 입력</li>',
-'<li>결과물은 채팅창 안에서 사라짐</li>',
-'<li>AI가 내 파일·툴을 모름</li>',
-'<li>프롬프트는 개인 노트에 따로 보관</li>',
+'<h2 class="section-heading">ChatGPT 사용자가 느끼는 한계</h2>',
+'<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0 24px">',
+'<div style="background:#fdf0f0;border:1px solid #e8c5c5;border-radius:10px;padding:18px">',
+'<div style="font-size:12px;font-weight:700;color:#a53545;margin-bottom:12px">😩 매번 반복되는 패턴</div>',
+'<ul style="font-size:13px;color:#6b5e5a;padding-left:18px;line-height:2.0">',
+'<li>같은 배경 설명을 매 대화마다 다시 입력</li>',
+'<li>결과물이 채팅창에만 존재, 파일로 바로 저장 안 됨</li>',
+'<li>AI가 내 폴더·문서·캘린더를 모름</li>',
+'<li>자동화하려면 Zapier 같은 별도 서비스 필요</li>',
 '</ul>',
 '</div>',
-'<div style="background:#f0f7ed;border:1px solid #b4d1a8;border-radius:10px;padding:16px">',
-'<div style="font-size:12px;font-weight:700;color:#3a6b2e;margin-bottom:10px">오늘 배우는 Claude 방식</div>',
-'<ul style="font-size:13px;color:#3a5a30;padding-left:18px;line-height:1.9">',
-'<li>Projects에 컨텍스트를 한 번 저장하면 끝</li>',
-'<li>Artifacts로 결과물을 바로 파일화</li>',
-'<li>MCP로 내 파일·서비스를 직접 연결</li>',
-'<li>Skills 파일로 프롬프트가 팀 자산이 됨</li>',
+'<div style="background:#f0f7ed;border:1px solid #b4d1a8;border-radius:10px;padding:18px">',
+'<div style="font-size:12px;font-weight:700;color:#3a6b2e;margin-bottom:12px">😎 Cowork 방식</div>',
+'<ul style="font-size:13px;color:#3a5a30;padding-left:18px;line-height:2.0">',
+'<li>Projects에 업무 맥락을 한 번만 저장</li>',
+'<li>Artifacts로 결과물을 즉시 파일화</li>',
+'<li>Connectors로 드라이브·노션·캘린더 직접 연결</li>',
+'<li>Scheduled로 반복 작업 자동 실행</li>',
 '</ul>',
 '</div>',
 '</div>',
 
-'<h2 class="section-heading">오늘 이 시간에 만들 것들</h2>',
+'<h2 class="section-heading">오늘 4시간 후 가능해지는 것</h2>',
 '<div class="demo-grid">',
-demo("📁 나만의 Project", "부서·업무별 컨텍스트를 저장해두는 지속적 작업 공간"),
-demo("⚡ Claude Code 환경", "터미널에서 AI와 협업하는 개발·문서 작업 환경"),
-demo("🔌 MCP 연결 2개", "파일시스템 + 외부 서비스를 Claude에 실시간 연결"),
-demo("📄 업무 Skill 파일", "내 반복 업무 프롬프트를 재사용 가능한 자산으로 변환"),
+demo("💬 Chat 마스터", "Projects로 업무 맥락을 저장하고, Artifacts로 결과물을 바로 파일화합니다."),
+demo("⌨️ Code 활용", "터미널에서 Claude Code로 파일을 직접 수정하고 코드를 생성합니다."),
+demo("🔗 Cowork 실행", "드라이브·노션·캘린더를 연결해 AI가 실제 업무를 대신 처리합니다."),
+demo("🔄 자동화 설계", "Scheduled 기능으로 반복 업무를 예약하고 매일 자동 실행합니다."),
 '</div>',
 
 '<div class="callout">',
 '<div class="callout-title">💡 오늘 수업의 전제</div>',
-'ChatGPT나 Gemini를 써봤고, AI 프롬프트가 어색하지 않은 분들을 위한 과정입니다. "어떻게 Claude가 다른가"에 집중하고, 기초 챗봇 사용법은 빠르게 지나갑니다.',
+'ChatGPT나 Gemini를 써봤고 AI 프롬프트가 어색하지 않은 분들을 위한 과정입니다. "Claude가 어떻게 다른가"에 집중하며, 기초 챗봇 사용법은 빠르게 지나갑니다.',
 '</div>'
 ].join('');
 
 /* ---------- */
-
 pages["0-1"] = [
-'<h1>오늘의 여정 · 4시간 아젠다</h1>',
-'<p class="page-desc">4시간 동안 Claude의 3개 레이어를 순서대로 쌓습니다. <b>Desktop(사용) → Code(확장) → MCP·Skills·Agents(자산화)</b>. 각 챕터는 독립적으로 완결되지만, 순서대로 쌓을수록 뒤가 더 강력해집니다.</p>',
+'<h1>오늘의 여정 · Cowork가 답인 이유</h1>',
+'<p class="page-desc">4시간 동안 Claude의 3개 레이어를 순서대로 쌓습니다. <b>Chat(사용) → Code(확장) → Cowork(자동화)</b>. 각 챕터는 독립적이지만 순서대로 쌓을수록 뒤가 더 강력해집니다.</p>',
 
 '<h2 class="section-heading">시간표</h2>',
 '<table>',
-'<thead><tr><th style="width:90px">챕터</th><th style="width:130px">시간</th><th>배울 것</th><th style="width:120px">핵심 산출물</th></tr></thead>',
+'<thead><tr><th style="width:80px">챕터</th><th style="width:120px">시간</th><th>배울 것</th><th style="width:130px">핵심 산출물</th></tr></thead>',
 '<tbody>',
-'<tr><td><b>CH 00</b></td><td>0:00–0:20</td><td>왜 Claude인가, 오늘의 구조 이해</td><td>—</td></tr>',
-'<tr><td><b>CH 01</b></td><td>0:20–1:00</td><td>Claude Desktop · Projects + Artifacts</td><td>나만의 Project 1개</td></tr>',
-'<tr><td><b>CH 02</b></td><td>1:00–1:50</td><td>Claude Code · 터미널 AI 협업</td><td>Code 환경 셋업 + 실습</td></tr>',
-'<tr><td><b>CH 03</b></td><td>1:50–2:40</td><td>MCP · 도구 연결</td><td>MCP 서버 2개 연결</td></tr>',
-'<tr><td><b>CH 04</b></td><td>2:40–3:40</td><td>Skills & Agents · 자산화</td><td>Skill 파일 + Agent 정의</td></tr>',
-'<tr><td><b>CH 05</b></td><td>3:40–4:00</td><td>치트시트 · 30일 루틴</td><td>내일부터 쓸 루틴 카드</td></tr>',
+'<tr><td><b>CH 00</b></td><td>0:00–0:20</td><td>AI 4단계 진화, Cowork 개념 이해</td><td>—</td></tr>',
+'<tr><td><b>CH 01</b></td><td>0:20–0:50</td><td>Chat · Projects + Artifacts 실습</td><td>나만의 Project 1개</td></tr>',
+'<tr><td><b>CH 02</b></td><td>0:50–1:20</td><td>Code · Claude Code 설치 + 첫 실행</td><td>Code 환경 셋업</td></tr>',
+'<tr><td><b>CH 03</b></td><td>1:20–2:10</td><td>Cowork · 정의 + 비교 + 첫 설정</td><td>Cowork 환경 구성</td></tr>',
+'<tr><td><b>CH 04</b></td><td>2:10–2:50</td><td>핵심 기능 4가지: Scheduled·Ideas·Customize·Connectors</td><td>기능 설정 완료</td></tr>',
+'<tr><td><b>CH 05</b></td><td>2:50–3:40</td><td>실전 실습 3개</td><td>실제 업무 자동화 1건</td></tr>',
+'<tr><td><b>CH 06</b></td><td>3:40–4:00</td><td>안전 원칙 + 30일 루틴</td><td>실전 루틴 카드</td></tr>',
 '</tbody></table>',
 
-'<h2 class="section-heading">오늘 수업의 3개 레이어</h2>',
+'<h2 class="section-heading">Chat → Code → Cowork · 3개 레이어</h2>',
 '<div class="step-grid">',
 '<div class="step-card">',
 '<div class="step-num">1</div>',
-'<div class="step-title">사용 레이어</div>',
-'<div class="step-desc">Claude Desktop에서 Projects·Artifacts로 일하는 방식을 바꿉니다. 기존 ChatGPT 사용 방식과 가장 큰 차이가 여기 있습니다.</div>',
+'<div class="step-title">Chat 레이어</div>',
+'<div class="step-desc">Claude Desktop/claude.ai에서 직접 대화. Projects로 맥락을 저장하고 Artifacts로 결과물을 뽑습니다. 가장 먼저 익혀야 할 기본기.</div>',
 '</div>',
 '<div class="step-card">',
 '<div class="step-num">2</div>',
-'<div class="step-title">확장 레이어</div>',
-'<div class="step-desc">Claude Code로 터미널에서 직접 작업합니다. 코딩뿐 아니라 문서·파일 작업을 AI와 함께 처리할 수 있습니다.</div>',
+'<div class="step-title">Code 레이어</div>',
+'<div class="step-desc">터미널에서 Claude Code CLI로 파일을 직접 편집합니다. 코드뿐 아니라 문서·보고서·설정 파일도 처리합니다.</div>',
 '</div>',
 '<div class="step-card">',
 '<div class="step-num">3</div>',
-'<div class="step-title">자산화 레이어</div>',
-'<div class="step-desc">MCP·Skills·Agents로 반복 업무를 파일과 구조로 만듭니다. 이게 Claude를 다른 AI와 차별화하는 핵심입니다.</div>',
+'<div class="step-title">Cowork 레이어</div>',
+'<div class="step-desc">AI가 허락된 서비스(드라이브·노션·캘린더)에 접근해 실제 작업을 실행합니다. 이게 다른 AI와 Claude를 구별하는 핵심입니다.</div>',
 '</div>',
-'</div>',
-
-'<div class="callout">',
-'<div class="callout-title">🎯 오늘 끝나면 가능해지는 것</div>',
-'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:1.9">',
-'<li>내 부서 업무 맥락을 Projects에 한 번 저장하고 매번 재사용</li>',
-'<li>Claude Code로 문서·코드 수정을 터미널에서 처리</li>',
-'<li>파일시스템·Notion 등을 MCP로 직접 연결</li>',
-'<li>반복 프롬프트를 Skill 파일로 만들어 팀 전체에 공유</li>',
-'</ul>',
 '</div>',
 
 '<div class="callout" style="background:#fdf5ea;border-color:#c8a855">',
 '<div class="callout-title" style="color:#8a6a10">📦 사전 준비 사항</div>',
-'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:1.9;color:#5a4a20">',
-'<li>Claude.ai 계정 (Pro 플랜 권장 — Projects 기능 필요)</li>',
-'<li>Claude Desktop 앱 설치 (claude.ai/download)</li>',
-'<li>Node.js 18 이상 설치 (Claude Code 실습용)</li>',
-'<li>터미널(macOS: Terminal / Windows: PowerShell 또는 명령 프롬프트) 기본 사용 가능</li>',
+'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:2.0;color:#5a4a20">',
+'<li>Claude.ai 계정 (Pro 플랜 권장 — Projects·Connectors 기능 필요)</li>',
+'<li>Claude Desktop 앱 설치 완료 (claude.ai/download)</li>',
+'<li>터미널 사용 가능 (macOS: Terminal, Windows: WSL 또는 PowerShell)</li>',
+'<li>Google 계정 (Connectors 실습용)</li>',
 '</ul>',
 '</div>'
 ].join('');
 
-/* ---------- CH 01 · Claude Desktop 핵심 ---------- */
-
+/* ---------- CH 01 ---------- */
 pages["1-1"] = [
-'<h1>Desktop UI · ChatGPT와 뭐가 다른가</h1>',
-'<p class="page-desc">Claude Desktop은 "더 나은 채팅창"이 아닙니다. <b>Projects(지속적 작업 공간)</b>와 <b>Artifacts(결과물 분리)</b>라는 두 구조가 기존 AI와 근본적으로 다릅니다.</p>',
+'<h1>Chat이란 · Claude Desktop 핵심 기능</h1>',
+'<p class="page-desc">Chat은 Claude와 대화하는 가장 기본적인 방식입니다. 그런데 Claude의 Chat은 ChatGPT와 구조적으로 다릅니다. <b>Projects(지속 컨텍스트)</b>와 <b>Artifacts(결과물 분리)</b>가 핵심 차이입니다.</p>',
 
-'<h2 class="section-heading">UI 한눈에 보기</h2>',
+'<h2 class="section-heading">Claude Desktop UI 한눈에</h2>',
 '<div style="background:#1f1f1f;border-radius:12px;padding:14px;box-shadow:0 4px 16px rgba(0,0,0,0.15);margin:8px 0 20px">',
 '<div style="display:flex;gap:2px">',
-'<div style="width:220px;background:#2a2a2a;border-radius:8px;padding:14px 10px;color:#e3e3e3;font-size:12px">',
-'<div style="display:flex;align-items:center;gap:8px;padding:6px 10px;color:#e3a0aa;font-weight:700;margin-bottom:10px;font-size:13px">✦ Claude</div>',
-'<div style="padding:6px 10px;color:#9aa0a6;font-size:11px;letter-spacing:0.05em;margin-bottom:4px">PROJECTS</div>',
-'<div style="padding:8px 10px;background:#3c2a2e;border-radius:6px;color:#e3a0aa;font-size:12px;margin-bottom:3px">📁 마케팅 Q3 캠페인</div>',
-'<div style="padding:8px 10px;color:#c4c7c5;font-size:12px;margin-bottom:3px">📁 품질 월례 보고</div>',
-'<div style="padding:8px 10px;color:#c4c7c5;font-size:12px;margin-bottom:10px">📁 신규 서비스 기획</div>',
-'<div style="padding:6px 10px;color:#9aa0a6;font-size:11px;letter-spacing:0.05em;margin-bottom:4px">최근 대화</div>',
-'<div style="padding:8px 10px;color:#c4c7c5;font-size:12px;margin-bottom:3px">계약서 검토 요청</div>',
-'<div style="padding:8px 10px;color:#c4c7c5;font-size:12px">이메일 초안 작성</div>',
+'<div style="width:210px;background:#2a2a2a;border-radius:8px;padding:14px 10px;color:#e3e3e3;font-size:12px;flex-shrink:0">',
+'<div style="font-size:13px;color:#e3a0aa;font-weight:700;padding:6px 8px;margin-bottom:10px">✦ Claude</div>',
+'<div style="font-size:10px;color:#9aa0a6;letter-spacing:0.06em;padding:0 8px;margin-bottom:6px">PROJECTS</div>',
+'<div style="padding:8px;background:#3c2a2e;border-radius:6px;color:#e3a0aa;font-size:12px;margin-bottom:3px">📁 마케팅 Q3 캠페인</div>',
+'<div style="padding:8px;color:#c4c7c5;font-size:12px;margin-bottom:3px">📁 품질 월례 보고</div>',
+'<div style="padding:8px;color:#c4c7c5;font-size:12px;margin-bottom:10px">📁 신규 서비스 기획</div>',
+'<div style="font-size:10px;color:#9aa0a6;letter-spacing:0.06em;padding:0 8px;margin-bottom:6px">최근 대화</div>',
+'<div style="padding:8px;color:#c4c7c5;font-size:12px;margin-bottom:3px">계약서 검토</div>',
+'<div style="padding:8px;color:#c4c7c5;font-size:12px">이메일 초안</div>',
 '</div>',
-'<div style="flex:1;background:#202124;border-radius:8px;padding:24px;color:#e3e3e3;font-size:13px;position:relative;min-height:260px">',
-'<div style="position:absolute;top:12px;right:12px;background:#3c4043;padding:4px 10px;border-radius:12px;font-size:11px;color:#c4c7c5">Claude 3.7 Sonnet ▾</div>',
-'<div style="margin-bottom:16px">',
-'<div style="font-size:11px;color:#9aa0a6;margin-bottom:6px">PROJECT 지식</div>',
-'<div style="background:#2d2e31;padding:10px 12px;border-radius:6px;font-size:12px;color:#c4c7c5;line-height:1.6">마케팅 Q3 캠페인 배경, 타깃 고객 데이터, 브랜드 가이드 (저장됨)</div>',
-'</div>',
-'<div style="background:#2d2e31;padding:12px 14px;border-radius:18px 18px 18px 4px;display:inline-block;max-width:80%;font-size:13px;line-height:1.6;margin-bottom:12px">이번 캠페인 슬로건 5개 뽑아줘.</div>',
-'<div style="margin-top:8px;background:#3c4043;padding:12px 16px;border-radius:4px 18px 18px 18px;font-size:12px;line-height:1.65;color:#e3e3e3">Project에 저장된 배경 정보를 바탕으로 Q3 캠페인 슬로건 5개 제안드립니다...</div>',
+'<div style="flex:1;background:#202124;border-radius:8px;padding:20px;color:#e3e3e3;font-size:13px;position:relative;min-height:240px">',
+'<div style="position:absolute;top:12px;right:12px;background:#3c4043;padding:4px 10px;border-radius:12px;font-size:11px;color:#c4c7c5">Claude Sonnet ▾</div>',
+'<div style="background:#2d2e31;padding:10px 12px;border-radius:6px;font-size:12px;color:#c4c7c5;margin-bottom:14px"><b style="color:#9aa0a6">Project 저장 내용:</b> 마케팅 Q3 배경, 타깃 고객, 브랜드 가이드</div>',
+'<div style="background:#2d2e31;padding:12px 14px;border-radius:18px 18px 18px 4px;display:inline-block;max-width:80%;font-size:13px;line-height:1.6;margin-bottom:10px">이번 캠페인 슬로건 5개 뽑아줘.</div>',
+'<div style="margin-top:6px;background:#3c4043;padding:12px 14px;border-radius:4px 18px 18px 18px;font-size:12px;color:#e3e3e3;line-height:1.65">Project 배경 기반 슬로건 5개 제안:<br>1. "Q3의 빛, 우리의 이야기"...</div>',
+'<div style="position:absolute;right:20px;top:50%;background:#2d4a2d;padding:8px 12px;border-radius:8px;font-size:11px;color:#5bb85b;border:1px solid #3a6a3a">📄 Artifact 생성됨</div>',
 '<div style="margin-top:20px;background:#303134;border:1px solid #3c4043;border-radius:24px;padding:10px 16px;color:#9aa0a6;font-size:12px">메시지 입력 ⬆</div>',
 '</div>',
 '</div>',
 '</div>',
-'<div style="font-size:11px;color:#9aa0a6;margin-top:6px;text-align:center">※ Claude Desktop UI 목업 — 왼쪽 Projects 패널이 핵심 차별점</div>',
+'<div style="font-size:11px;color:#9aa0a6;margin-top:6px;text-align:center">※ 실제 UI 기반 목업 — Projects 패널(좌)과 Artifact 뱃지(우)가 핵심</div>',
 
-'<h2 class="section-heading">ChatGPT vs Claude · 구조 비교</h2>',
+'<h2 class="section-heading">ChatGPT vs Claude Chat · 구조 비교</h2>',
 '<table>',
-'<thead><tr><th>항목</th><th>ChatGPT / Gemini</th><th>Claude (오늘 배울 것)</th></tr></thead>',
+'<thead><tr><th>항목</th><th>ChatGPT / Gemini</th><th>Claude Chat (오늘 배울 것)</th></tr></thead>',
 '<tbody>',
-'<tr><td><b>업무 맥락 유지</b></td><td>매 대화마다 다시 설명</td><td>Project에 저장 → 영구 유지</td></tr>',
-'<tr><td><b>결과물 관리</b></td><td>채팅창 안에 묻힘</td><td>Artifacts로 분리 · 다운로드 가능</td></tr>',
-'<tr><td><b>파일 연결</b></td><td>업로드 후 사라짐</td><td>MCP로 실시간 연결 (CH 03)</td></tr>',
-'<tr><td><b>반복 작업</b></td><td>매번 프롬프트 재입력</td><td>Skills 파일로 저장·재사용 (CH 04)</td></tr>',
-'<tr><td><b>자동화</b></td><td>별도 앱 필요</td><td>Agents로 위임 (CH 04)</td></tr>',
+'<tr><td><b>업무 맥락 유지</b></td><td>매 대화마다 다시 설명</td><td><b>Project</b>에 저장 → 모든 대화에 유지</td></tr>',
+'<tr><td><b>결과물 관리</b></td><td>채팅창 안에 묻힘</td><td><b>Artifacts</b>로 분리 · 복사·다운로드 가능</td></tr>',
+'<tr><td><b>파일 업로드</b></td><td>대화 후 사라짐</td><td>Project에 저장 → 재사용 가능</td></tr>',
+'<tr><td><b>자동화 연계</b></td><td>별도 도구 필요</td><td>Connectors → Cowork 레이어로 확장 (CH 03)</td></tr>',
 '</tbody></table>',
 
 '<div class="callout">',
 '<div class="callout-title">🎯 이 챕터 끝나면 가능해지는 것</div>',
 '<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:1.9">',
-'<li>내 업무용 Project를 만들고 배경 정보를 한 번만 저장</li>',
-'<li>대화 결과를 Artifact로 뽑아 파일로 저장·공유</li>',
+'<li>내 업무용 Project를 만들고 배경 정보를 한 번만 저장해 재사용</li>',
+'<li>대화 결과를 Artifact로 뽑아 바로 파일로 사용</li>',
 '</ul>',
-'<p style="margin-top:8px;font-size:13px;color:#6b5e5a">이어지는 순서: <b>1-2</b> Projects 실습 → <b>1-3</b> Artifacts 실습</p>',
 '</div>'
 ].join('');
 
 /* ---------- */
-
 pages["1-2"] = [
-'<h1>Projects · 컨텍스트 재사용</h1>',
-'<p class="page-desc">Projects는 "이 업무를 Claude와 계속 함께 한다"는 선언입니다. 배경 정보를 한 번 저장해두면 해당 Project 안의 모든 대화에서 Claude가 그 맥락을 기억합니다.</p>',
+'<h1>Projects & Artifacts 실습</h1>',
+'<p class="page-desc">내 실제 업무 하나를 골라 Project를 만들고, 배경 정보를 저장합니다. 그리고 Artifact를 생성해 결과물을 파일처럼 다뤄봅니다.</p>',
 
 '<div class="callout">',
 '<div class="callout-title">🎯 실습 목표</div>',
-'내 실제 업무 하나를 골라 Project를 만들고, 배경 정보를 저장합니다. 실습 후 같은 질문을 일반 대화 vs Project 대화에서 비교해봅니다.',
+'내 업무 Project 1개 생성 → 배경 저장 → Artifact 생성 → 복사/다운로드까지 완성합니다.',
 '</div>',
 
-'<h2 class="section-heading">만드는 순서 — 4단계</h2>',
+'<h2 class="section-heading">Projects 만들기 — 4단계</h2>',
 '<div class="step-grid">',
-'<div class="step-card">',
-'<div class="step-num">1</div>',
-'<div class="step-title">Project 생성</div>',
-'<div class="step-desc">사이드바 Projects 영역 → "+ 새 Project" 클릭. 이름 입력 (예: "마케팅 Q3", "품질 월례 보고").</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">2</div>',
-'<div class="step-title">Project 지식 입력</div>',
-'<div class="step-desc">Project 설정 → "Project 지식" 섹션에 배경 정보 붙여넣기. 아래 템플릿을 그대로 활용해도 됩니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">3</div>',
-'<div class="step-title">첫 대화 시작</div>',
-'<div class="step-desc">Project 안에서 새 대화 시작. Claude가 저장된 맥락을 자동으로 참조합니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">4</div>',
-'<div class="step-title">비교 테스트</div>',
-'<div class="step-desc">Project 밖 일반 채팅에서 같은 질문. 답변 품질 차이를 직접 확인합니다.</div>',
-'</div>',
+'<div class="step-card"><div class="step-num">1</div><div class="step-title">Project 생성</div><div class="step-desc">Claude.ai 또는 Desktop → 왼쪽 사이드바 "Projects" → "+ 새 Project". 이름 입력: 예) "마케팅 팀", "주간 보고서".</div></div>',
+'<div class="step-card"><div class="step-num">2</div><div class="step-title">배경 정보 저장</div><div class="step-desc">Project 설정 → "Project 지침(Instructions)"에 업무 배경 입력. 팀 소개, 자주 쓰는 말투, 주의사항 등을 적어두면 매 대화마다 Claude가 기억합니다.</div></div>',
+'<div class="step-card"><div class="step-num">3</div><div class="step-title">대화 시작</div><div class="step-desc">Project 안에서 새 대화 시작. 배경 설명 없이 바로 업무 요청 → Claude가 저장된 컨텍스트로 응답합니다.</div></div>',
+'<div class="step-card"><div class="step-num">4</div><div class="step-title">Artifact 생성</div><div class="step-desc">보고서·표·코드 등을 요청하면 오른쪽 패널에 Artifact가 분리됩니다. 복사 버튼 또는 다운로드로 즉시 파일화.</div></div>',
 '</div>',
 
-'<h2 class="section-heading">Project 지식 템플릿 — 복사해서 쓰기</h2>',
-promptBlock('Project 지식 — 내 업무 맥락 템플릿',
-`## 나(역할)
-- 이름/직책: [예: 마케팅팀 대리 김OO]
-- 주요 업무: [예: SNS 콘텐츠 기획, 캠페인 성과 분석]
-- 자주 쓰는 도구: [예: 사내 그룹웨어, 엑셀, PPT]
+promptBlock('Project 배경 지침 템플릿', '나는 [회사명] [부서명]에서 일합니다.\n주요 업무: [업무 내용 2~3줄]\n자주 만드는 결과물: 주간 보고서, 회의록, 이메일 초안\n말투: 격식체, 간결하게\n주의사항: 외부 공개 금지 내용 포함 시 알려줄 것'),
 
-## 이 Project의 목적
-[예: Q3 캠페인 전체 기획·실행 관련 작업]
-
-## 배경 정보
-- 대상 고객: [예: 2030 직장인, 건강 관심 높음]
-- 브랜드 톤: [예: 친근하되 전문적, 과장 없이 솔직하게]
-- 주요 제약: [예: 예산 300만원, 게시 플랫폼은 인스타그램·블로그]
-
-## Claude에게 요청할 때 기본 규칙
-- 결과물은 항상 한국어로
-- 초안을 먼저 주고, 내가 피드백하면 수정
-- 숫자·데이터 근거가 있으면 함께 제시`),
-
-'<h2 class="section-heading">테스트해보기</h2>',
+'<h2 class="section-heading">Artifacts 활용 — 어디에 쓰나</h2>',
 '<div class="demo-grid">',
-demo('테스트 A — 간단한 요청', '"이번 캠페인 슬로건 후보 5개 뽑아줘" — Project 안에서 물어보면 저장된 타깃·브랜드 톤을 반영한 결과가 나옵니다.'),
-demo('테스트 B — 반복 작업', '"지난주 회의 내용 요약해줘" — 회의록을 붙여넣으면 배경 맥락을 알고 있어 훨씬 정확한 요약이 나옵니다.'),
-demo('비교 확인', '같은 질문을 Project 밖 일반 채팅에서 해보세요. 맥락 없는 답변과의 차이가 바로 Projects의 가치입니다.'),
+demo("📄 문서 작성", "보고서·기획서·이메일 초안을 Artifact로 생성하면 바로 복사해서 사용 가능."),
+demo("📊 표·데이터", "비교표·일정표·예산표를 Artifact로 만들면 엑셀 붙여넣기가 쉬워집니다."),
+demo("💻 코드", "스크립트·수식·자동화 코드를 Artifact로 분리해 바로 실행 가능."),
 '</div>',
 
-'<h2 class="section-heading">활용 팁</h2>',
-'<div class="demo-grid">',
-demo('업무별로 Project 분리', '하나의 Project에 여러 업무를 섞으면 맥락이 희석됩니다. "월례 보고", "채용 공고", "교육 자료" 식으로 목적별로 나눕니다.'),
-demo('파일 첨부도 가능', 'Project 안에 PDF·엑셀 파일을 업로드해두면 Claude가 파일 내용까지 참조합니다. 제품 스펙시트, 브랜드 가이드 등에 유용합니다.'),
-demo('팀 공유', 'Claude Pro 플랜에서는 Project를 팀원과 공유할 수 있습니다. 팀 공통 맥락을 한 곳에서 관리합니다.'),
-'</div>',
-
-'<div class="callout">',
-'<div class="callout-title">⚠️ 주의사항</div>',
-'Project 지식에 <b>개인정보(고객 이름, 주민번호 등)나 사내 기밀 정보</b>를 그대로 입력하지 마십시오. 일반화된 구조 정보(역할, 브랜드 방향, 업무 유형)만 저장하는 것을 권장합니다. 사내 AI 정책을 먼저 확인하세요.',
+'<div class="callout" style="background:#f0f7ed;border-color:#5aa05a">',
+'<div class="callout-title" style="color:#2a6a2a">✅ 실습 완료 체크리스트</div>',
+'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:2.0;color:#2a5a2a">',
+'<li>Project가 왼쪽 사이드바에 생성됐나?</li>',
+'<li>Project 지침에 업무 배경을 저장했나?</li>',
+'<li>Project 안에서 대화 시 배경 설명 없이 질문해도 Claude가 맥락을 이해하나?</li>',
+'<li>보고서나 표를 요청하면 오른쪽에 Artifact가 나타나나?</li>',
+'</ul>',
 '</div>'
 ].join('');
 
-/* ---------- */
-
-pages["1-3"] = [
-'<h1>Artifacts · 결과물을 자산으로</h1>',
-'<p class="page-desc">Artifacts는 대화 중에 생성된 결과물을 <b>채팅창과 분리해서 독립된 파일처럼 관리</b>하는 기능입니다. 긴 문서, 코드, 표 같은 결과물이 채팅 히스토리에 묻히지 않고 오른쪽 패널에 분리되어 나타납니다.</p>',
-
-'<div class="callout">',
-'<div class="callout-title">🎯 실습 목표</div>',
-'보고서 초안 하나를 Claude와 함께 작성하고 Artifact로 뽑아냅니다. Artifact를 수정·다운로드하는 흐름을 익힙니다.',
-'</div>',
-
-'<h2 class="section-heading">Artifacts가 뭔가 — UI 목업</h2>',
-'<div style="background:#1f1f1f;border-radius:12px;padding:14px;box-shadow:0 4px 16px rgba(0,0,0,0.12);margin:8px 0 20px">',
-'<div style="display:flex;gap:8px">',
-'<div style="flex:1;background:#202124;border-radius:8px;padding:20px;color:#e3e3e3;font-size:13px;min-height:220px">',
-'<div style="font-size:11px;color:#9aa0a6;margin-bottom:10px">대화창</div>',
-'<div style="background:#2d2e31;padding:12px;border-radius:18px 18px 18px 4px;font-size:12px;line-height:1.6;margin-bottom:10px;max-width:85%">Q3 캠페인 성과 보고서 초안 만들어줘. 목차, 요약, 주요 지표 섹션 포함해줘.</div>',
-'<div style="font-size:12px;color:#c4c7c5;line-height:1.7">알겠습니다. 보고서 초안을 작성했습니다.<br><span style="color:#8ab4f8;cursor:pointer">→ 오른쪽 패널에서 확인하세요</span></div>',
-'</div>',
-'<div style="width:260px;background:#2a2a2a;border-radius:8px;padding:16px;color:#e3e3e3;font-size:12px">',
-'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">',
-'<span style="font-size:11px;color:#9aa0a6">ARTIFACT</span>',
-'<span style="background:#8B1C2B;color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:700">복사 / 다운로드</span>',
-'</div>',
-'<div style="background:#303134;border-radius:6px;padding:12px;line-height:1.7;font-size:12px">',
-'<div style="font-weight:700;margin-bottom:6px;color:#e3e3e3">Q3 캠페인 성과 보고서</div>',
-'<div style="color:#9aa0a6;font-size:11px">1. 개요 및 요약</div>',
-'<div style="color:#9aa0a6;font-size:11px">2. 주요 성과 지표</div>',
-'<div style="color:#9aa0a6;font-size:11px">3. 채널별 분석</div>',
-'<div style="color:#9aa0a6;font-size:11px">4. 다음 분기 제언</div>',
-'</div>',
-'</div>',
-'</div>',
-'</div>',
-'<div style="font-size:11px;color:#9aa0a6;margin-top:6px;text-align:center">※ Artifact는 오른쪽 패널에 분리되어 나타납니다</div>',
-
-'<h2 class="section-heading">Artifact 활용 순서 — 4단계</h2>',
-'<div class="step-grid">',
-'<div class="step-card">',
-'<div class="step-num">1</div>',
-'<div class="step-title">결과물 요청</div>',
-'<div class="step-desc">긴 문서·코드·표를 요청할 때 "Artifact로 만들어줘" 또는 "문서로 작성해줘"라고 명시하면 자동으로 Artifact 패널에 표시됩니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">2</div>',
-'<div class="step-title">실시간 수정</div>',
-'<div class="step-desc">Artifact를 보면서 대화창에서 "3번 항목에 수치 추가해줘" 식으로 수정 요청. Artifact가 실시간으로 업데이트됩니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">3</div>',
-'<div class="step-title">직접 편집</div>',
-'<div class="step-desc">Artifact 패널에서 직접 텍스트를 수정할 수도 있습니다. AI 도움과 직접 편집을 자유롭게 넘나들 수 있습니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">4</div>',
-'<div class="step-title">다운로드·공유</div>',
-'<div class="step-desc">완성된 Artifact는 복사 또는 다운로드. 마크다운 문서, HTML, 코드 파일 등 형식에 따라 저장합니다.</div>',
-'</div>',
-'</div>',
-
-'<h2 class="section-heading">지금 해보기 — 보고서 초안 만들기</h2>',
-promptBlock('Artifact 실습 프롬프트',
-`아래 내용을 바탕으로 팀 내부 공유용 주간 업무 보고서 초안을 Artifact로 작성해줘.
-
-형식:
-- 제목: [날짜] 주간 업무 보고
-- 섹션: 이번 주 완료 / 진행 중 / 다음 주 계획 / 이슈·요청 사항
-- 각 항목은 불릿 형태, 간결하게
-
-내용:
-- 완료: 월례 보고서 작성 완료, 협력사 미팅 진행
-- 진행: 신규 프로세스 문서화 (60% 완료)
-- 계획: 부서 교육 자료 초안 작성
-- 이슈: 시스템 점검 일정 확인 필요`),
-
-'<h2 class="section-heading">Artifacts 유형 3가지</h2>',
-'<div class="demo-grid">',
-demo('문서 (Markdown)', '보고서, 기획안, 이메일 초안 등. 마크다운 형식으로 저장되어 나중에 편집도 쉽습니다.'),
-demo('코드', 'Python, JavaScript, SQL 등 코드 조각. 실행 버튼으로 바로 결과 확인도 가능합니다.'),
-demo('HTML', '간단한 대시보드, 프로토타입 페이지. 브라우저에서 바로 열 수 있습니다.'),
-'</div>',
-
-'<div class="callout">',
-'<div class="callout-title">💡 Artifacts가 특히 유용한 상황</div>',
-'3페이지 이상의 긴 문서, 반복 수정이 필요한 보고서·기획안, 팀원에게 공유할 결과물 작성 시 Artifacts를 적극 활용하면 작업 흐름이 크게 달라집니다.',
-'</div>'
-].join('');
-
-/* ===================== END CH 00–01 ===================== */
-
-/* ---------- PLACEHOLDERS for CH 02–05 (will be filled next) ---------- */
-/* ---------- CH 02 · Claude Code ---------- */
-
+/* ---------- CH 02 ---------- */
 pages["2-1"] = [
-'<h1>왜 터미널에서 AI를 쓰나</h1>',
-'<p class="page-desc">Claude Desktop은 브라우저·앱에서 대화하는 방식입니다. Claude Code는 한 걸음 더 나아가 <b>터미널에서 직접 파일을 읽고 수정하고 실행</b>합니다. "AI에게 물어보고 내가 고치는" 방식에서 "AI가 직접 고치는" 방식으로 바뀝니다.</p>',
+'<h1>Code란 · 파일을 직접 다루는 AI</h1>',
+'<p class="page-desc">Chat이 "AI에게 말하는 것"이라면, Code는 "AI가 내 컴퓨터 파일에 직접 손대는 것"입니다. Claude Code는 터미널에서 실행하는 CLI 도구로, 파일 읽기·쓰기·편집을 AI가 직접 처리합니다.</p>',
 
-'<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 24px">',
-'<div style="background:#fdf0f0;border:1px solid #e8c5c5;border-radius:10px;padding:16px">',
-'<div style="font-size:12px;font-weight:700;color:#a53545;margin-bottom:10px">BEFORE — Claude Desktop 방식</div>',
+'<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0 24px">',
+'<div style="background:#fdf0f0;border:1px solid #e8c5c5;border-radius:10px;padding:18px">',
+'<div style="font-size:12px;font-weight:700;color:#a53545;margin-bottom:10px">Chat 방식의 한계</div>',
 '<ul style="font-size:13px;color:#6b5e5a;padding-left:18px;line-height:2.0">',
-'<li>파일 내용을 복사해서 채팅창에 붙여넣기</li>',
-'<li>Claude의 답변을 다시 파일에 수동으로 복사</li>',
-'<li>수정할 파일이 10개면 10번 반복</li>',
-'<li>폴더 구조·파일명을 AI가 모름</li>',
+'<li>파일 내용을 복사해서 Claude에 붙여넣어야 함</li>',
+'<li>수정 결과를 다시 복사해서 파일에 붙여넣어야 함</li>',
+'<li>파일 여러 개를 한 번에 처리하기 어려움</li>',
+'<li>폴더 구조를 파악하기 어려움</li>',
 '</ul>',
 '</div>',
-'<div style="background:#f0f7ed;border:1px solid #b4d1a8;border-radius:10px;padding:16px">',
-'<div style="font-size:12px;font-weight:700;color:#3a6b2e;margin-bottom:10px">AFTER — Claude Code 방식</div>',
+'<div style="background:#f0f7ed;border:1px solid #b4d1a8;border-radius:10px;padding:18px">',
+'<div style="font-size:12px;font-weight:700;color:#3a6b2e;margin-bottom:10px">Claude Code 방식</div>',
 '<ul style="font-size:13px;color:#3a5a30;padding-left:18px;line-height:2.0">',
-'<li>프로젝트 폴더를 통째로 Claude가 인식</li>',
-'<li>파일 읽기·쓰기·생성을 AI가 직접 수행</li>',
-'<li>"이 폴더 안의 모든 파일 정리해줘" 한 번에 처리</li>',
-'<li>터미널 명령도 대신 실행 가능</li>',
+'<li>폴더에서 바로 실행 → 파일을 직접 읽고 수정</li>',
+'<li>여러 파일을 한 번에 분석·편집</li>',
+'<li>폴더 구조 자동 파악</li>',
+'<li>수정 내용이 파일에 바로 저장됨</li>',
 '</ul>',
 '</div>',
 '</div>',
 
-'<h2 class="section-heading">Claude Code가 실제로 하는 것</h2>',
-'<div style="background:#1f1f1f;border-radius:12px;padding:20px;box-shadow:0 4px 16px rgba(0,0,0,0.15);margin:8px 0 20px">',
-'<div style="color:#9aa0a6;font-size:11px;margin-bottom:10px;letter-spacing:0.1em">TERMINAL</div>',
-'<div style="font-family:monospace;font-size:13px;line-height:2.0">',
-'<div><span style="color:#5bb85b">$</span> <span style="color:#e3e3e3">cd ~/Projects/report-tool</span></div>',
-'<div><span style="color:#5bb85b">$</span> <span style="color:#e3e3e3">claude</span></div>',
-'<div style="color:#9aa0a6;margin:8px 0">Claude Code 시작됨 ✓</div>',
-'<div style="color:#8ab4f8;margin-bottom:6px">사용자: 이 폴더 안의 README.md를 읽고, 현재 기능 목록을 표 형태로 정리해줘.</div>',
-'<div style="color:#c4c7c5;margin-left:0">Claude: README.md 읽는 중...</div>',
-'<div style="color:#c4c7c5">파일 확인 완료. 현재 5개 기능이 있습니다. 표 형태로 정리해서 README에 추가할까요?</div>',
-'<div style="color:#8ab4f8;margin-top:6px">사용자: 응, 바로 수정해줘.</div>',
-'<div style="color:#c4c7c5">README.md 수정 완료. 3줄 추가, 1줄 수정했습니다.</div>',
-'</div>',
-'</div>',
-'<div style="font-size:11px;color:#9aa0a6;margin-top:6px;text-align:center">※ 실제 Claude Code 터미널 대화 목업</div>',
-
-'<h2 class="section-heading">Claude Code가 특히 강력한 상황</h2>',
+'<h2 class="section-heading">Claude Code가 할 수 있는 것</h2>',
 '<div class="demo-grid">',
-demo('문서 일괄 정리', '폴더 안의 마크다운 파일 20개를 한 번에 읽고, 목차 파일을 자동 생성합니다.'),
-demo('코드 수정·리팩터링', '"이 함수 이름 전체 바꿔줘", "주석 한국어로 번역해줘" — 파일 여러 개를 동시에 처리합니다.'),
-demo('반복 작업 자동화', '"이 폴더 안 CSV 파일들의 헤더를 전부 영문에서 한국어로 바꿔줘" 같은 배치 작업을 즉시 실행합니다.'),
+demo("📁 파일 읽기·편집", "보고서 파일을 열어 내용을 수정하거나, 여러 문서를 분석해 요약합니다."),
+demo("💻 코드 작성·수정", "소스 코드를 직접 편집하고, 버그를 찾아 수정합니다."),
+demo("🔍 폴더 분석", "프로젝트 폴더 전체를 스캔해 구조를 파악하고 개선점을 제안합니다."),
+demo("⚙️ 자동화 스크립트", "반복 작업을 처리하는 스크립트를 작성하고 바로 실행합니다."),
 '</div>',
 
 '<div class="callout">',
-'<div class="callout-title">🎯 이 챕터 끝나면 가능해지는 것</div>',
-'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:1.9">',
-'<li>Claude Code를 설치하고 내 프로젝트 폴더에서 실행</li>',
-'<li>파일 읽기·수정·생성을 Claude에게 직접 위임</li>',
-'<li>슬래시 커맨드(/help, /compact 등)로 세션 제어</li>',
-'</ul>',
-'<p style="margin-top:8px;font-size:13px;color:#6b5e5a">이어지는 순서: <b>2-2</b> 설치·첫 실행 → <b>2-3</b> 실제 프로젝트 실습</p>',
+'<div class="callout-title">💡 Chat vs Code — 언제 어떤 걸?</div>',
+'<table style="margin:8px 0 0">',
+'<thead><tr><th>상황</th><th>추천</th></tr></thead>',
+'<tbody>',
+'<tr><td>글쓰기, 아이디어, 설명, Q&A</td><td><b>Chat</b> (Claude.ai)</td></tr>',
+'<tr><td>파일 직접 수정, 코드 작성, 폴더 분석</td><td><b>Code</b> (터미널)</td></tr>',
+'<tr><td>외부 서비스 자동화, 반복 작업 예약</td><td><b>Cowork</b> (CH 03~04)</td></tr>',
+'</tbody></table>',
 '</div>'
 ].join('');
 
 /* ---------- */
-
 pages["2-2"] = [
 '<h1>Claude Code 설치 · 첫 실행</h1>',
-'<p class="page-desc">Node.js가 설치된 환경이면 npm 명령 하나로 설치가 끝납니다. 설치 후 프로젝트 폴더로 이동해 <code style="background:#f0ece4;padding:2px 6px;border-radius:3px;font-size:13px">claude</code>를 입력하면 바로 시작됩니다.</p>',
+'<p class="page-desc">터미널 한 줄 명령어로 Claude Code를 설치하고, 첫 번째 AI 파일 작업을 실행합니다.</p>',
 
 '<div class="callout">',
 '<div class="callout-title">🎯 실습 목표</div>',
-'Claude Code를 설치하고, 실습용 폴더에서 첫 대화를 진행합니다. <code style="background:#f0ece4;padding:2px 5px;border-radius:3px;font-size:13px">/help</code> 커맨드로 사용 가능한 명령 목록도 확인합니다.',
+'Claude Code 설치 → 로그인 → 실습 폴더에서 첫 명령 실행까지 완성합니다.',
 '</div>',
 
-'<h2 class="section-heading">설치 · 첫 실행 — 4단계</h2>',
-'<div class="step-grid">',
-'<div class="step-card">',
-'<div class="step-num">1</div>',
-'<div class="step-title">설치</div>',
-'<div class="step-desc">터미널에서 아래 명령 실행. Node.js 18 이상 필요. 설치는 한 번만 하면 됩니다.</div>',
+'<h2 class="section-heading">1단계 · 설치</h2>',
+'<div style="background:#1f1f1f;border-radius:10px;padding:20px;margin:8px 0 16px">',
+'<div style="font-size:11px;color:#9aa0a6;margin-bottom:10px">터미널에 그대로 붙여넣기</div>',
+'<code style="font-family:monospace;font-size:14px;color:#5bb85b">curl -fsSL https://claude.ai/install.sh | bash</code>',
 '</div>',
-'<div class="step-card">',
-'<div class="step-num">2</div>',
-'<div class="step-title">실습 폴더 생성·이동</div>',
-'<div class="step-desc">터미널에서 실습용 폴더를 만들고 이동합니다. <code style="background:#f0ece4;padding:1px 4px;border-radius:3px">mkdir ~/Documents/claude-test && cd ~/Documents/claude-test</code> (Windows는 경로를 적절히 변경)</div>',
+'<div class="callout" style="background:#fdf5ea;border-color:#c8a855">',
+'<div class="callout-title" style="color:#8a6a10">⚠️ Windows 사용자</div>',
+'Windows에서는 먼저 <b>WSL(Windows Subsystem for Linux)</b>을 설치해야 합니다.<br>',
+'PowerShell 관리자 모드에서: <code style="background:#f0e0c0;padding:2px 6px;border-radius:3px">wsl --install</code> 실행 후 재시작 → Ubuntu 터미널에서 위 설치 명령 실행.',
 '</div>',
-'<div class="step-card">',
-'<div class="step-num">3</div>',
-'<div class="step-title">claude 실행</div>',
-'<div class="step-desc"><code style="background:#f0ece4;padding:2px 5px;border-radius:3px">claude</code> 입력 후 Enter. 최초 실행 시 Anthropic 계정 인증(브라우저 팝업)이 진행됩니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">4</div>',
-'<div class="step-title">첫 대화 + /help</div>',
-'<div class="step-desc">간단한 파일 작업을 요청해봅니다. <code style="background:#f0ece4;padding:2px 5px;border-radius:3px">/help</code>를 입력하면 슬래시 커맨드 전체 목록이 표시됩니다.</div>',
+
+'<h2 class="section-heading">2단계 · 인증</h2>',
+'<div style="background:#1f1f1f;border-radius:10px;padding:20px;margin:8px 0 16px">',
+'<div style="font-size:11px;color:#9aa0a6;margin-bottom:10px">설치 후 로그인</div>',
+'<div style="font-family:monospace;font-size:13px;color:#c4c7c5;line-height:2.2">',
+'<div><span style="color:#9aa0a6">$ </span><span style="color:#5bb85b">claude</span></div>',
+'<div style="color:#8ab4f8">→ 브라우저가 열리며 Claude.ai 로그인 페이지 표시</div>',
+'<div style="color:#8ab4f8">→ 로그인 완료 후 터미널로 돌아와 Enter</div>',
 '</div>',
 '</div>',
 
-'<h2 class="section-heading">설치 명령</h2>',
-promptBlock('Claude Code 설치',
-`# 1. 설치 (한 번만)
-npm install -g @anthropic-ai/claude-code
+'<h2 class="section-heading">3단계 · 첫 명령 실행</h2>',
+'<div style="background:#1f1f1f;border-radius:10px;padding:20px;margin:8px 0 16px">',
+'<div style="font-family:monospace;font-size:13px;color:#c4c7c5;line-height:2.4">',
+'<div><span style="color:#9aa0a6"># 실습 폴더 생성 후 진입</span></div>',
+'<div><span style="color:#9aa0a6">$ </span><span style="color:#5bb85b">mkdir ~/claude-test && cd ~/claude-test</span></div>',
+'<div style="margin-top:8px"><span style="color:#9aa0a6"># Claude Code 실행</span></div>',
+'<div><span style="color:#9aa0a6">$ </span><span style="color:#5bb85b">claude</span></div>',
+'<div style="margin-top:8px;color:#e3a0aa">&gt; 이 폴더에 test.txt 파일을 만들고 "안녕하세요, Claude Code입니다"라고 적어줘</div>',
+'</div>',
+'</div>',
 
-# 2. 버전 확인
-claude --version
-
-# 3. 프로젝트 폴더로 이동 후 실행
-cd /path/to/my-project
-claude`),
-
-'<h2 class="section-heading">슬래시 커맨드 — 자주 쓰는 것</h2>',
+'<h2 class="section-heading">자주 쓰는 슬래시 명령어</h2>',
 '<table>',
-'<thead><tr><th style="width:130px">커맨드</th><th>기능</th><th>언제 쓰나</th></tr></thead>',
+'<thead><tr><th>명령어</th><th>기능</th></tr></thead>',
 '<tbody>',
-'<tr><td><code>/help</code></td><td>사용 가능한 커맨드 전체 목록 표시</td><td>처음 쓸 때, 기억이 안 날 때</td></tr>',
-'<tr><td><code>/clear</code></td><td>현재 대화 맥락 초기화</td><td>새 작업 시작할 때</td></tr>',
-'<tr><td><code>/compact</code></td><td>긴 대화를 요약해서 토큰 절약</td><td>세션이 길어졌을 때</td></tr>',
-'<tr><td><code>/model</code></td><td>사용 모델 변경</td><td>작업 성격에 따라 모델 전환 시</td></tr>',
+'<tr><td><code>/help</code></td><td>사용 가능한 명령어 전체 목록</td></tr>',
+'<tr><td><code>/clear</code></td><td>대화 컨텍스트 초기화 (새 작업 시작)</td></tr>',
+'<tr><td><code>/compact</code></td><td>긴 대화 압축 (토큰 절약)</td></tr>',
+'<tr><td><code>/model</code></td><td>사용 모델 변경</td></tr>',
 '</tbody></table>',
-'<div class="callout" style="background:#fdf5ea;border-color:#c8a855">',
-'<div class="callout-title" style="color:#8a6a10">💡 커맨드 목록은 버전마다 다를 수 있습니다</div>',
-'설치된 Claude Code 버전에서 <code style="background:#f0ece4;padding:2px 5px;border-radius:3px">/help</code>를 입력하면 현재 사용 가능한 전체 커맨드를 확인할 수 있습니다. 위 목록보다 더 많을 수 있습니다.',
-'</div>',
 
-'<h2 class="section-heading">터미널 목업 — 첫 실행 흐름</h2>',
-'<div style="background:#1f1f1f;border-radius:12px;padding:20px;box-shadow:0 4px 16px rgba(0,0,0,0.15);margin:8px 0 20px">',
-'<div style="color:#9aa0a6;font-size:11px;margin-bottom:10px;letter-spacing:0.1em">TERMINAL</div>',
-'<div style="font-family:monospace;font-size:13px;line-height:2.0">',
-'<div><span style="color:#5bb85b">$</span> <span style="color:#e3e3e3">npm install -g @anthropic-ai/claude-code</span></div>',
-'<div style="color:#9aa0a6">... 설치 완료</div>',
-'<div style="margin-top:4px"><span style="color:#5bb85b">$</span> <span style="color:#e3e3e3">cd ~/Documents/my-project</span></div>',
-'<div><span style="color:#5bb85b">$</span> <span style="color:#e3e3e3">claude</span></div>',
-'<div style="color:#e3a0aa;margin:8px 0;font-weight:600">✦ Claude Code 시작됨</div>',
-'<div style="color:#9aa0a6;font-size:12px">작업 폴더: ~/Documents/my-project</div>',
-'<div style="color:#9aa0a6;font-size:12px;margin-bottom:10px">파일 5개 감지됨</div>',
-'<div style="color:#8ab4f8">사용자: 이 폴더 구조를 설명해줘.</div>',
-'<div style="color:#c4c7c5;margin-top:4px">Claude: 현재 폴더에 5개 파일이 있습니다...</div>',
-'<div style="color:#8ab4f8;margin-top:8px">사용자: /help</div>',
-'<div style="color:#c4c7c5;margin-top:4px">사용 가능한 커맨드:</div>',
-'<div style="color:#c4c7c5;padding-left:14px">/clear — 대화 맥락 초기화</div>',
-'<div style="color:#c4c7c5;padding-left:14px">/compact — 대화 요약 (토큰 절약)</div>',
-'<div style="color:#c4c7c5;padding-left:14px">/model — 모델 변경</div>',
-'<div style="color:#c4c7c5;padding-left:14px">... (버전에 따라 추가 커맨드 있음)</div>',
-'</div>',
-'</div>',
-'<div style="font-size:11px;color:#9aa0a6;margin-top:6px;text-align:center">※ 실제 Claude Code 첫 실행 목업</div>',
-
-'<h2 class="section-heading">첫 실습 — 이렇게 시작해보세요</h2>',
-'<div class="demo-grid">',
-demo('폴더 구조 파악', '"이 폴더에 어떤 파일이 있어? 간단히 설명해줘" — Claude가 폴더를 읽고 현재 상태를 요약합니다.'),
-demo('README 작성', '"이 프로젝트용 README.md 파일을 만들어줘. 한국어로." — 폴더 내용을 분석해 자동 작성합니다.'),
-demo('/compact 활용', '작업이 길어졌다면 /compact 입력. 대화 요약 후 토큰을 절약하며 계속 진행할 수 있습니다.'),
-'</div>',
-
-'<div class="callout" style="background:#fdf5ea;border-color:#c8a855">',
-'<div class="callout-title" style="color:#8a6a10">⚠️ 실행 위치 주의</div>',
-'<code style="background:#f0ece4;padding:2px 5px;border-radius:3px;font-size:13px">claude</code>는 <b>현재 디렉터리를 작업 공간으로 인식</b>합니다. 반드시 작업할 프로젝트 폴더로 이동한 후 실행하십시오. <code>--dir</code> 같은 별도 플래그는 없습니다.',
-'</div>',
-'<div class="callout" style="background:#f0f7ed;border-color:#b4d1a8;margin-top:20px">',
-'<div class="callout-title" style="color:#3a6b2e">✅ 실습 완료 체크리스트</div>',
-'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:2.0;color:#3a5a30">',
-'<li>npm install 명령이 오류 없이 완료됐나?</li>',
-'<li>터미널에서 <code style="background:#e8f5e2;padding:1px 4px;border-radius:3px">claude</code> 입력 시 Claude Code가 실행됐나?</li>',
-'<li><code style="background:#e8f5e2;padding:1px 4px;border-radius:3px">/help</code> 커맨드 입력 시 커맨드 목록이 표시됐나?</li>',
-'<li>폴더 구조 설명 요청에 Claude가 응답했나?</li>',
+'<div class="callout" style="background:#f0f7ed;border-color:#5aa05a">',
+'<div class="callout-title" style="color:#2a6a2a">✅ 실습 완료 체크리스트</div>',
+'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:2.0;color:#2a5a2a">',
+'<li><code>claude --version</code>으로 설치가 확인됐나?</li>',
+'<li>로그인 후 터미널에 "Welcome to Claude Code" 메시지가 보이나?</li>',
+'<li>파일 생성 요청 후 실제로 test.txt가 만들어졌나?</li>',
 '</ul>',
 '</div>'
 ].join('');
 
-/* ---------- */
-
-pages["2-3"] = [
-'<h1>실제 프로젝트에서 코드 수정하기</h1>',
-'<p class="page-desc">설치가 끝났다면 이제 실제 작업을 해봅니다. 이 실습에서는 <b>기존 파일을 읽고 → 수정을 요청하고 → 결과를 확인</b>하는 전체 흐름을 익힙니다. 코딩을 몰라도 됩니다 — 문서 파일도 동일한 방식으로 작동합니다.</p>',
-
-'<div class="callout">',
-'<div class="callout-title">🎯 실습 목표</div>',
-'실습용 폴더에서 Claude Code와 대화하며 파일을 수정합니다. 수정 전 내용 확인 → 수정 요청 → 변경 결과 확인까지의 흐름을 익힙니다.',
-'</div>',
-
-'<h2 class="section-heading">실습 시나리오 — 보고서 파일 정리</h2>',
-'<div class="callout" style="background:#f5f3ff;border-color:#b8a8d8">',
-'<div class="callout-title" style="color:#5a2a74">시나리오 배경</div>',
-'팀 공유 폴더에 월간 보고서 마크다운 파일이 있습니다. 날짜 형식이 제각각이고, 제목 표기도 통일되어 있지 않습니다. Claude Code로 이 파일들을 정리해봅니다.',
-'</div>',
-
-'<h2 class="section-heading">실습 순서 — 5단계</h2>',
-'<div class="step-grid">',
-'<div class="step-card">',
-'<div class="step-num">1</div>',
-'<div class="step-title">폴더 이동 + 실행</div>',
-'<div class="step-desc">실습 폴더로 이동 후 <code style="background:#f0ece4;padding:1px 5px;border-radius:3px">claude</code> 실행. 폴더 안 파일 목록을 Claude가 자동 인식합니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">2</div>',
-'<div class="step-title">현재 상태 파악</div>',
-'<div class="step-desc">"이 폴더 파일들 읽고 어떤 상태인지 알려줘"로 먼저 현황 파악. 무엇을 바꿀지 파악 후 작업을 지시합니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">3</div>',
-'<div class="step-title">수정 요청</div>',
-'<div class="step-desc">구체적인 수정 내용을 지시합니다. "전부 바꿔줘"보다 "이 파일의 2번 섹션 제목 형식을 XX로 통일해줘"처럼 명확하게 합니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">4</div>',
-'<div class="step-title">변경 내용 확인</div>',
-'<div class="step-desc">Claude가 변경할 내용을 먼저 보여줍니다. 동의하면 진행, 아니면 수정 지시를 추가합니다.</div>',
-'</div>',
-'<div class="step-card" style="grid-column: span 1">',
-'<div class="step-num">5</div>',
-'<div class="step-title">/review로 최종 확인</div>',
-'<div class="step-desc"><code style="background:#f0ece4;padding:1px 5px;border-radius:3px">/review</code> 입력 후 변경 사항 전체를 한 번에 검토하고 세션을 마칩니다.</div>',
-'</div>',
-'</div>',
-
-'<h2 class="section-heading">이 실습에서 써볼 프롬프트 예시</h2>',
-promptBlock('Claude Code 실습 — 파일 수정 대화 흐름',
-`# 1단계: 현황 파악
-이 폴더 안의 마크다운 파일들을 읽고,
-파일 목록과 각 파일의 제목·날짜 형식을 표로 정리해줘.
-
-# 2단계: 수정 요청
-모든 파일에서 날짜 형식을 "YYYY년 MM월" 통일해줘.
-제목은 "## 섹션명" 형식으로 맞춰줘.
-수정 전에 변경될 내용을 먼저 보여줘.
-
-# 3단계: 목차 파일 생성
-전체 보고서 목록을 정리한 INDEX.md 파일을 새로 만들어줘.
-파일명, 날짜, 한 줄 요약 포함.`),
-
-'<h2 class="section-heading">작업 중 자주 하는 말</h2>',
-'<div class="demo-grid">',
-demo('"수정 전에 먼저 보여줘"', '변경 사항 미리보기 요청. 실수 방지에 필수. Claude는 기본적으로 변경 전 확인을 요청합니다.'),
-demo('"이 파일만 적용해줘"', '여러 파일이 있을 때 특정 파일에만 먼저 적용하고 확인 후 나머지로 확장합니다.'),
-demo('"원래대로 돌려줘"', '수정이 마음에 안 들면 되돌리기 요청. 변경 전 백업을 Claude가 보관하고 있습니다.'),
-'</div>',
-
-'<div class="callout">',
-'<div class="callout-title">💡 코딩 모르는 분께</div>',
-'Claude Code는 코드 파일뿐 아니라 <b>마크다운, 텍스트, CSV, 설정 파일</b> 등 모든 텍스트 파일을 다룹니다. 문서 정리, 데이터 파일 변환, 보고서 일괄 수정 등에도 동일하게 활용합니다. 지금 익히는 흐름(읽기 → 요청 → 확인)은 파일 종류와 무관하게 동일합니다.',
-'</div>',
-
-'<div class="callout" style="background:#fdf5ea;border-color:#c8a855">',
-'<div class="callout-title" style="color:#8a6a10">⚠️ 중요한 파일 작업 전 확인 사항</div>',
-'Claude Code는 실제로 파일을 수정합니다. <b>중요한 파일은 작업 전 백업</b>을 권장합니다. 또한 사내 보안 정책에 따라 민감 정보가 포함된 파일을 AI 도구로 처리할 때는 정보보안팀 가이드를 따르십시오.',
-'</div>',
-'<div class="callout" style="background:#f0f7ed;border-color:#b4d1a8;margin-top:20px">',
-'<div class="callout-title" style="color:#3a6b2e">✅ 실습 완료 체크리스트</div>',
-'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:2.0;color:#3a5a30">',
-'<li>Claude Code에서 폴더 안 파일 목록을 제대로 읽어왔나?</li>',
-'<li>파일 수정 요청 후 변경 내용 미리보기가 표시됐나?</li>',
-'<li>수정 승인 후 실제 파일에 변경이 반영됐나?</li>',
-'<li>/compact 입력 시 대화 요약이 됐나?</li>',
-'</ul>',
-'</div>'
-].join('');
-/* ---------- CH 03 · MCP ---------- */
-
+/* ---------- CH 03 ---------- */
 pages["3-1"] = [
-'<h1>MCP가 뭐야 · Claude에 도구를 꽂다</h1>',
-'<p class="page-desc">MCP(Model Context Protocol)는 Claude가 외부 서비스·파일·데이터베이스와 직접 연결되는 표준 방식입니다. 쉽게 말해 <b>"Claude에게 플러그인을 꽂는 것"</b>입니다. MCP 서버를 연결하면 Claude가 그 서비스의 데이터를 실시간으로 읽고 씁니다.</p>',
+'<h1>Cowork란 · 작업형 AI의 정의</h1>',
+'<p class="page-desc">Chat은 AI에게 말을 겁니다. Code는 AI가 파일을 편집합니다. <b>Cowork는 AI가 외부 서비스와 연결되어 실제 업무를 처음부터 끝까지 처리합니다.</b></p>',
 
-'<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 24px">',
-'<div style="background:#fdf0f0;border:1px solid #e8c5c5;border-radius:10px;padding:16px">',
-'<div style="font-size:12px;font-weight:700;color:#a53545;margin-bottom:10px">MCP 없이</div>',
-'<ul style="font-size:13px;color:#6b5e5a;padding-left:18px;line-height:2.0">',
-'<li>Notion 내용을 복사해서 Claude에 붙여넣기</li>',
-'<li>GitHub 코드를 내려받아 파일로 전달</li>',
-'<li>데이터가 바뀌면 다시 복사해야 함</li>',
-'<li>Claude는 데이터의 "스냅샷"만 봄</li>',
-'</ul>',
-'</div>',
-'<div style="background:#f0f7ed;border:1px solid #b4d1a8;border-radius:10px;padding:16px">',
-'<div style="font-size:12px;font-weight:700;color:#3a6b2e;margin-bottom:10px">MCP 연결 후</div>',
-'<ul style="font-size:13px;color:#3a5a30;padding-left:18px;line-height:2.0">',
-'<li>Claude가 Notion 페이지를 직접 읽고 씀</li>',
-'<li>GitHub 레포지토리를 실시간으로 탐색</li>',
-'<li>항상 최신 데이터로 작업</li>',
-'<li>Claude가 서비스의 실제 "라이브 뷰"를 봄</li>',
-'</ul>',
+'<div style="background:#3a1a22;border:1px solid rgba(139,28,43,0.5);border-radius:14px;padding:24px;margin:8px 0 28px;text-align:center">',
+'<div style="font-size:12px;color:#e3a0aa;font-weight:700;letter-spacing:0.1em;margin-bottom:14px">COWORK 정의</div>',
+'<div style="font-size:17px;font-weight:700;color:#fff;line-height:1.8;max-width:600px;margin:0 auto">',
+'"똑똑한 AI 인턴이, 내가 허락한 서비스 안에서,<br>',
+'연결된 규칙을 바탕으로,<br>',
+'실제 결과물을 만들어 저장하는 <span style="color:#e3a0aa">작업 시스템</span>"',
 '</div>',
 '</div>',
 
-'<h2 class="section-heading">MCP 구조 — 한눈에</h2>',
-'<div style="background:#1f1f1f;border-radius:12px;padding:20px;box-shadow:0 4px 16px rgba(0,0,0,0.15);margin:8px 0 20px">',
-'<div style="display:flex;align-items:center;justify-content:center;gap:16px;padding:20px 10px;flex-wrap:wrap">',
-'<div style="background:#2a2a2a;border-radius:10px;padding:14px 20px;text-align:center;color:#e3e3e3;font-size:13px;min-width:100px">',
-'<div style="font-size:20px;margin-bottom:6px">🖥️</div>',
-'<div style="font-weight:700">Claude Desktop</div>',
-'<div style="font-size:11px;color:#9aa0a6;margin-top:2px">또는 Claude Code</div>',
-'</div>',
-'<div style="color:#8ab4f8;font-size:18px;font-weight:700">⟺</div>',
-'<div style="background:#3c2a2e;border-radius:10px;padding:14px 20px;text-align:center;color:#e3a0aa;font-size:13px;min-width:100px">',
-'<div style="font-size:20px;margin-bottom:6px">🔌</div>',
-'<div style="font-weight:700">MCP 서버</div>',
-'<div style="font-size:11px;color:#9aa0a6;margin-top:2px">로컬 또는 원격</div>',
-'</div>',
-'<div style="color:#8ab4f8;font-size:18px;font-weight:700">⟺</div>',
-'<div style="background:#2a2a2a;border-radius:10px;padding:14px 20px;text-align:center;color:#e3e3e3;font-size:13px;min-width:100px">',
-'<div style="font-size:20px;margin-bottom:6px">📦</div>',
-'<div style="font-weight:700">외부 서비스</div>',
-'<div style="font-size:11px;color:#9aa0a6;margin-top:2px">파일·Notion·GitHub 등</div>',
-'</div>',
-'</div>',
-'<div style="text-align:center;font-size:12px;color:#9aa0a6;margin-top:4px">claude_desktop_config.json에 MCP 서버를 등록하면 연결 완료</div>',
+'<h2 class="section-heading">Cowork의 4가지 구성 요소</h2>',
+'<div class="step-grid">',
+'<div class="step-card"><div class="step-num">1</div><div class="step-title">AI 인턴</div><div class="step-desc">Claude가 주도적으로 작업을 실행합니다. 지시하면 알아서 단계를 나눠 처리합니다.</div></div>',
+'<div class="step-card"><div class="step-num">2</div><div class="step-title">허락된 서비스</div><div class="step-desc">Google Drive, Gmail, Notion, Calendar 등 내가 연결 허용한 서비스에만 접근합니다. 모든 권한은 사용자가 제어합니다.</div></div>',
+'<div class="step-card"><div class="step-num">3</div><div class="step-title">연결된 규칙</div><div class="step-desc">Settings와 Customize에 저장된 내 업무 규칙을 따릅니다. "보고서는 항상 3단락으로" 같은 규칙이 자동 적용됩니다.</div></div>',
+'<div class="step-card"><div class="step-num">4</div><div class="step-title">실제 결과물</div><div class="step-desc">대화창에 텍스트로 답하는 게 아니라, 실제 파일을 만들고 문서를 업데이트하고 이메일을 초안합니다.</div></div>',
 '</div>',
 
-'<h2 class="section-heading">연결 방식 — 두 가지 경로</h2>',
-'<table>',
-'<thead><tr><th>방식</th><th>대상</th><th>설정 위치</th><th>언제 쓰나</th></tr></thead>',
-'<tbody>',
-'<tr><td><b>Claude Desktop</b></td><td>Desktop 앱</td><td>claude_desktop_config.json</td><td>GUI 환경, 대화 중 실시간 연결</td></tr>',
-'<tr><td><b>Claude Code</b></td><td>터미널 세션</td><td><code>claude mcp add</code> 명령</td><td>터미널 작업 중 특정 서비스 연결</td></tr>',
-'</tbody></table>',
-
-'<h2 class="section-heading">설정 파일 위치</h2>',
+'<h2 class="section-heading">Cowork가 만드는 변화</h2>',
 '<div class="demo-grid">',
-demo('macOS', '~/Library/Application Support/Claude/claude_desktop_config.json'),
-demo('Windows', '%APPDATA%\\Claude\\claude_desktop_config.json'),
+demo("🔄 반복 업무 탈출", "매주 같은 형식으로 쓰던 보고서를 Cowork에 맡기면, 내 역할은 검토와 확정으로 바뀝니다."),
+demo("📂 파일이 스스로 정리", "Drive에 쌓인 문서를 Cowork가 스캔해 분류·요약·정리합니다."),
+demo("📅 캘린더와 연동", "회의 일정을 보고 자동으로 사전 자료를 준비하거나 후속 할 일을 정리합니다."),
+demo("📧 이메일 처리 보조", "받은 메일을 분석해 답장 초안을 준비합니다. 전송은 항상 사람이 확인 후 진행."),
 '</div>',
 
 '<div class="callout">',
-'<div class="callout-title">🎯 이 챕터 끝나면 가능해지는 것</div>',
-'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:1.9">',
-'<li>파일시스템 MCP로 Claude가 내 PC 폴더를 직접 읽고 씀</li>',
-'<li>Notion 또는 GitHub MCP로 외부 서비스 실시간 연결</li>',
-'<li>Claude Code에서 <code>claude mcp list</code>로 연결된 MCP 목록 확인</li>',
-'</ul>',
-'<p style="margin-top:8px;font-size:13px;color:#6b5e5a">이어지는 순서: <b>3-2</b> 파일시스템 MCP → <b>3-3</b> 외부 서비스 MCP</p>',
+'<div class="callout-title">💡 Cowork ≠ 완전 자동화</div>',
+'Cowork는 AI가 혼자 모든 걸 하는 시스템이 아닙니다. <b>AI가 초안을 만들고, 사람이 확인·승인하는 협업</b>입니다. 특히 이메일 전송·결제·중요 문서 확정은 항상 사람이 최종 판단합니다.',
 '</div>'
 ].join('');
 
 /* ---------- */
-
 pages["3-2"] = [
-'<h1>파일시스템 MCP 연결</h1>',
-'<p class="page-desc">파일시스템 MCP는 Claude가 내 PC의 특정 폴더를 직접 읽고 쓸 수 있게 합니다. Claude Desktop에서 대화하면서 로컬 파일을 실시간으로 다룰 수 있는 가장 기본적인 MCP입니다.</p>',
+'<h1>Chat vs Code vs Cowork · 완전 비교</h1>',
+'<p class="page-desc">세 가지 모드를 언제, 어떻게 쓰는지 명확히 이해해야 올바르게 활용할 수 있습니다.</p>',
 
-'<div class="callout">',
-'<div class="callout-title">🎯 실습 목표</div>',
-'claude_desktop_config.json에 파일시스템 MCP 설정을 추가하고, Claude Desktop에서 내 PC 폴더에 접근하는 것을 확인합니다.',
-'</div>',
-
-'<h2 class="section-heading">설정 순서 — 4단계</h2>',
-'<div class="step-grid">',
-'<div class="step-card">',
-'<div class="step-num">1</div>',
-'<div class="step-title">패키지 설치</div>',
-'<div class="step-desc">터미널에서 파일시스템 MCP 패키지를 설치합니다. npm 전역 설치 한 번이면 됩니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">2</div>',
-'<div class="step-title">설정 파일 열기</div>',
-'<div class="step-desc">운영체제에 맞는 경로의 claude_desktop_config.json 파일을 텍스트 편집기로 엽니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">3</div>',
-'<div class="step-title">설정 추가</div>',
-'<div class="step-desc">아래 설정 블록을 붙여넣고 경로를 실제 내 폴더로 수정합니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">4</div>',
-'<div class="step-title">Claude Desktop 재시작</div>',
-'<div class="step-desc">앱을 완전히 종료 후 재시작. 새 대화창에서 파일시스템 도구가 활성화됩니다.</div>',
-'</div>',
-'</div>',
-
-'<h2 class="section-heading">설정 블록 — 복사해서 붙여넣기</h2>',
-promptBlock('claude_desktop_config.json — 파일시스템 MCP',
-`{
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/Users/내이름/Documents",
-        "/Users/내이름/Desktop"
-      ]
-    }
-  }
-}
-
-// Windows 예시 (경로 형식 주의)
-{
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "C:\\\\Users\\\\내이름\\\\Documents"
-      ]
-    }
-  }
-}`),
-
-'<h2 class="section-heading">연결 확인 — Claude Desktop에서 테스트</h2>',
-'<div style="background:#1f1f1f;border-radius:12px;padding:20px;box-shadow:0 4px 16px rgba(0,0,0,0.15);margin:8px 0 20px">',
-'<div style="color:#9aa0a6;font-size:11px;margin-bottom:10px;letter-spacing:0.1em">CLAUDE DESKTOP · 새 대화</div>',
-'<div style="font-family:monospace;font-size:13px;line-height:2.0">',
-'<div style="color:#8ab4f8">사용자: Documents 폴더에 어떤 파일이 있어?</div>',
-'<div style="color:#9aa0a6;font-size:11px;margin:4px 0">[파일시스템 도구 호출 중...]</div>',
-'<div style="color:#c4c7c5">Documents 폴더에 다음 파일들이 있습니다:</div>',
-'<div style="color:#c4c7c5">- 2024_월례보고서.docx (수정일: 2024-10-15)</div>',
-'<div style="color:#c4c7c5">- 프로젝트_기획안.pdf (수정일: 2024-10-12)</div>',
-'<div style="color:#c4c7c5">- ...</div>',
-'</div>',
-'</div>',
-'<div style="font-size:11px;color:#9aa0a6;margin-top:6px;text-align:center">※ 파일시스템 MCP 연결 후 Claude Desktop 대화 목업</div>',
-
-'<h2 class="section-heading">Claude Code에서 MCP 추가</h2>',
-promptBlock('Claude Code — MCP 추가·목록 확인',
-`# MCP 서버 추가 (문법은 설치 버전에 따라 다를 수 있음)
-claude mcp add filesystem -- npx -y @modelcontextprotocol/server-filesystem /path/to/folder
-
-# 연결된 MCP 목록 확인
-claude mcp list
-
-# 전체 옵션 확인
-claude mcp --help`),
-
-'<div class="callout" style="background:#fdf5ea;border-color:#c8a855">',
-'<div class="callout-title" style="color:#8a6a10">💡 Windows 경로 주의</div>',
-'Windows에서 JSON 파일 안에 경로를 쓸 때는 역슬래시(<code>\\</code>)를 두 번 써야 합니다. 예: <code style="background:#f0ece4;padding:2px 5px;border-radius:3px">C:\\\\Users\\\\내이름\\\\Documents</code> — 이렇게 쓰면 실제 경로는 <code>C:\\Users\\내이름\\Documents</code>로 인식됩니다.',
-'</div>',
-'<div class="callout">',
-'<div class="callout-title">💡 폴더 권한 범위를 좁게 설정하세요</div>',
-'설정 파일에 지정한 폴더만 Claude가 접근합니다. <b>처음에는 실습용 폴더 하나만 지정</b>하고, 필요에 따라 점진적으로 확장하는 것을 권장합니다. 홈 디렉터리 전체를 열어두면 예상치 못한 파일 수정이 일어날 수 있습니다.',
-'</div>',
-
-'<div class="callout" style="background:#fdf5ea;border-color:#c8a855">',
-'<div class="callout-title" style="color:#8a6a10">⚠️ 보안 주의사항</div>',
-'파일시스템 MCP는 지정된 폴더에 대해 <b>읽기와 쓰기 권한</b>을 모두 가집니다. 민감한 개인 데이터·사내 기밀 자료가 있는 폴더는 연결하지 마십시오. 사내 AI 보안 정책을 먼저 확인하십시오.',
-'</div>',
-'<div class="callout" style="background:#f0f7ed;border-color:#b4d1a8;margin-top:20px">',
-'<div class="callout-title" style="color:#3a6b2e">✅ 실습 완료 체크리스트</div>',
-'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:2.0;color:#3a5a30">',
-'<li>Claude Desktop을 재시작했나?</li>',
-'<li>새 대화창에서 파일 관련 도구 아이콘이 생겼나?</li>',
-'<li>"Documents 폴더에 어떤 파일이 있어?" 물었을 때 실제 파일 목록이 나왔나?</li>',
-'<li><code style="background:#e8f5e2;padding:1px 4px;border-radius:3px">claude mcp list</code>로 filesystem이 등록됐나?</li>',
-'</ul>',
-'</div>'
-].join('');
-
-/* ---------- */
-
-pages["3-3"] = [
-'<h1>외부 서비스 MCP 연결 (Notion / GitHub)</h1>',
-'<p class="page-desc">파일시스템 MCP를 익혔다면 이제 외부 서비스를 연결합니다. Notion과 GitHub는 현재 가장 많이 쓰이는 MCP 서버입니다. 하나를 골라 연결해보세요 — 방식은 동일합니다.</p>',
-
-'<div class="callout">',
-'<div class="callout-title">🎯 실습 목표</div>',
-'Notion 또는 GitHub MCP를 claude_desktop_config.json에 추가하고, Claude Desktop에서 해당 서비스 데이터를 실시간으로 조회합니다.',
-'</div>',
-
-'<h2 class="section-heading">Option A — Notion MCP</h2>',
-'<div class="step-grid">',
-'<div class="step-card">',
-'<div class="step-num">1</div>',
-'<div class="step-title">Notion API 키 발급</div>',
-'<div class="step-desc">notion.so → Settings → Connections → Develop or manage integrations → New integration. Internal Integration Token을 복사합니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">2</div>',
-'<div class="step-title">페이지 연결 권한 부여</div>',
-'<div class="step-desc">연결할 Notion 페이지로 이동 → ··· 메뉴 → Connections → 방금 만든 Integration 선택. 접근 허용 페이지를 명시적으로 지정합니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">3</div>',
-'<div class="step-title">config 파일에 추가</div>',
-'<div class="step-desc">아래 설정 블록을 claude_desktop_config.json의 mcpServers 안에 추가하고 API 키를 넣습니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">4</div>',
-'<div class="step-title">재시작 + 확인</div>',
-'<div class="step-desc">Claude Desktop 재시작 후 "내 Notion 워크스페이스에 어떤 페이지가 있어?"로 연결을 확인합니다.</div>',
-'</div>',
-'</div>',
-
-promptBlock('claude_desktop_config.json — Notion MCP',
-`{
-  "mcpServers": {
-    "notion": {
-      "command": "npx",
-      "args": ["-y", "@notionhq/notion-mcp-server"],
-      "env": {
-        "OPENAPI_MCP_HEADERS": "{\\"Authorization\\": \\"Bearer YOUR_NOTION_API_KEY\\", \\"Notion-Version\\": \\"2022-06-28\\"}"
-      }
-    }
-  }
-}`),
-
-'<h2 class="section-heading">Option B — GitHub MCP</h2>',
-'<div class="step-grid">',
-'<div class="step-card">',
-'<div class="step-num">1</div>',
-'<div class="step-title">GitHub PAT 발급</div>',
-'<div class="step-desc">GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens. 접근할 레포지토리와 권한(읽기 최소)만 선택합니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">2</div>',
-'<div class="step-title">config 파일에 추가</div>',
-'<div class="step-desc">아래 설정을 mcpServers 안에 추가하고 발급받은 토큰을 넣습니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">3</div>',
-'<div class="step-title">재시작 + 확인</div>',
-'<div class="step-desc">Claude Desktop 재시작 후 레포지토리 이름으로 내용을 조회해봅니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">4</div>',
-'<div class="step-title">실전 활용</div>',
-'<div class="step-desc">"이 레포 README 읽고 한국어로 요약해줘", "최근 이슈 목록 보여줘" 등 자연어로 요청합니다.</div>',
-'</div>',
-'</div>',
-
-promptBlock('claude_desktop_config.json — GitHub MCP',
-`{
-  "mcpServers": {
-    "github": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "YOUR_GITHUB_PAT"
-      }
-    }
-  }
-}`),
-
-'<h2 class="section-heading">두 MCP를 동시에 쓰는 config 예시</h2>',
-promptBlock('claude_desktop_config.json — 복수 MCP 등록',
-`{
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/Users/내이름/Documents"]
-    },
-    "notion": {
-      "command": "npx",
-      "args": ["-y", "@notionhq/notion-mcp-server"],
-      "env": {
-        "OPENAPI_MCP_HEADERS": "{\\"Authorization\\": \\"Bearer YOUR_NOTION_API_KEY\\", \\"Notion-Version\\": \\"2022-06-28\\"}"
-      }
-    }
-  }
-}`),
-
-'<h2 class="section-heading">연결 후 쓸 수 있는 것들</h2>',
-'<div class="demo-grid">',
-demo('Notion + Claude', '"이 Notion 페이지 내용 읽고 회의 안건 정리해줘", "방금 정리한 내용을 이 Notion 페이지에 저장해줘"'),
-demo('GitHub + Claude', '"이 레포 최근 커밋 목록 보여줘", "README.md 읽고 설치 가이드 한국어로 요약해줘"'),
-demo('파일 + Notion 연계', '로컬 파일 내용을 읽어 Notion 페이지에 자동 기록. 두 MCP를 동시에 활용합니다.'),
-'</div>',
-
-'<div class="callout" style="background:#fdf5ea;border-color:#c8a855">',
-'<div class="callout-title" style="color:#8a6a10">⚠️ API 키·토큰 관리</div>',
-'config 파일에 API 키를 직접 넣으면 편리하지만, <b>해당 파일을 타인과 공유하거나 버전 관리 시스템에 올리지 마십시오.</b> 키가 노출되면 즉시 폐기하고 재발급합니다. 팀 공유 환경에서는 환경변수 방식으로 관리하는 것을 권장합니다.',
-'</div>',
-'<div class="callout" style="background:#f0f7ed;border-color:#b4d1a8;margin-top:20px">',
-'<div class="callout-title" style="color:#3a6b2e">✅ 실습 완료 체크리스트</div>',
-'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:2.0;color:#3a5a30">',
-'<li>API 키를 발급했나? (Notion 또는 GitHub)</li>',
-'<li>claude_desktop_config.json에 설정을 추가했나?</li>',
-'<li>Claude Desktop 재시작 후 도구 연결이 확인됐나?</li>',
-'<li>자연어 질문("내 Notion 페이지 목록 보여줘")에 응답이 왔나?</li>',
-'</ul>',
-'</div>'
-].join('');
-/* ---------- CH 04 · Skills & Agents ---------- */
-
-pages["4-1"] = [
-'<h1>Skill · 반복 프롬프트를 파일로</h1>',
-'<p class="page-desc">매번 같은 프롬프트를 다시 입력하고 있다면, 그 프롬프트를 <b>파일로 만들어 저장</b>하면 됩니다. Claude Code의 Skill은 마크다운 파일 하나입니다. 한 번 만들면 언제든 불러쓸 수 있고, 팀과 공유도 됩니다.</p>',
-
-'<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 24px">',
-'<div style="background:#fdf0f0;border:1px solid #e8c5c5;border-radius:10px;padding:16px">',
-'<div style="font-size:12px;font-weight:700;color:#a53545;margin-bottom:10px">Skill 없이</div>',
-'<ul style="font-size:13px;color:#6b5e5a;padding-left:18px;line-height:2.0">',
-'<li>매번 같은 지침을 새 대화에서 다시 입력</li>',
-'<li>프롬프트가 개인 메모장에 흩어져 있음</li>',
-'<li>동료에게 공유하려면 텍스트 복붙</li>',
-'<li>버전 관리·업데이트가 어려움</li>',
-'</ul>',
-'</div>',
-'<div style="background:#f0f7ed;border:1px solid #b4d1a8;border-radius:10px;padding:16px">',
-'<div style="font-size:12px;font-weight:700;color:#3a6b2e;margin-bottom:10px">Skill 파일 사용 후</div>',
-'<ul style="font-size:13px;color:#3a5a30;padding-left:18px;line-height:2.0">',
-'<li>파일 한 번 만들어두면 언제든 호출</li>',
-'<li>.claude/ 폴더에 모든 Skill이 모여 있음</li>',
-'<li>Git으로 팀 전체와 버전 관리·공유</li>',
-'<li>업데이트하면 다음 호출부터 즉시 반영</li>',
-'</ul>',
-'</div>',
-'</div>',
-
-'<h2 class="section-heading">Skill 파일 구조</h2>',
-'<div style="background:#1f1f1f;border-radius:12px;padding:20px;box-shadow:0 4px 16px rgba(0,0,0,0.15);margin:8px 0 20px">',
-'<div style="color:#9aa0a6;font-size:11px;margin-bottom:10px;letter-spacing:0.1em">파일 트리</div>',
-'<div style="font-family:monospace;font-size:13px;line-height:2.0;color:#c4c7c5">',
-'<div>my-project/</div>',
-'<div style="padding-left:20px">├── .claude/</div>',
-'<div style="padding-left:40px;color:#8ab4f8">├── skills/                ← 프로젝트 전용 Skill</div>',
-'<div style="padding-left:60px;color:#8ab4f8">├── weekly-report.md</div>',
-'<div style="padding-left:60px;color:#8ab4f8">├── code-review.md</div>',
-'<div style="padding-left:60px;color:#8ab4f8">└── data-summary.md</div>',
-'<div style="padding-left:40px">└── agents/               ← Agent 정의 파일 (4-3에서)</div>',
-'<div style="padding-left:20px">└── src/</div>',
-'<div style="margin-top:10px;color:#9aa0a6;font-size:12px">전역 Skill: ~/.claude/skills/ 에 저장하면 모든 프로젝트에서 사용 가능</div>',
-'</div>',
-'</div>',
-
-'<h2 class="section-heading">Skill 파일 구성 요소</h2>',
+'<h2 class="section-heading">3가지 모드 비교표</h2>',
 '<table>',
-'<thead><tr><th style="width:130px">항목</th><th>설명</th><th>예시</th></tr></thead>',
+'<thead><tr><th>항목</th><th>💬 Chat</th><th>⌨️ Code</th><th>🔗 Cowork</th></tr></thead>',
 '<tbody>',
-'<tr><td><b>---<br>헤더 (YAML)</b></td><td>파일 메타정보. name, description 정의</td><td>name: weekly-report</td></tr>',
-'<tr><td><b>목적 설명</b></td><td>이 Skill이 무엇을 하는지 Claude에게 알림</td><td>"주간 업무 보고서를 작성하는 Skill입니다."</td></tr>',
-'<tr><td><b>지침·규칙</b></td><td>출력 형식, 언어, 제약 조건</td><td>항상 한국어, 불릿 형식, 3개 섹션 유지</td></tr>',
-'<tr><td><b>예시 (선택)</b></td><td>입력 예시와 기대 출력 패턴</td><td>입력: 이번 주 완료 목록 / 출력: 보고서 초안</td></tr>',
+'<tr><td><b>실행 방식</b></td><td>claude.ai 웹/앱 대화</td><td>터미널 CLI</td><td>claude.ai + Connectors</td></tr>',
+'<tr><td><b>파일 접근</b></td><td>업로드 필요</td><td>로컬 폴더 직접</td><td>클라우드 서비스 직접</td></tr>',
+'<tr><td><b>결과물 저장</b></td><td>Artifact (수동 저장)</td><td>파일에 직접 저장</td><td>Drive·Notion 등에 자동 저장</td></tr>',
+'<tr><td><b>자동화 가능?</b></td><td>X (매번 직접 실행)</td><td>스크립트로 가능</td><td>Scheduled로 예약 가능</td></tr>',
+'<tr><td><b>외부 서비스</b></td><td>X</td><td>MCP 서버 추가 시 가능</td><td>Connectors로 기본 제공</td></tr>',
+'<tr><td><b>난이도</b></td><td>쉬움</td><td>중간 (터미널 기본 필요)</td><td>중간 (설정 후 쉬움)</td></tr>',
+'</tbody></table>',
+
+'<h2 class="section-heading">업무 상황별 추천 모드</h2>',
+'<table>',
+'<thead><tr><th>상황</th><th>추천 모드</th><th>이유</th></tr></thead>',
+'<tbody>',
+'<tr><td>이메일 초안 작성, 아이디어 정리</td><td><b>Chat</b></td><td>빠른 대화로 충분</td></tr>',
+'<tr><td>보고서 파일 직접 수정</td><td><b>Code</b></td><td>파일에 직접 접근 필요</td></tr>',
+'<tr><td>폴더 내 문서 일괄 처리</td><td><b>Code</b></td><td>여러 파일 동시 처리</td></tr>',
+'<tr><td>Drive 문서를 Notion에 정리</td><td><b>Cowork</b></td><td>외부 서비스 간 연동</td></tr>',
+'<tr><td>매주 월요일 주간 보고 초안 생성</td><td><b>Cowork</b></td><td>Scheduled 자동화</td></tr>',
+'<tr><td>받은 이메일 분류 및 답장 초안</td><td><b>Cowork</b></td><td>Gmail Connector 활용</td></tr>',
 '</tbody></table>',
 
 '<div class="callout">',
-'<div class="callout-title">🎯 이 챕터 끝나면 가능해지는 것</div>',
-'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:1.9">',
-'<li>내 반복 업무 프롬프트를 .claude/skills/ 안의 마크다운 파일로 저장</li>',
-'<li>Agent 정의 파일을 만들어 특정 작업을 위임</li>',
-'<li>팀 레포에 Skill·Agent 파일을 공유해 팀 전체 자산화</li>',
-'</ul>',
-'<p style="margin-top:8px;font-size:13px;color:#6b5e5a">이어지는 순서: <b>4-2</b> Skill 만들기 → <b>4-3</b> 서브에이전트 개념 → <b>4-4</b> 에이전트 워크샵</p>',
+'<div class="callout-title">💡 세 모드는 경쟁이 아닌 계층</div>',
+'Chat → Code → Cowork는 위로 갈수록 강력하지만, 아래 레이어가 항상 더 유용한 경우도 있습니다. <b>간단한 작업은 Chat으로, 파일 편집은 Code로, 서비스 연동·자동화는 Cowork로</b> — 상황에 맞게 선택하세요.',
 '</div>'
 ].join('');
 
 /* ---------- */
-
-pages["4-2"] = [
-'<h1>내 업무 Skill 하나 만들기</h1>',
-'<p class="page-desc">이 실습에서는 실제로 내 업무에 쓰는 반복 프롬프트를 Skill 파일로 만듭니다. 완성된 파일은 .claude/skills/ 폴더에 저장해 바로 쓸 수 있습니다.</p>',
+pages["3-3"] = [
+'<h1>Cowork 시작하기 · 첫 설정</h1>',
+'<p class="page-desc">Cowork는 Claude.ai에서 Connectors를 활성화하면 시작됩니다. Google Drive 또는 Google Calendar를 연결하는 첫 번째 실습을 진행합니다.</p>',
 
 '<div class="callout">',
 '<div class="callout-title">🎯 실습 목표</div>',
-'주간 업무 보고서 Skill 파일을 만들고, Claude Code에서 "주간 보고서 작성해줘"라고 말하면 정해진 형식으로 즉시 초안이 나오는 것을 확인합니다.',
+'Claude.ai에서 Google Drive Connector를 연결하고, Drive 파일 하나를 Claude로 불러와 요약합니다.',
 '</div>',
 
-'<h2 class="section-heading">만드는 순서 — 4단계</h2>',
+'<h2 class="section-heading">Connectors 활성화 — 4단계</h2>',
 '<div class="step-grid">',
-'<div class="step-card">',
-'<div class="step-num">1</div>',
-'<div class="step-title">폴더 생성</div>',
-'<div class="step-desc">프로젝트 루트에 .claude/skills/ 폴더를 만듭니다. 전역으로 쓰려면 ~/.claude/skills/ 에 만듭니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">2</div>',
-'<div class="step-title">파일 생성</div>',
-'<div class="step-desc">weekly-report.md 파일을 만들고 아래 템플릿을 붙여넣습니다. 파일명이 Skill 이름이 됩니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">3</div>',
-'<div class="step-title">내용 맞춤화</div>',
-'<div class="step-desc">부서명, 형식, 규칙을 내 업무에 맞게 수정합니다. Claude가 이 파일의 지침을 그대로 따릅니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">4</div>',
-'<div class="step-title">Claude Code에서 호출</div>',
-'<div class="step-desc">claude 실행 후 <b>"weekly-report 형식으로 이번 주 보고서 초안 만들어줘"</b>라고 요청합니다. Claude가 .claude/skills/ 폴더를 자동 탐색해 Skill 파일을 참조합니다.</div>',
-'</div>',
+'<div class="step-card"><div class="step-num">1</div><div class="step-title">Claude.ai 접속</div><div class="step-desc">claude.ai 로그인 → 왼쪽 하단 프로필 → "Settings(설정)" 클릭.</div></div>',
+'<div class="step-card"><div class="step-num">2</div><div class="step-title">Integrations 메뉴</div><div class="step-desc">설정 페이지 → "Integrations" 또는 "연결" 탭 → 사용 가능한 서비스 목록 확인.</div></div>',
+'<div class="step-card"><div class="step-num">3</div><div class="step-title">Google Drive 연결</div><div class="step-desc">"Google Drive" 클릭 → "Connect" → Google 계정 로그인 → 접근 허용. 허용 범위는 읽기 전용으로 시작 권장.</div></div>',
+'<div class="step-card"><div class="step-num">4</div><div class="step-title">첫 활용</div><div class="step-desc">새 대화 → "@" 입력 → Google Drive 선택 → 파일 검색 → 선택된 파일 기반으로 질문.</div></div>',
 '</div>',
 
-'<h2 class="section-heading">Skill 파일 템플릿 — weekly-report.md</h2>',
-promptBlock('.claude/skills/weekly-report.md',
-`---
-name: weekly-report
-description: 주간 업무 보고서 초안을 작성하는 Skill
----
+'<h2 class="section-heading">연결 후 활용 예시</h2>',
+promptBlock('Drive 파일 요약 요청', '@Google Drive [파일명] 파일을 열어서 핵심 내용을 3줄로 요약해줘.\n그리고 이 문서에서 다음 주 처리해야 할 액션 아이템을 뽑아줘.'),
 
-# 주간 업무 보고서 Skill
-
-## 목적
-사용자가 이번 주 업무 내역을 요약해서 알려주면,
-팀 내부 공유용 주간 업무 보고서 초안을 작성합니다.
-
-## 출력 형식
-- 제목: [날짜] 주간 업무 보고
-- 섹션 1: 이번 주 완료
-- 섹션 2: 진행 중 (완료율 포함)
-- 섹션 3: 다음 주 계획
-- 섹션 4: 이슈 및 요청 사항
-
-## 규칙
-- 항상 한국어로 작성
-- 각 항목은 불릿(·) 형식, 1~2줄 이내
-- 완료 항목은 구체적 결과를 포함 (예: "검토 완료" 아닌 "3건 검토·승인")
-- 이슈 섹션이 없으면 "없음"으로 표기
-
-## 사용 방법
-사용자가 이번 주 업무 내용을 요약해서 입력하면
-위 형식에 맞게 보고서 초안을 바로 작성합니다.`),
-
-'<h2 class="section-heading">호출 후 대화 예시</h2>',
-'<div style="background:#1f1f1f;border-radius:12px;padding:20px;box-shadow:0 4px 16px rgba(0,0,0,0.15);margin:8px 0 20px">',
-'<div style="color:#9aa0a6;font-size:11px;margin-bottom:10px;letter-spacing:0.1em">CLAUDE CODE 대화</div>',
-'<div style="font-family:monospace;font-size:13px;line-height:2.0">',
-'<div style="color:#8ab4f8">사용자: weekly-report Skill 써서 이번 주 보고서 만들어줘.<br>완료: 협력사 계약서 검토, Q3 실적 분석 완료<br>진행: 신규 서비스 기획안 (70%)<br>다음: 부서 교육 자료 작성</div>',
-'<div style="color:#9aa0a6;font-size:11px;margin:6px 0">[weekly-report.md 로드됨]</div>',
-'<div style="color:#c4c7c5">---</div>',
-'<div style="color:#c4c7c5">2024-10-21 주간 업무 보고</div>',
-'<div style="color:#c4c7c5">이번 주 완료:</div>',
-'<div style="color:#c4c7c5">· 협력사 계약서 검토 및 최종 확인 완료</div>',
-'<div style="color:#c4c7c5">· Q3 실적 분석 보고서 작성 완료</div>',
-'<div style="color:#c4c7c5">...</div>',
+'<div class="callout" style="background:#fdf5ea;border-color:#c8a855">',
+'<div class="callout-title" style="color:#8a6a10">⚠️ 연결 범위 주의사항</div>',
+'Connector 연결 시 <b>최소 권한 원칙</b>을 지키세요. 처음엔 읽기 전용, 특정 폴더만 공유하는 방식으로 시작하고 필요에 따라 확장하는 게 안전합니다.',
 '</div>',
-'</div>',
-'<div style="font-size:11px;color:#9aa0a6;margin-top:6px;text-align:center">※ Skill 파일을 참조해 형식을 자동 적용한 대화 목업</div>',
 
-'<h2 class="section-heading">활용 팁</h2>',
+'<div class="callout" style="background:#f0f7ed;border-color:#5aa05a">',
+'<div class="callout-title" style="color:#2a6a2a">✅ 실습 완료 체크리스트</div>',
+'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:2.0;color:#2a5a2a">',
+'<li>Settings → Integrations에서 Google Drive 연결 상태가 "Connected"로 표시?</li>',
+'<li>새 대화에서 "@" 입력 시 Google Drive 옵션이 나타나나?</li>',
+'<li>Drive 파일 선택 후 Claude가 파일 내용을 읽어 요약해주나?</li>',
+'</ul>',
+'</div>'
+].join('');
+
+/* ---------- CH 04 ---------- */
+pages["4-1"] = [
+'<h1>Scheduled · 반복 작업 자동화</h1>',
+'<p class="page-desc">Scheduled는 "매주 월요일 오전 9시에 이 작업을 실행해줘"처럼 반복 업무를 예약하는 기능입니다. 수동으로 매번 실행할 필요가 없어집니다.</p>',
+
+'<h2 class="section-heading">Scheduled가 해결하는 문제</h2>',
 '<div class="demo-grid">',
-demo('업무별로 Skill 분리', 'weekly-report.md, code-review.md, meeting-minutes.md처럼 용도별로 파일을 나눕니다. 부르는 것만 로드됩니다.'),
-demo('전역 Skill로 올리기', '자주 쓰는 Skill은 ~/.claude/skills/ 에 두면 어느 프로젝트에서나 사용 가능합니다.'),
-demo('팀 레포 공유', '.claude/ 폴더를 Git에 포함하면 팀 전체가 같은 Skill을 씁니다. 업데이트도 pull 한 번으로 반영됩니다.'),
+demo("📋 주간 보고서", "매주 월요일 아침, 지난주 Drive 파일을 모아 주간 업무 요약을 자동 생성합니다."),
+demo("📰 아침 브리핑", "매일 출근 전 오늘의 캘린더 일정과 미처리 이메일 요약을 준비합니다."),
+demo("📊 월간 정리", "매월 1일, 지난달 작업 결과물을 정리해 팀 공유 문서로 업데이트합니다."),
 '</div>',
-'<div class="callout" style="background:#f0f7ed;border-color:#b4d1a8;margin-top:20px">',
-'<div class="callout-title" style="color:#3a6b2e">✅ 실습 완료 체크리스트</div>',
-'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:2.0;color:#3a5a30">',
-'<li>.claude/skills/weekly-report.md 파일이 생성됐나?</li>',
-'<li>Claude Code에서 "weekly-report 형식으로" 라고 말했을 때 파일을 참조했나?</li>',
-'<li>출력이 Skill에 정의한 섹션 구조(완료/진행/계획/이슈)로 나왔나?</li>',
+
+'<h2 class="section-heading">Scheduled 작업 설정 방법</h2>',
+'<div class="step-grid">',
+'<div class="step-card"><div class="step-num">1</div><div class="step-title">작업 정의</div><div class="step-desc">어떤 작업을 몇 시에 반복할지 결정. "매주 금요일 오후 4시에 이번 주 할 일 완료 리스트 정리".</div></div>',
+'<div class="step-card"><div class="step-num">2</div><div class="step-title">Claude.ai에서 설정</div><div class="step-desc">새 대화 시작 → "매주 [요일] [시간]에 [작업 내용]을 실행해줘"라고 요청. Claude가 Scheduled 작업으로 등록.</div></div>',
+'<div class="step-card"><div class="step-num">3</div><div class="step-title">Connector 연결 확인</div><div class="step-desc">작업에 필요한 서비스(Drive, Calendar 등)가 연결돼 있는지 확인. 미연결 시 실행 불가.</div></div>',
+'<div class="step-card"><div class="step-num">4</div><div class="step-title">결과 확인 및 조정</div><div class="step-desc">첫 실행 후 결과물 확인. 프롬프트를 수정해 더 정확한 결과가 나오도록 조정.</div></div>',
+'</div>',
+
+promptBlock('주간 보고서 Scheduled 프롬프트', '매주 금요일 오후 4시에 아래 작업을 실행해줘:\n\n1. @Google Drive [보고서 폴더]에서 이번 주 생성·수정된 파일 목록 확인\n2. 각 파일의 핵심 내용 1~2줄 요약\n3. 완료된 작업과 미완료 작업 분류\n4. 다음 주 예정 작업 목록 추가\n5. 결과를 [공유 노션 페이지]에 "주간 보고 - YYYY.MM.DD" 제목으로 저장'),
+
+'<div class="callout">',
+'<div class="callout-title">💡 Scheduled 활용 팁</div>',
+'처음엔 <b>읽기 전용 작업</b>(요약·분류)부터 시작하세요. AI가 파일을 수정하거나 이메일을 전송하는 작업은 충분히 테스트한 후 활성화하는 게 안전합니다.',
+'</div>'
+].join('');
+
+/* ---------- */
+pages["4-2"] = [
+'<h1>Ideas & Customize · 제안과 맞춤 설정</h1>',
+'<p class="page-desc">Ideas는 Claude가 내 업무 패턴을 분석해 개선 아이디어를 제안하는 기능입니다. Customize는 Claude의 응답 스타일과 행동 방식을 내 업무에 맞게 설정합니다.</p>',
+
+'<h2 class="section-heading">Ideas — Claude의 선제적 제안</h2>',
+'<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0 24px">',
+'<div class="card">',
+'<div class="card-title">Ideas가 하는 것</div>',
+'<ul style="font-size:13px;color:#6b5e5a;padding-left:18px;line-height:1.9;margin-top:8px">',
+'<li>내 대화·작업 패턴 분석</li>',
+'<li>"이 작업 자동화하면 어때요?" 제안</li>',
+'<li>비슷한 작업을 묶어서 처리 방법 안내</li>',
+'<li>더 효율적인 워크플로우 추천</li>',
+'</ul>',
+'</div>',
+'<div class="card">',
+'<div class="card-title">Ideas 활성화 방법</div>',
+'<ul style="font-size:13px;color:#6b5e5a;padding-left:18px;line-height:1.9;margin-top:8px">',
+'<li>Claude.ai → Settings → Ideas 탭</li>',
+'<li>제안 빈도 설정 (일간·주간·수동)</li>',
+'<li>제안 받고 싶은 업무 카테고리 선택</li>',
+'<li>수락하면 Scheduled 작업으로 자동 변환</li>',
+'</ul>',
+'</div>',
+'</div>',
+
+'<h2 class="section-heading">Customize — 나만의 Claude 설정</h2>',
+'<p style="font-size:14px;color:#6b5e5a;margin-bottom:16px">Customize는 Claude에게 "항상 이런 방식으로 일해줘"라고 사전에 지시하는 기능입니다. Project별로 다른 커스터마이즈를 설정할 수 있습니다.</p>',
+
+promptBlock('Customize 설정 예시 (마케팅 팀용)', '당신은 우리 팀의 마케팅 코피라이터입니다.\n\n기본 지침:\n- 한국 직장인 30-40대를 주요 타깃으로 글을 씁니다\n- 말투는 전문적이지만 딱딱하지 않게\n- 문장은 짧고 명확하게 (한 문장 최대 30자)\n- 영어는 괄호로 병기: 예) 전환율(Conversion Rate)\n- 초안 작성 후 반드시 "개선 포인트 3가지"를 함께 제안\n\n금지사항:\n- 과장된 표현 (최고의, 혁신적인 등) 사용 금지\n- 경쟁사 직접 언급 금지'),
+
+'<div class="callout">',
+'<div class="callout-title">💡 좋은 Customize 지침 작성법</div>',
+'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:1.9">',
+'<li><b>역할 정의</b>: "당신은 [역할]입니다"로 시작</li>',
+'<li><b>말투·형식 지정</b>: 격식체/구어체, 길이, 구조</li>',
+'<li><b>금지사항 명시</b>: 하지 말아야 할 것을 명확히</li>',
+'<li><b>출력 형식 고정</b>: "항상 다음 형식으로 답해줘: ..."</li>',
 '</ul>',
 '</div>'
 ].join('');
 
 /* ---------- */
-
 pages["4-3"] = [
-'<h1>서브에이전트 · 일을 위임하는 법</h1>',
-'<p class="page-desc">Claude Code에서 메인 Claude는 복잡한 작업을 <b>서브에이전트(Sub-agent)</b>에게 나눠서 맡길 수 있습니다. 서브에이전트도 마크다운 파일 하나로 정의됩니다. 메인이 전략을 짜면 서브가 실행합니다.</p>',
+'<h1>Settings · 나만의 작업 규칙</h1>',
+'<p class="page-desc">Settings는 Claude Code에서 작업 규칙을 파일로 저장하는 시스템입니다. <b>CLAUDE.md</b>라는 특별한 파일에 "이 프로젝트에서 Claude가 따라야 할 규칙"을 적어두면, Claude Code가 자동으로 읽고 적용합니다.</p>',
 
-'<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 24px">',
-'<div style="background:#fdf0f0;border:1px solid #e8c5c5;border-radius:10px;padding:16px">',
-'<div style="font-size:12px;font-weight:700;color:#a53545;margin-bottom:10px">에이전트 없이</div>',
-'<ul style="font-size:13px;color:#6b5e5a;padding-left:18px;line-height:2.0">',
-'<li>복잡한 작업을 Claude 하나에게 한꺼번에</li>',
-'<li>긴 작업 중 맥락이 희석됨</li>',
-'<li>단계별 역할 분리가 어려움</li>',
-'<li>재사용 불가 — 매번 새로 지시</li>',
-'</ul>',
-'</div>',
-'<div style="background:#f0f7ed;border:1px solid #b4d1a8;border-radius:10px;padding:16px">',
-'<div style="font-size:12px;font-weight:700;color:#3a6b2e;margin-bottom:10px">서브에이전트 활용</div>',
-'<ul style="font-size:13px;color:#3a5a30;padding-left:18px;line-height:2.0">',
-'<li>메인 Claude가 전체 계획 수립 + 위임</li>',
-'<li>서브에이전트가 독립적 맥락으로 전문 작업</li>',
-'<li>역할별 전문화 (문서 작성 / 코드 리뷰 / 데이터 처리)</li>',
-'<li>Agent 파일 재사용 — 정의 한 번, 계속 활용</li>',
-'</ul>',
-'</div>',
-'</div>',
-
-'<h2 class="section-heading">에이전트 구조 — 위임 흐름</h2>',
-'<div style="background:#1f1f1f;border-radius:12px;padding:24px;box-shadow:0 4px 16px rgba(0,0,0,0.15);margin:8px 0 20px">',
-'<div style="display:flex;flex-direction:column;gap:12px">',
-'<div style="background:#2a2a2a;border-radius:10px;padding:14px 18px;border-left:4px solid #e3a0aa">',
-'<div style="font-size:11px;color:#e3a0aa;font-weight:700;margin-bottom:6px;letter-spacing:0.08em">MAIN CLAUDE (오케스트레이터)</div>',
-'<div style="font-size:13px;color:#e3e3e3">사용자 요청 수신 → 작업 분해 → 각 서브에이전트에 위임 → 결과 통합</div>',
-'</div>',
-'<div style="display:flex;justify-content:center;color:#9aa0a6;font-size:18px">↓ Agent 도구로 호출</div>',
-'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">',
-'<div style="background:#2a3a2a;border-radius:8px;padding:12px;border-left:4px solid #5bb85b">',
-'<div style="font-size:11px;color:#5bb85b;font-weight:700;margin-bottom:4px">서브에이전트 A</div>',
-'<div style="font-size:12px;color:#c4c7c5">문서 요약 전문 처리</div>',
-'</div>',
-'<div style="background:#2a2a3a;border-radius:8px;padding:12px;border-left:4px solid #8ab4f8">',
-'<div style="font-size:11px;color:#8ab4f8;font-weight:700;margin-bottom:4px">서브에이전트 B</div>',
-'<div style="font-size:12px;color:#c4c7c5">코드 리뷰 전문 처리</div>',
-'</div>',
-'<div style="background:#3a2a3a;border-radius:8px;padding:12px;border-left:4px solid #b8a8d8">',
-'<div style="font-size:11px;color:#b8a8d8;font-weight:700;margin-bottom:4px">서브에이전트 C</div>',
-'<div style="font-size:12px;color:#c4c7c5">데이터 분석 전문 처리</div>',
-'</div>',
-'</div>',
-'</div>',
-'</div>',
-'<div style="font-size:11px;color:#9aa0a6;margin-top:6px;text-align:center">※ 메인 Claude가 복잡한 작업을 분해하여 서브에이전트에 위임하는 구조</div>',
-
-'<h2 class="section-heading">Agent 파일 위치와 구조</h2>',
-'<div style="background:#1f1f1f;border-radius:12px;padding:20px;box-shadow:0 4px 16px rgba(0,0,0,0.15);margin:8px 0 20px">',
-'<div style="font-family:monospace;font-size:13px;line-height:2.0;color:#c4c7c5">',
+'<h2 class="section-heading">CLAUDE.md — 프로젝트 규칙 파일</h2>',
+'<div style="background:#1f1f1f;border-radius:12px;padding:20px;margin:8px 0 20px">',
+'<div style="font-size:11px;color:#9aa0a6;margin-bottom:10px">프로젝트 폴더 구조</div>',
+'<div style="font-family:monospace;font-size:13px;line-height:2.2;color:#c4c7c5">',
 '<div>my-project/</div>',
-'<div style="padding-left:20px">└── .claude/</div>',
-'<div style="padding-left:40px">├── skills/</div>',
-'<div style="padding-left:40px;color:#8ab4f8">└── agents/              ← Agent 정의 파일 위치</div>',
-'<div style="padding-left:60px;color:#8ab4f8">├── doc-summarizer.md</div>',
-'<div style="padding-left:60px;color:#8ab4f8">├── code-reviewer.md</div>',
-'<div style="padding-left:60px;color:#8ab4f8">└── data-analyst.md</div>',
+'<div style="padding-left:20px">├── CLAUDE.md    <span style="color:#e3a0aa">← 여기! 규칙 파일</span></div>',
+'<div style="padding-left:20px">├── src/</div>',
+'<div style="padding-left:20px">├── docs/</div>',
+'<div style="padding-left:20px">└── reports/</div>',
 '</div>',
+'</div>',
+
+'<h2 class="section-heading">CLAUDE.md 작성 예시</h2>',
+promptBlock('CLAUDE.md 예시 (문서 작업 프로젝트)', '# 프로젝트 규칙\n\n## 기본 정보\n- 프로젝트: 마케팅팀 Q3 캠페인 문서 관리\n- 담당자: 홍길동 (마케팅 팀장)\n- 작업 폴더: /reports, /briefs\n\n## 파일 작성 규칙\n- 모든 문서는 Markdown 형식\n- 파일명: YYYY-MM-DD-제목.md\n- 첫 줄에 작성일·작성자·버전 기재\n\n## 금지 사항\n- /archive 폴더 내 파일 수정 금지\n- 외부 링크를 무단으로 제거 금지\n\n## 자주 쓰는 명령\n- "보고서 초안": 다음 주 계획 + 지난주 성과 구조\n- "회의록 정리": 안건·결정사항·담당자 형식'),
+
+'<h2 class="section-heading">CLAUDE.md에 담아야 할 것들</h2>',
+'<div class="demo-grid">',
+demo("📌 프로젝트 맥락", "팀 이름, 담당자, 업무 배경. Claude Code 실행할 때마다 이 맥락을 기억합니다."),
+demo("📝 파일 규칙", "파일명 형식, 저장 위치, 사용 금지 폴더. 실수를 예방합니다."),
+demo("🔧 자주 쓰는 명령", "반복 사용하는 작업의 단축 이름. '보고서 초안'이라고만 해도 구조를 압니다."),
 '</div>',
 
 '<div class="callout">',
-'<div class="callout-title">💡 Skill vs Agent</div>',
-'<table style="margin:8px 0 0">',
-'<thead><tr><th>항목</th><th>Skill</th><th>Agent</th></tr></thead>',
-'<tbody>',
-'<tr><td>위치</td><td>.claude/skills/</td><td>.claude/agents/</td></tr>',
-'<tr><td>역할</td><td>프롬프트 지침 파일</td><td>독립적 작업 수행자</td></tr>',
-'<tr><td>호출</td><td>대화 중 직접 참조</td><td>메인 Claude가 Agent 도구로 호출</td></tr>',
-'<tr><td>컨텍스트</td><td>메인과 공유</td><td>독립적 컨텍스트</td></tr>',
-'</tbody></table>',
-'</div>',
-
-'<p style="margin-top:16px;font-size:14px;color:#6b5e5a">이어지는 실습에서 실제 Agent 파일을 만들어 활용합니다. →</p>'
+'<div class="callout-title">💡 CLAUDE.md 작성 팁</div>',
+'처음부터 완벽하게 쓸 필요 없습니다. 작업하면서 Claude가 실수하거나 "앞으로 이렇게 해줘"라고 지시한 내용을 그때그때 CLAUDE.md에 추가해가세요.',
+'</div>'
 ].join('');
 
 /* ---------- */
-
 pages["4-4"] = [
-'<h1>내 전용 에이전트 만들기</h1>',
-'<p class="page-desc">오늘 배운 것을 모두 활용하는 통합 워크샵입니다. 내 실제 업무를 처리하는 Agent 파일을 정의하고, Claude Code에서 위임 작업을 실행해봅니다.</p>',
+'<h1>Connectors · 외부 서비스 연결</h1>',
+'<p class="page-desc">Connectors는 Cowork의 핵심입니다. Google Drive, Gmail, Notion, Google Calendar를 Claude에 연결하면 AI가 실제 서비스를 직접 읽고 작업합니다.</p>',
+
+'<div class="callout">',
+'<div class="callout-title">🎯 실습 목표</div>',
+'Google Drive Connector를 연결하고, Drive 폴더에서 문서를 불러와 Notion에 정리하는 흐름을 만듭니다.',
+'</div>',
+
+'<h2 class="section-heading">지원 Connectors 목록</h2>',
+'<table>',
+'<thead><tr><th>서비스</th><th>할 수 있는 것</th><th>주요 활용</th></tr></thead>',
+'<tbody>',
+'<tr><td><b>Google Drive</b></td><td>파일 읽기·생성·업데이트</td><td>보고서 자동 생성, 문서 요약</td></tr>',
+'<tr><td><b>Gmail</b></td><td>메일 읽기·초안 작성</td><td>이메일 분류, 답장 초안</td></tr>',
+'<tr><td><b>Notion</b></td><td>페이지 읽기·생성·편집</td><td>회의록 저장, 지식베이스 업데이트</td></tr>',
+'<tr><td><b>Google Calendar</b></td><td>일정 읽기·생성</td><td>사전 자료 준비, 회의 요약</td></tr>',
+'</tbody></table>',
+
+'<h2 class="section-heading">Google Drive 연결 실습 — 5단계</h2>',
+'<div class="step-grid">',
+'<div class="step-card"><div class="step-num">1</div><div class="step-title">Settings 열기</div><div class="step-desc">Claude.ai → 좌측 하단 프로필 → Settings → Integrations.</div></div>',
+'<div class="step-card"><div class="step-num">2</div><div class="step-title">Drive 연결</div><div class="step-desc">Google Drive → Connect → Google 계정 선택 → 접근 허용. 특정 폴더만 공유 권장.</div></div>',
+'<div class="step-card"><div class="step-num">3</div><div class="step-title">파일 참조</div><div class="step-desc">대화창에서 "@" 입력 → Google Drive → 파일 검색 → 선택하면 Claude가 파일 내용 접근.</div></div>',
+'<div class="step-card"><div class="step-num">4</div><div class="step-title">Notion 연결</div><div class="step-desc">같은 방식으로 Notion도 연결. 워크스페이스 접근 허용 → 특정 데이터베이스 선택.</div></div>',
+'<div class="step-card"><div class="step-num">5</div><div class="step-title">연동 테스트</div><div class="step-desc">Drive 파일 요약 → Notion 페이지 생성 요청으로 두 서비스 간 흐름 확인.</div></div>',
+'</div>',
+
+promptBlock('Drive → Notion 연동 요청', '@Google Drive [회의록 폴더] 폴더에서 이번 달 회의록 파일을 모두 찾아줘.\n\n각 회의록에서 다음 정보를 추출해:\n- 회의 날짜\n- 주요 결정사항 (최대 3개)\n- 담당자와 데드라인이 있는 액션 아이템\n\n추출한 내용을 @Notion [팀 위키] 데이터베이스에 "월간 결정사항 요약 - [월]" 제목으로 새 페이지를 만들어 저장해줘.'),
+
+'<div class="callout" style="background:#f0f7ed;border-color:#5aa05a">',
+'<div class="callout-title" style="color:#2a6a2a">✅ 실습 완료 체크리스트</div>',
+'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:2.0;color:#2a5a2a">',
+'<li>Settings에서 Google Drive Connected 상태 확인?</li>',
+'<li>대화창 "@" 입력 시 Drive 파일 검색이 되나?</li>',
+'<li>Drive 파일 내용을 Claude가 읽고 요약해주나?</li>',
+'<li>(선택) Notion 연결 후 새 페이지 생성이 되나?</li>',
+'</ul>',
+'</div>'
+].join('');
+
+/* ---------- CH 05 ---------- */
+pages["5-1"] = [
+'<h1>실습 A · 보고서 초안 자동 생성</h1>',
+'<p class="page-desc">매주 반복하는 주간 보고서. Cowork로 초안 생성을 자동화하면 작성 시간을 70% 이상 줄일 수 있습니다.</p>',
+
+'<div class="callout">',
+'<div class="callout-title">🎯 실습 시나리오</div>',
+'Drive에 저장된 이번 주 업무 메모 파일을 분석해서, 정해진 형식의 주간 보고서 초안을 자동 생성합니다.',
+'</div>',
+
+'<h2 class="section-heading">실습 순서 — 3단계</h2>',
+'<div class="step-grid">',
+'<div class="step-card"><div class="step-num">1</div><div class="step-title">재료 준비</div><div class="step-desc">Drive에 이번 주 업무 내용이 담긴 메모 파일을 저장. 없으면 지금 바로 텍스트 파일 하나 만들어도 OK.</div></div>',
+'<div class="step-card"><div class="step-num">2</div><div class="step-title">보고서 형식 설정</div><div class="step-desc">Claude에게 보고서 형식을 지정. Project 지침이나 Customize에 저장해두면 매번 설명 불필요.</div></div>',
+'<div class="step-card"><div class="step-num">3</div><div class="step-title">자동 생성 실행</div><div class="step-desc">아래 프롬프트로 Drive 파일을 참조해 보고서 초안 생성. 결과를 Artifact로 뽑아 검토 후 제출.</div></div>',
+'</div>',
+
+promptBlock('주간 보고서 자동 생성', '@Google Drive [이번주 업무메모.txt] 파일을 읽고 아래 형식으로 주간 보고서 초안을 작성해줘.\n\n[주간 보고서 형식]\n제목: 20XX년 XX월 X주차 주간 업무 보고\n부서/담당자:\n\n1. 이번 주 완료 업무\n   - 항목별 1~2줄\n\n2. 진행 중 업무 및 현황\n   - 항목, 진행률%, 예상 완료일\n\n3. 다음 주 계획\n   - 우선순위 순으로 3~5개\n\n4. 이슈 및 건의사항\n   - 없으면 "없음" 기재\n\n형식을 지키고, 존댓말로 작성해줘.'),
+
+'<h2 class="section-heading">Scheduled로 자동화하기</h2>',
+'<p style="font-size:14px;color:#6b5e5a">위 실습이 잘 됐다면, 매주 금요일 오후에 자동 실행되도록 Scheduled 작업으로 등록합니다.</p>',
+promptBlock('Scheduled 등록 요청', '매주 금요일 오후 4시에 주간 보고서 초안을 자동 생성해줘.\n\n방법:\n1. @Google Drive [업무 폴더]에서 이번 주 수정된 파일 읽기\n2. 위 형식으로 보고서 초안 작성\n3. Artifact로 저장'),
+
+'<div class="callout" style="background:#f0f7ed;border-color:#5aa05a">',
+'<div class="callout-title" style="color:#2a6a2a">✅ 실습 완료 체크리스트</div>',
+'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:2.0;color:#2a5a2a">',
+'<li>Drive 파일을 Claude가 읽어왔나?</li>',
+'<li>지정한 형식으로 보고서 초안이 생성됐나?</li>',
+'<li>Artifact로 분리되어 복사/다운로드 가능한 상태인가?</li>',
+'<li>(선택) Scheduled 작업으로 등록했나?</li>',
+'</ul>',
+'</div>'
+].join('');
+
+/* ---------- */
+pages["5-2"] = [
+'<h1>실습 B · 회의록 할 일 자동 정리</h1>',
+'<p class="page-desc">회의록에서 Action Item을 뽑고, 담당자별로 정리해 Notion에 저장합니다. 회의 후 15분 작업을 2분으로 줄이는 실습입니다.</p>',
+
+'<div class="callout">',
+'<div class="callout-title">🎯 실습 시나리오</div>',
+'회의 중 메모한 텍스트(또는 Drive에 저장된 회의록)를 분석해 담당자별 할 일 목록을 Notion에 자동 저장합니다.',
+'</div>',
+
+'<h2 class="section-heading">실습 순서 — 3단계</h2>',
+'<div class="step-grid">',
+'<div class="step-card"><div class="step-num">1</div><div class="step-title">회의록 준비</div><div class="step-desc">오늘 회의 내용을 텍스트로 준비. "안건, 논의 내용, 결정사항, 담당자 언급"이 들어있으면 충분. Drive 파일 또는 직접 붙여넣기.</div></div>',
+'<div class="step-card"><div class="step-num">2</div><div class="step-title">AI 분석 실행</div><div class="step-desc">아래 프롬프트로 회의록 분석. 담당자·데드라인이 있는 항목만 추출하도록 지시.</div></div>',
+'<div class="step-card"><div class="step-num">3</div><div class="step-title">Notion 저장</div><div class="step-desc">추출된 할 일 목록을 Notion에 저장 요청. 담당자별 할당이 자동으로 됩니다.</div></div>',
+'</div>',
+
+promptBlock('회의록 Action Item 추출', '아래 회의록을 분석해서 Action Item을 정리해줘.\n\n[회의록 내용 붙여넣기]\n---\n(여기에 회의록 텍스트 붙여넣기)\n---\n\n추출 형식:\n## 회의 요약\n- 일시: \n- 참석자: \n- 핵심 결정사항 3개 (한 줄씩)\n\n## Action Item 목록\n| 번호 | 할 일 | 담당자 | 데드라인 | 우선순위 |\n|------|--------|--------|---------|--------|\n\n## 미확정 사항\n- 추가 논의가 필요한 항목'),
+
+promptBlock('Notion 저장 요청', '@Notion [팀 업무 관리] 데이터베이스에 오늘 회의 결과를 저장해줘.\n\n방법:\n- 페이지 제목: "[YYYY-MM-DD] 회의록 - [회의 주제]"\n- 속성: 날짜, 참석자, 상태(진행중)\n- 본문에 위에서 정리한 요약과 Action Item 표 포함\n- Action Item을 별도 태스크로 생성 (담당자 연결)'),
+
+'<div class="callout" style="background:#f0f7ed;border-color:#5aa05a">',
+'<div class="callout-title" style="color:#2a6a2a">✅ 실습 완료 체크리스트</div>',
+'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:2.0;color:#2a5a2a">',
+'<li>회의록에서 Action Item이 정확히 추출됐나?</li>',
+'<li>담당자·데드라인이 표로 정리됐나?</li>',
+'<li>(Notion 연결 시) Notion에 페이지가 생성됐나?</li>',
+'<li>잘못 추출된 항목이 있다면 프롬프트를 어떻게 수정할지 생각해보기</li>',
+'</ul>',
+'</div>'
+].join('');
+
+/* ---------- */
+pages["5-3"] = [
+'<h1>통합 워크샵 · 내 업무에 Cowork 적용</h1>',
+'<p class="page-desc">지금까지 배운 Chat, Code, Cowork를 내 실제 업무에 엮어 하나의 자동화 흐름을 설계합니다. 오늘 끝나고 바로 쓸 수 있는 나만의 Cowork 루틴을 만듭니다.</p>',
 
 '<div class="callout" style="background:#f5f3ff;border-color:#b8a8d8">',
-'<div class="callout-title" style="color:#5a2a74">워크샵 시나리오</div>',
-'팀 내 문서 정리 담당 에이전트를 만듭니다. 폴더 안의 보고서 파일들을 읽고, 월별 요약 문서를 자동 생성하는 Agent를 정의하고 실행합니다.',
+'<div class="callout-title" style="color:#5a2a74">워크샵 미션</div>',
+'내 업무에서 <b>가장 반복적이고 시간이 오래 걸리는 작업 하나</b>를 골라서, Cowork로 자동화하는 설계를 완성합니다.',
 '</div>',
 
-'<h2 class="section-heading">워크샵 단계 1 — Agent 파일 작성</h2>',
-'<div class="step-grid">',
-'<div class="step-card">',
-'<div class="step-num">1</div>',
-'<div class="step-title">.claude/agents/ 생성</div>',
-'<div class="step-desc">프로젝트 폴더에 .claude/agents/ 디렉터리를 만듭니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">2</div>',
-'<div class="step-title">Agent 파일 작성</div>',
-'<div class="step-desc">doc-summarizer.md 파일을 만들고 아래 템플릿을 붙여넣습니다. name, description, 역할·규칙을 정의합니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">3</div>',
-'<div class="step-title">파일시스템 MCP 연결 확인</div>',
-'<div class="step-desc">Agent가 파일을 읽으려면 파일시스템 MCP가 연결되어 있어야 합니다. 실습 3-2에서 설정한 것을 활용합니다.</div>',
-'</div>',
-'<div class="step-card">',
-'<div class="step-num">4</div>',
-'<div class="step-title">메인 Claude에서 위임</div>',
-'<div class="step-desc">"doc-summarizer 에이전트로 reports/ 폴더 요약해줘"라고 요청하면 메인 Claude가 에이전트를 호출합니다.</div>',
-'</div>',
-'</div>',
+'<h2 class="section-heading">단계 1 · 자동화 대상 선택</h2>',
+'<p style="font-size:14px;color:#6b5e5a;margin-bottom:14px">아래 질문에 답하면서 대상 업무를 정합니다:</p>',
+'<table>',
+'<thead><tr><th>질문</th><th>답변 작성</th></tr></thead>',
+'<tbody>',
+'<tr><td>매주/매월 반복하는 업무는?</td><td style="color:#9aa0a6">예) 주간 보고서, 회의록, 인보이스</td></tr>',
+'<tr><td>어느 서비스에서 정보를 가져오나?</td><td style="color:#9aa0a6">예) Google Drive, 이메일, 사내 시스템</td></tr>',
+'<tr><td>결과를 어디에 저장/공유하나?</td><td style="color:#9aa0a6">예) Notion, 팀 채팅, 이메일</td></tr>',
+'<tr><td>현재 소요 시간은?</td><td style="color:#9aa0a6">예) 30분, 1시간</td></tr>',
+'</tbody></table>',
 
-'<h2 class="section-heading">Agent 파일 — doc-summarizer.md</h2>',
-promptBlock('.claude/agents/doc-summarizer.md',
-`---
-name: doc-summarizer
-description: "문서 폴더를 읽고 월별 요약 SUMMARY.md를 생성하는 에이전트"
----
+'<h2 class="section-heading">단계 2 · 자동화 흐름 설계</h2>',
+promptBlock('내 업무 Cowork 설계 요청', '내 업무 자동화를 설계해줘.\n\n자동화하고 싶은 업무: [업무명]\n정보 소스: [예: Google Drive 특정 폴더]\n결과물 형식: [예: Notion 페이지, 이메일 초안]\n실행 주기: [예: 매주 금요일 오후 5시]\n\n위 조건으로:\n1. 어떤 Connector가 필요한지\n2. 단계별 실행 순서\n3. 예상 결과물 형식\n4. 주의할 점\n을 설계해줘.'),
 
-# 문서 요약 에이전트
-
-## 역할
-지정된 폴더 안의 문서 파일들을 읽고, 월별·주제별로 정리된
-요약 문서를 생성합니다.
-
-## 작업 순서
-1. 지정 폴더 내 파일 목록 스캔
-2. 각 파일 읽기 (텍스트, 마크다운, txt 대상)
-3. 파일별 핵심 내용 3줄 이내 요약
-4. 날짜 기준으로 정렬
-5. SUMMARY.md 파일로 통합 저장
-
-## 출력 형식
-## [폴더명] 문서 요약
-
-| 파일명 | 날짜 | 핵심 내용 요약 |
-|--------|------|--------------|
-| ...    | ...  | ...          |
-
-## 총 N개 문서, 생성일: YYYY-MM-DD
-
-## 규칙
-- 한국어로 요약
-- 파일명·날짜 기준 오름차순 정렬
-- 읽을 수 없는 파일은 목록에 "(읽기 불가)"로 표시
-- SUMMARY.md 덮어쓰기 전 기존 파일 확인`),
-
-'<h2 class="section-heading">워크샵 단계 2 — 실행 및 결과 확인</h2>',
-promptBlock('Claude Code — Agent 위임 요청',
-`# 에이전트 호출
-reports/ 폴더 안의 문서들을 doc-summarizer 에이전트로 정리해줘.
-SUMMARY.md 파일로 만들어줘.
-
-# 결과 확인
-SUMMARY.md 파일 내용을 보여줘.
-
-# 보완 요청
-요약이 너무 길면 각 항목을 2줄 이내로 줄여줘.`),
-
-'<h2 class="section-heading">나만의 Agent — 업무 유형별 아이디어</h2>',
+'<h2 class="section-heading">단계 3 · 팀에 공유하기</h2>',
 '<div class="demo-grid">',
-demo('회의 기록 에이전트', '회의록 파일을 읽고 → 결정 사항, 액션 아이템, 다음 일정을 자동 추출해 정리합니다.'),
-demo('코드 리뷰 에이전트', 'PR 파일을 읽고 → 문제점, 개선 제안, 보안 이슈를 체크리스트 형태로 정리합니다.'),
-demo('데이터 정리 에이전트', 'CSV·엑셀 파일을 읽고 → 이상값 탐지, 형식 통일, 요약 통계를 자동 생성합니다.'),
+demo("📁 Customize 파일 공유", "내가 만든 Customize 지침을 팀원에게 공유하면, 팀 전체가 동일한 AI 작업 스타일로 통일됩니다."),
+demo("📄 CLAUDE.md 팀 공유", "프로젝트 폴더의 CLAUDE.md를 팀 레포에 올리면, 누구나 같은 규칙으로 Claude Code를 사용합니다."),
+demo("🔄 Scheduled 레시피 공유", "성공한 자동화 프롬프트를 문서화해서 팀에 배포 → 팀 전체 생산성 향상."),
 '</div>',
 
 '<div class="callout">',
-'<div class="callout-title">🔄 오늘 배운 것을 연결하면</div>',
-'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:1.9">',
-'<li><b>Claude Desktop</b> Project로 팀 맥락 저장 → <b>Artifacts</b>로 결과 보관</li>',
-'<li><b>Claude Code</b>로 파일 직접 처리 → <b>MCP</b>로 Notion·GitHub 연결</li>',
-'<li><b>Skills</b>로 프롬프트 자산화 → <b>Agents</b>로 복잡한 작업 위임</li>',
-'</ul>',
-'이 세 레이어가 쌓이면 Claude는 단순 챗봇이 아니라 실제 업무 파트너가 됩니다.',
-'</div>',
-'<div class="callout" style="background:#f0f7ed;border-color:#b4d1a8;margin-top:20px">',
-'<div class="callout-title" style="color:#3a6b2e">✅ 워크샵 완료 체크리스트</div>',
-'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:2.0;color:#3a5a30">',
-'<li>.claude/agents/doc-summarizer.md 파일이 생성됐나?</li>',
-'<li>메인 Claude에서 에이전트 호출 요청이 실행됐나?</li>',
-'<li>reports/ 폴더에 SUMMARY.md 파일이 생성됐나?</li>',
-'<li>요약 결과가 정의한 표 형식으로 나왔나?</li>',
-'</ul>',
+'<div class="callout-title">💡 워크샵 마무리 — 오늘 반드시 하나</div>',
+'완벽한 자동화를 한 번에 만들려 하지 마세요. <b>한 가지 반복 작업</b>에서 시작해서, 잘 된다 싶으면 하나씩 확장하는 방식이 오래 갑니다. 오늘 이 자리에서 Connector 연결까지만 해도 충분합니다.',
 '</div>'
 ].join('');
-/* ---------- CH 05 · 치트시트 ---------- */
 
-pages["5"] = [
-'<h1>손에 쥐고 가는 것 · 30일 루틴</h1>',
-'<p class="page-desc">오늘 4시간 동안 배운 것을 한 장으로 정리합니다. 내일 아침 출근하면 어디서 무엇부터 시작할지 — 그 루틴을 손에 쥐고 가세요.</p>',
+/* ---------- CH 06 ---------- */
+pages["6-1"] = [
+'<h1>AI 안전하게 쓰기 · 3가지 원칙</h1>',
+'<p class="page-desc">AI가 강력할수록 주의도 필요합니다. Cowork처럼 외부 서비스에 접근하는 AI를 쓸 때는 특히 3가지 원칙을 지켜야 합니다.</p>',
 
-'<h2 class="section-heading">오늘 배운 도구 · 언제 쓰나</h2>',
+'<h2 class="section-heading">원칙 1 · 개인정보 보호</h2>',
+'<div class="card">',
+'<div class="card-title">AI에게 넘기면 안 되는 정보</div>',
+'<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">',
+'<div style="background:#fdf0f0;border-radius:8px;padding:14px">',
+'<div style="font-size:12px;font-weight:700;color:#a53545;margin-bottom:8px">절대 금지</div>',
+'<ul style="font-size:13px;color:#6b5e5a;padding-left:18px;line-height:1.9">',
+'<li>주민등록번호, 비밀번호</li>',
+'<li>타인의 개인정보 (동의 없이)</li>',
+'<li>사내 기밀 전략 문서</li>',
+'<li>미공개 재무·인사 정보</li>',
+'</ul>',
+'</div>',
+'<div style="background:#fdf5ea;border-radius:8px;padding:14px">',
+'<div style="font-size:12px;font-weight:700;color:#8a6a10;margin-bottom:8px">주의 필요</div>',
+'<ul style="font-size:13px;color:#6b5e5a;padding-left:18px;line-height:1.9">',
+'<li>고객 이름·연락처 (가명 처리 권장)</li>',
+'<li>계약 세부 내용 (회사 정책 확인)</li>',
+'<li>팀 내부 커뮤니케이션 내용</li>',
+'<li>미발표 제품·서비스 정보</li>',
+'</ul>',
+'</div>',
+'</div>',
+'</div>',
+
+'<h2 class="section-heading">원칙 2 · 사실 확인</h2>',
+'<div class="callout" style="background:#fdf5ea;border-color:#c8a855">',
+'<div class="callout-title" style="color:#8a6a10">⚠️ AI는 사실을 틀릴 수 있습니다</div>',
+'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:2.0">',
+'<li>숫자·날짜·이름 등 구체적 사실은 <b>반드시 원본 소스로 재확인</b></li>',
+'<li>법률·의료·재무 관련 내용은 전문가 검토 필수</li>',
+'<li>AI가 "확실하다"고 해도 중요한 결정엔 직접 확인</li>',
+'<li>외부 공개 문서에 AI 생성 내용을 쓸 때는 검토 후 사용</li>',
+'</ul>',
+'</div>',
+
+'<h2 class="section-heading">원칙 3 · 최소 권한 원칙</h2>',
+'<div class="card">',
+'<div class="card-title">Connector 권한 설정 원칙</div>',
+'<ul style="font-size:14px;color:#6b5e5a;padding-left:18px;line-height:2.0;margin-top:8px">',
+'<li>처음엔 <b>읽기 전용</b>으로 시작. 쓰기 권한은 충분히 테스트 후 부여</li>',
+'<li>전체 Drive 대신 <b>특정 폴더만</b> 공유</li>',
+'<li>불필요한 Connector는 언제든 해제 가능 → Settings → Integrations → 연결 해제</li>',
+'<li>주기적으로 연결된 Connector 목록 점검 (분기 1회 권장)</li>',
+'</ul>',
+'</div>',
+
+'<div class="callout">',
+'<div class="callout-title">💡 회사 AI 정책 확인</div>',
+'회사마다 AI 사용 정책이 다릅니다. 특히 고객 데이터, 기밀 문서를 AI에 업로드하거나 Connector로 연결할 때는 <b>회사 IT·법무팀 정책을 먼저 확인</b>하세요.',
+'</div>'
+].join('');
+
+/* ---------- */
+pages["6-2"] = [
+'<h1>마무리 · 손에 쥐고 가는 것</h1>',
+'<p class="page-desc">4시간 동안 Chat → Code → Cowork까지 달려왔습니다. 오늘 배운 것을 정리하고, 내일부터 바로 시작할 수 있는 30일 루틴을 가져갑니다.</p>',
+
+'<h2 class="section-heading">오늘 배운 것 정리</h2>',
 '<table>',
-'<thead><tr><th style="width:130px">도구</th><th>언제 쓰나</th><th style="width:160px">핵심 시작점</th><th style="width:80px">소요 시간</th></tr></thead>',
+'<thead><tr><th>레이어</th><th>핵심 기능</th><th>바로 쓸 수 있는 것</th></tr></thead>',
 '<tbody>',
-'<tr>',
-'<td><b>Projects</b></td>',
-'<td>업무 맥락을 저장하고 반복 사용할 때. 부서·프로젝트별 배경 정보 관리.</td>',
-'<td>Claude Desktop → 사이드바 → + 새 Project</td>',
-'<td>첫 설정 5분</td>',
-'</tr>',
-'<tr>',
-'<td><b>Artifacts</b></td>',
-'<td>보고서·코드·기획안 등 길고 수정이 필요한 결과물 작업 시.</td>',
-'<td>요청에 "Artifact로 만들어줘" 추가</td>',
-'<td>즉시</td>',
-'</tr>',
-'<tr>',
-'<td><b>Claude Code</b></td>',
-'<td>파일 일괄 수정, 문서 정리, 코드 작업 — 파일을 직접 건드려야 할 때.</td>',
-'<td>cd 프로젝트폴더 && claude</td>',
-'<td>설치 3분</td>',
-'</tr>',
-'<tr>',
-'<td><b>MCP (파일)</b></td>',
-'<td>Claude Desktop에서 로컬 파일을 대화 중 실시간으로 읽고 쓸 때.</td>',
-'<td>claude_desktop_config.json에 filesystem 추가</td>',
-'<td>설정 5분</td>',
-'</tr>',
-'<tr>',
-'<td><b>MCP (서비스)</b></td>',
-'<td>Notion·GitHub 등 외부 서비스 데이터를 Claude와 실시간으로 연결할 때.</td>',
-'<td>config에 서비스별 MCP 블록 추가</td>',
-'<td>API 키 포함 10분</td>',
-'</tr>',
-'<tr>',
-'<td><b>Skills</b></td>',
-'<td>같은 형식의 결과물을 반복해서 만들 때. 팀과 프롬프트를 공유할 때.</td>',
-'<td>.claude/skills/ 에 마크다운 파일 생성</td>',
-'<td>파일 작성 10분</td>',
-'</tr>',
-'<tr>',
-'<td><b>Agents</b></td>',
-'<td>복잡한 작업을 단계별로 분리하거나 전문화된 서브 작업자가 필요할 때.</td>',
-'<td>.claude/agents/ 에 마크다운 파일 생성</td>',
-'<td>파일 작성 15분</td>',
-'</tr>',
+'<tr><td><b>Chat</b></td><td>Projects · Artifacts</td><td>업무 Project 1개 + Artifact 결과물</td></tr>',
+'<tr><td><b>Code</b></td><td>Claude Code CLI</td><td>파일 직접 편집, 코드 수정</td></tr>',
+'<tr><td><b>Cowork</b></td><td>Scheduled · Connectors</td><td>Drive/Notion 연결 + 반복 작업 예약</td></tr>',
+'<tr><td><b>설정</b></td><td>Customize · CLAUDE.md</td><td>나만의 AI 작업 규칙 저장</td></tr>',
 '</tbody></table>',
 
 '<h2 class="section-heading">손에 쥐고 가는 것 3가지</h2>',
 '<div class="demo-grid">',
-'<div class="demo-topic">',
-'<div class="tt">1. 내 업무 Project 1개</div>',
-'<div class="dd">오늘 실습에서 만든 Project를 내일 출근하면 바로 열어서 실제 업무에 써보세요. 처음 2~3일이 습관의 분기점입니다.</div>',
-'</div>',
-'<div class="demo-topic">',
-'<div class="tt">2. Skill 파일 1개</div>',
-'<div class="dd">내가 이번 주에 가장 많이 반복하는 작업 하나를 골라 .claude/skills/ 에 Skill 파일로 만들어보세요. 파일 이름 하나, 지침 10줄이면 충분합니다.</div>',
-'</div>',
-'<div class="demo-topic">',
-'<div class="tt">3. Claude Code + 파일시스템 MCP</div>',
-'<div class="dd">자주 쓰는 작업 폴더 하나에 파일시스템 MCP를 연결해두면, 이후 모든 파일 작업의 출발점이 됩니다.</div>',
-'</div>',
+demo("1. Project 1개", "오늘 만든 Project를 내일 출근 즉시 열어 실제 업무에 쓰기. 처음 3일이 습관의 분기점."),
+demo("2. Connector 연결 1개", "Google Drive 또는 Notion을 연결해 두면, 이후 모든 Cowork 작업의 출발점이 됩니다."),
+demo("3. 반복 업무 자동화 1개", "가장 자주 하는 반복 작업 하나를 Cowork로 자동화. 완벽하지 않아도 괜찮습니다."),
 '</div>',
 
-'<h2 class="section-heading">내일 아침부터 30일 루틴</h2>',
+'<h2 class="section-heading">내일부터 30일 루틴</h2>',
 '<table>',
-'<thead><tr><th style="width:90px">기간</th><th>목표</th><th>구체적 행동</th></tr></thead>',
+'<thead><tr><th style="width:80px">기간</th><th>목표</th><th>구체적 행동</th></tr></thead>',
 '<tbody>',
-'<tr>',
-'<td><b>1~3일</b><br><span style="font-size:12px;color:#6b5e5a">진입</span></td>',
-'<td>기존 업무에 Project 하나 투입</td>',
-'<td>오늘 만든 Project에 실제 업무 맥락을 저장하고 매일 한 번 이상 사용. 채팅창 열기 전에 Project부터 켜는 습관.</td>',
-'</tr>',
-'<tr>',
-'<td><b>4~7일</b><br><span style="font-size:12px;color:#6b5e5a">확장</span></td>',
-'<td>파일 작업 한 건을 Claude Code로 처리</td>',
-'<td>이번 주 파일 작업(보고서 수정, 문서 정리 등) 중 하나를 Claude Code로 시도. /help, /compact 커맨드 익히기.</td>',
-'</tr>',
-'<tr>',
-'<td><b>2주차</b><br><span style="font-size:12px;color:#6b5e5a">자산화</span></td>',
-'<td>Skill 파일 1~2개 완성</td>',
-'<td>반복하는 프롬프트를 .claude/skills/ 에 정리. 주간 보고서, 회의 요약, 코드 리뷰 등 자신의 업무 패턴에서 고릅니다.</td>',
-'</tr>',
-'<tr>',
-'<td><b>3주차</b><br><span style="font-size:12px;color:#6b5e5a">연결</span></td>',
-'<td>MCP 1개 연결</td>',
-'<td>파일시스템 또는 사내에서 쓰는 서비스 MCP 하나 연결. 처음엔 실습용 폴더 하나만, 확인 후 확장합니다.</td>',
-'</tr>',
-'<tr>',
-'<td><b>4주차</b><br><span style="font-size:12px;color:#6b5e5a">팀 공유</span></td>',
-'<td>만든 Skill·Agent 팀에 공유</td>',
-'<td>.claude/ 폴더를 팀 레포에 포함하거나, Skill 파일을 메신저로 공유. 팀 표준 프롬프트를 만들어가는 첫 걸음.</td>',
-'</tr>',
+'<tr><td><b>1~3일</b></td><td>Chat 습관화</td><td>매일 아침 Project 열고 오늘 할 일 정리 요청. 하루 1개 Artifact 생성.</td></tr>',
+'<tr><td><b>4~7일</b></td><td>Code 한 번</td><td>이번 주 파일 작업 중 하나를 Claude Code로 처리. 어렵지 않습니다.</td></tr>',
+'<tr><td><b>2주차</b></td><td>Connector 활용</td><td>Drive에서 파일 불러와 요약·정리. 저장된 내용을 Notion에 옮기는 흐름 만들기.</td></tr>',
+'<tr><td><b>3주차</b></td><td>Scheduled 설정</td><td>가장 반복적인 업무 하나를 Scheduled로 등록. 첫 자동 실행 결과 확인.</td></tr>',
+'<tr><td><b>4주차</b></td><td>팀 공유</td><td>잘 된 Customize·CLAUDE.md·프롬프트를 팀에 공유. AI 협업 문화 시작.</td></tr>',
 '</tbody></table>',
-
-'<div class="callout">',
-'<div class="callout-title">💡 오늘 기억할 한 가지</div>',
-'<b>처음엔 작게.</b> 전체 업무에 한 번에 AI를 도입하려 하면 지칩니다. 가장 반복적인 작업 하나에서 시작해서, 그게 자연스러워지면 옆으로 한 칸씩 넓혀가는 방식이 오래 갑니다.',
-'</div>',
 
 '<div class="callout" style="background:#fdf5ea;border-color:#c8a855">',
 '<div class="callout-title" style="color:#8a6a10">추가 자료</div>',
 '<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:2.0">',
-'<li><a href="https://docs.anthropic.com" target="_blank" style="color:#8B1C2B">Anthropic 공식 문서</a> — Claude Code, MCP 최신 가이드</li>',
-'<li><a href="https://modelcontextprotocol.io" target="_blank" style="color:#8B1C2B">MCP 공식 사이트</a> — 사용 가능한 MCP 서버 목록</li>',
-'<li><a href="https://github.com/modelcontextprotocol/servers" target="_blank" style="color:#8B1C2B">MCP Servers GitHub</a> — 파일시스템·GitHub·Notion 등 공식 서버 코드</li>',
+'<li><a href="https://docs.anthropic.com" target="_blank" style="color:#8B1C2B">Anthropic 공식 문서</a> — Claude 최신 기능 가이드</li>',
+'<li><a href="https://www.anthropic.com/claude" target="_blank" style="color:#8B1C2B">claude.ai</a> — Claude 웹앱 (Connectors 설정)</li>',
+'<li><a href="https://claude.ai/download" target="_blank" style="color:#8B1C2B">Claude Desktop 다운로드</a></li>',
 '</ul>',
+'</div>',
+
+'<div class="callout">',
+'<div class="callout-title">💡 오늘 기억할 한 가지</div>',
+'<b>처음엔 작게.</b> 전체 업무를 한 번에 AI로 바꾸려 하면 지칩니다. 가장 반복적인 작업 하나에서 시작해서, 그게 자연스러워지면 한 칸씩 넓혀가는 방식이 오래 갑니다. 오늘 이 자리에서 Project 하나만 만들어도 충분한 시작입니다.',
 '</div>'
 ].join('');
 
@@ -1667,9 +1045,8 @@ function renderNav() {
   chapters.forEach((c, ci) => {
     html += '<div class="nav-chapter' + (ci === 0 ? ' open' : '') + '">';
     html += '<div class="nav-chapter-header" onclick="toggleChapter(this)">';
-    html +=   '<span class="ch-num">' + (c.num || ('CH ' + ci.toString().padStart(2,'0'))) + '</span>';
+    html +=   '<span class="ch-num">' + c.num + '</span>';
     html +=   '<span class="ch-title">' + c.title + '</span>';
-    html +=   '<span class="ch-time">' + (c.time || '') + '</span>';
     html +=   '<span class="ch-caret">▾</span>';
     html += '</div>';
     html += '<div class="sections">';
@@ -1685,11 +1062,9 @@ function renderNav() {
   nav.innerHTML = html;
 }
 function toggleChapter(el) { el.parentElement.classList.toggle('open'); }
-
 function findSection(id) {
-  for (const c of chapters) {
+  for (const c of chapters)
     for (const s of c.sections) if (s.id === id) return { chapter: c, section: s };
-  }
   return null;
 }
 function flatSections() {
@@ -1702,19 +1077,13 @@ function renderPage(id) {
   const bc = document.getElementById('breadcrumb');
   if (!pages[id]) { content.innerHTML = '<h1>페이지를 찾을 수 없습니다</h1>'; return; }
   content.innerHTML = pages[id];
-
   const found = findSection(id);
   if (found) {
     bc.innerHTML = '<span>' + found.chapter.title + '</span><span class="current">' + found.section.title + '</span>';
   }
-
   document.querySelectorAll('.section-item').forEach(el => el.classList.remove('active'));
   const active = document.querySelector('.section-item[data-id="' + id + '"]');
-  if (active) {
-    active.classList.add('active');
-    active.closest('.nav-chapter').classList.add('open');
-  }
-
+  if (active) { active.classList.add('active'); active.closest('.nav-chapter').classList.add('open'); }
   const flat = flatSections();
   const idx = flat.findIndex(x => x.section.id === id);
   const prev = idx > 0 ? flat[idx - 1] : null;
@@ -1743,8 +1112,8 @@ function setFont(delta) {
 function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
 
 renderNav();
-const initialId = (location.hash && location.hash.slice(1)) || (chapters[0] && chapters[0].sections[0] && chapters[0].sections[0].id) || '';
-if (initialId) renderPage(initialId);
+const initialId = (location.hash && location.hash.slice(1)) || chapters[0].sections[0].id;
+renderPage(initialId);
 window.addEventListener('hashchange', () => renderPage(location.hash.slice(1)));
 </script>
 </body>
