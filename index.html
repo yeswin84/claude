@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude 4시간 실무 가이드 v2</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+:root {
+  --brand:       #8B1C2B;
+  --brand-soft:  #b94556;
+  --bg:          #FAF5EA;
+  --panel:       #FFFFFF;
+  --text:        #2C2626;
+  --muted:       #6B5E5A;
+  --border:      #E5DFD4;
+  --sidebar:     #FDF7EC;
+  --hover:       #F2EADC;
+  --sidebar-bg:  #1f1719;
+  --sidebar-hov: #2a2022;
+  --sidebar-act: #2e2325;
+  --sidebar-txt: #e5dcc8;
+  --sidebar-dim: #8a7f72;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+  background: var(--bg); color: var(--text);
+  font-size: 15px; line-height: 1.65; letter-spacing: -0.01em;
+}
+.app { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 300px; background: var(--sidebar-bg); color: var(--sidebar-txt);
+  position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  padding: 22px 0 40px; flex-shrink: 0;
+}
+.brand {
+  padding: 0 22px 22px; display: flex; gap: 12px; align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 12px;
+}
+.logo {
+  width: 46px; height: 46px; background: var(--brand); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700; font-size: 14px; flex-shrink: 0;
+}
+.brand-title { font-weight: 700; color: #fff; font-size: 15px; }
+.brand-sub   { font-size: 12px; color: var(--sidebar-dim); margin-top: 3px; }
+
+.nav-chapter { padding: 2px 12px; }
+.nav-chapter-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 10px; cursor: pointer; user-select: none;
+  border-radius: 6px; transition: background .15s;
+}
+.nav-chapter-header:hover { background: var(--sidebar-hov); }
+.ch-num {
+  background: var(--brand); color: #fff; font-size: 10px; font-weight: 700;
+  padding: 3px 7px; border-radius: 3px; letter-spacing: .04em; flex-shrink: 0;
+}
+.ch-title { font-size: 13.5px; color: var(--sidebar-txt); flex: 1; font-weight: 500; }
+.ch-time  { font-size: 11px; color: var(--sidebar-dim); }
+.ch-caret { color: var(--sidebar-dim); transition: transform .2s; font-size: 10px; }
+.nav-chapter.open .ch-caret { transform: rotate(180deg); }
+.sections { padding-left: 14px; display: none; margin: 2px 0 8px; }
+.nav-chapter.open .sections { display: block; }
+
+.section-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px 8px 14px; cursor: pointer; border-radius: 4px;
+  font-size: 13px; color: var(--sidebar-txt); transition: background .15s;
+  border-left: 2px solid transparent;
+}
+.section-item:hover { background: var(--sidebar-hov); }
+.section-item.active {
+  background: var(--sidebar-act); border-left: 2px solid var(--brand-soft); color: #fff;
+}
+.section-item .dot { width: 5px; height: 5px; background: var(--brand-soft); border-radius: 50%; flex-shrink: 0; }
+.section-item .title { flex: 1; }
+
+.tag { font-size: 10px; padding: 2px 6px; border-radius: 3px; font-weight: 700; letter-spacing: .02em; flex-shrink: 0; }
+.tag-plat     { background: #c5dcc8; color: #2f5534; }
+.tag-concept  { background: #c5d5e4; color: #2a4664; }
+.tag-practice { background: #efd9a8; color: #7a5a18; }
+.tag-workshop { background: #dcc8e4; color: #5a2a74; }
+.tag-opening  { background: #f0c8c8; color: #7a1a1a; }
+
+.main { flex: 1; min-width: 0; }
+.top {
+  background: var(--bg); padding: 18px 40px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 10;
+}
+.breadcrumb { font-size: 14px; color: var(--muted); }
+.breadcrumb .current { color: var(--text); font-weight: 600; }
+.breadcrumb span + span::before { content: "›"; margin: 0 8px; color: var(--muted); }
+.font-ctrl { display: flex; background: #fff; border: 1px solid var(--border); border-radius: 5px; overflow: hidden; }
+.font-ctrl button {
+  background: transparent; border: none; padding: 6px 12px; cursor: pointer;
+  font-size: 12px; color: var(--muted);
+}
+.font-ctrl button.active { background: var(--text); color: #fff; }
+
+.content { padding: 40px; max-width: 980px; }
+
+h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; letter-spacing: -.02em; }
+h2 { font-size: 20px; font-weight: 700; margin: 32px 0 12px; letter-spacing: -.02em; }
+h3 { font-size: 16px; font-weight: 600; margin: 20px 0 8px; }
+p  { margin: 8px 0; }
+strong { font-weight: 700; color: var(--text); }
+
+.page-desc { font-size: 15.5px; color: var(--muted); margin-bottom: 24px; line-height: 1.75; }
+.section-heading {
+  border-bottom: 2px solid var(--brand); padding-bottom: 6px;
+  font-size: 18px; font-weight: 700; margin: 36px 0 16px;
+  display: inline-block; color: var(--text);
+}
+.callout {
+  background: #fff; border-left: 4px solid var(--brand);
+  padding: 16px 20px; border-radius: 6px; margin: 20px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+.callout-title { font-weight: 700; margin-bottom: 6px; color: var(--brand); font-size: 14px; }
+
+.card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin: 16px 0; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.card-title { font-weight: 700; margin-bottom: 8px; font-size: 16px; }
+.card-desc  { color: var(--muted); font-size: 14px; }
+
+.prompt-block { background: #fcfaf5; border: 1px solid var(--border); border-radius: 8px; margin: 12px 0 20px; overflow: hidden; }
+.prompt-header { background: var(--bg); padding: 10px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+.prompt-label { font-size: 13px; font-weight: 600; color: var(--text); }
+.copy-btn { background: var(--brand); color: #fff; border: none; padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600; transition: background .15s; }
+.copy-btn:hover { background: var(--brand-soft); }
+.copy-btn.copied { background: #5a7c5a; }
+.prompt-body { padding: 18px 22px; white-space: pre-wrap; font-family: 'Pretendard Variable', monospace; font-size: 13.5px; line-height: 1.75; color: #2c2626; }
+
+.file-card {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px; background: #fff;
+  border: 1px solid var(--border); border-radius: 8px; margin: 10px 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,.04); text-decoration: none; color: inherit;
+}
+.file-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.file-info p  { font-size: 13px; color: var(--muted); margin: 0; }
+.dl-btn { background: var(--brand); color: #fff; border: none; padding: 10px 22px; border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 700; text-decoration: none; display: inline-block; }
+.dl-btn:hover { background: var(--brand-soft); }
+
+ul { padding-left: 22px; margin: 10px 0; }
+li { margin: 6px 0; }
+
+.demo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin: 14px 0; }
+.demo-topic { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.demo-topic .tt { font-weight: 700; margin-bottom: 6px; color: var(--text); font-size: 14px; }
+.demo-topic .dd { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+table { width: 100%; border-collapse: collapse; margin: 14px 0; background: #fff; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
+th { background: var(--bg); font-weight: 700; font-size: 13px; }
+tr:last-child td { border-bottom: none; }
+
+.pills { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 20px; }
+.pill  { padding: 4px 12px; background: #fff; border: 1px solid var(--border); border-radius: 14px; font-size: 12px; color: var(--muted); }
+.pill.primary { background: var(--brand); color: #fff; border-color: var(--brand); }
+
+.step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
+.step-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.step-num { width: 28px; height: 28px; background: var(--brand); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+.step-title { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+.step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+.footer-nav { display: flex; justify-content: space-between; margin-top: 50px; padding-top: 24px; border-top: 1px solid var(--border); gap: 12px; }
+.nav-btn { background: #fff; border: 1px solid var(--border); padding: 12px 20px; border-radius: 6px; cursor: pointer; font-size: 14px; color: var(--text); font-weight: 600; transition: all .15s; flex: 1; max-width: 48%; }
+.nav-btn:hover:not(.disabled) { background: var(--brand); color: #fff; border-color: var(--brand); }
+.nav-btn.disabled { opacity: .4; cursor: not-allowed; }
+.nav-btn.next { text-align: right; }
+
+.hamburger { display: none; background: none; border: none; font-size: 22px; cursor: pointer; color: var(--text); }
+@media (max-width: 900px) {
+  .sidebar { position: fixed; left: -300px; z-index: 100; transition: left .25s; }
+  .sidebar.open { left: 0; }
+  .content { padding: 24px; }
+  .top { padding: 16px 20px; }
+  .hamburger { display: block; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="logo">CL</div>
+      <div>
+        <div class="brand-title">Claude 실무 가이드 v2</div>
+        <div class="brand-sub">4시간 · AI 경험자 심화 과정</div>
+      </div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+  </aside>
+  <main class="main">
+    <header class="top">
+      <button class="hamburger" onclick="toggleSidebar()">☰</button>
+      <div class="breadcrumb" id="breadcrumb">Home</div>
+      <div class="font-ctrl">
+        <button onclick="setFont(-1)">A-</button>
+        <button class="active" onclick="setFont(0)">기본</button>
+        <button onclick="setFont(1)">A+</button>
+      </div>
+    </header>
+    <div class="content" id="content"></div>
+  </main>
+</div>
+
+<script>
+const chapters = [
+  { num:"CH 00", title:"오프닝", time:"0:00–0:20 · 20분",
+    sections:[
+      {id:"0",   title:"ChatGPT 쓰던 내가 Claude를 다시 배우는 이유", type:"opening"},
+      {id:"0-1", title:"오늘의 여정 · 4시간 아젠다",                  type:"concept"}
+    ]
+  },
+  { num:"CH 01", title:"Claude Desktop 핵심", time:"0:20–1:00 · 40분",
+    sections:[
+      {id:"1-1", title:"Desktop UI · ChatGPT와 뭐가 다른가",  type:"concept"},
+      {id:"1-2", title:"Projects · 컨텍스트 재사용",           type:"practice", label:"실습 1"},
+      {id:"1-3", title:"Artifacts · 결과물을 자산으로",         type:"practice", label:"실습 2"}
+    ]
+  },
+  { num:"CH 02", title:"Claude Code", time:"1:00–1:50 · 50분",
+    sections:[
+      {id:"2-1", title:"왜 터미널에서 AI를 쓰나",               type:"concept"},
+      {id:"2-2", title:"Claude Code 설치 · 첫 실행",            type:"practice", label:"실습 3"},
+      {id:"2-3", title:"실제 프로젝트에서 코드 수정하기",       type:"practice", label:"실습 4"}
+    ]
+  },
+  { num:"CH 03", title:"MCP · 내 Claude에 도구 붙이기", time:"1:50–2:40 · 50분",
+    sections:[
+      {id:"3-1", title:"MCP가 뭐야 · Claude에 도구를 꽂다",     type:"concept"},
+      {id:"3-2", title:"파일시스템 MCP 연결",                   type:"practice", label:"실습 5"},
+      {id:"3-3", title:"외부 서비스 MCP 연결 (Notion/GitHub)", type:"practice", label:"실습 6"}
+    ]
+  },
+  { num:"CH 04", title:"Skills & Agents · 반복 업무를 자산으로", time:"2:40–3:40 · 60분",
+    sections:[
+      {id:"4-1", title:"Skill · 반복 프롬프트를 파일로",        type:"concept"},
+      {id:"4-2", title:"내 업무 Skill 하나 만들기",             type:"practice", label:"실습 7"},
+      {id:"4-3", title:"서브에이전트 · 일을 위임하는 법",       type:"concept"},
+      {id:"4-4", title:"내 전용 에이전트 만들기",               type:"workshop", label:"워크샵"}
+    ]
+  },
+  { num:"CH 05", title:"치트시트 · 30일 루틴", time:"3:40–4:00 · 20분",
+    sections:[
+      {id:"5", title:"손에 쥐고 가는 것 · 30일 루틴", type:"plat"}
+    ]
+  }
+];
+
+const typeLabel = { opening:'오프닝', concept:'개념', practice:'실습', workshop:'워크샵', plat:'플랫폼' };
+const typeClass  = { opening:'tag-opening', concept:'tag-concept', practice:'tag-practice', workshop:'tag-workshop', plat:'tag-plat' };
+
+function promptBlock(title, content) {
+  const id = 'pb-' + Math.random().toString(36).slice(2, 9);
+  return '<div class="prompt-block">'
+       +   '<div class="prompt-header">'
+       +     '<span class="prompt-label">📝 ' + title + '</span>'
+       +     '<button class="copy-btn" onclick="copyPrompt(this,\'' + id + '\')">복사</button>'
+       +   '</div>'
+       +   '<pre id="' + id + '" class="prompt-body">' + content + '</pre>'
+       + '</div>';
+}
+function demo(title, desc) {
+  return '<div class="demo-topic"><div class="tt">' + title + '</div><div class="dd">' + desc + '</div></div>';
+}
+function fileCard(name, size) {
+  return '<div class="file-card"><div class="file-info"><h4>' + name + '</h4><p>' + size + '</p></div><span class="dl-btn" style="background:#bbaa95;cursor:not-allowed">준비 중</span></div>';
+}
+function copyPrompt(btn, id) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('copied');
+    btn.innerText = '✓ 복사됨';
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerText = '복사'; }, 1500);
+  });
+}
+
+/* ===================== PAGES ===================== */
+const pages = {};
+
+/* ---------- CH 00 · 오프닝 ---------- */
+
+pages["0"] = [
+'<h1>ChatGPT 쓰던 내가 Claude를 다시 배우는 이유</h1>',
+'<p class="page-desc">ChatGPT·Gemini를 써봤지만 뭔가 아쉬웠다면 — 그 아쉬움이 오늘 이 자리로 이끌었습니다. Claude는 단순히 "더 나은 챗봇"이 아니라, <b>반복 업무를 자산으로 쌓는 구조</b>가 다릅니다.</p>',
+
+'<div style="background:#1f1f1f;border-radius:12px;padding:24px;margin:0 0 24px;box-shadow:0 4px 20px rgba(0,0,0,0.18)">',
+'<div style="color:#e3e3e3;font-size:13px;line-height:1.8">',
+'<div style="color:#8B1C2B;font-weight:700;font-size:11px;letter-spacing:0.1em;margin-bottom:14px">CLAUDE DESKTOP · 오늘 배울 것들</div>',
+'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">',
+'<div style="background:#2a2a2a;border-radius:8px;padding:14px"><div style="color:#c4c7c5;font-size:11px;margin-bottom:6px">CH 01</div><div style="font-weight:600">Projects + Artifacts</div><div style="color:#9aa0a6;font-size:12px;margin-top:4px">컨텍스트를 저장하고 결과물을 자산화</div></div>',
+'<div style="background:#2a2a2a;border-radius:8px;padding:14px"><div style="color:#c4c7c5;font-size:11px;margin-bottom:6px">CH 02</div><div style="font-weight:600">Claude Code</div><div style="color:#9aa0a6;font-size:12px;margin-top:4px">터미널에서 AI가 코드를 직접 수정</div></div>',
+'<div style="background:#2a2a2a;border-radius:8px;padding:14px"><div style="color:#c4c7c5;font-size:11px;margin-bottom:6px">CH 03</div><div style="font-weight:600">MCP 연결</div><div style="color:#9aa0a6;font-size:12px;margin-top:4px">파일·Notion·GitHub을 Claude에 꽂기</div></div>',
+'<div style="background:#2a2a2a;border-radius:8px;padding:14px"><div style="color:#c4c7c5;font-size:11px;margin-bottom:6px">CH 04</div><div style="font-weight:600">Skills & Agents</div><div style="color:#9aa0a6;font-size:12px;margin-top:4px">반복 업무를 파일로 쌓고 위임하기</div></div>',
+'</div>',
+'</div></div>',
+
+'<h2 class="section-heading">왜 지금 Claude인가 — 핵심 차이 3가지</h2>',
+'<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0 20px">',
+'<div style="background:#fff3f3;border:1px solid #f3cac8;border-radius:10px;padding:16px">',
+'<div style="font-size:12px;font-weight:700;color:#a53545;margin-bottom:10px">ChatGPT / Gemini 쓰던 방식</div>',
+'<ul style="font-size:13px;color:#6b5e5a;padding-left:18px;line-height:1.9">',
+'<li>매번 같은 배경 설명을 다시 입력</li>',
+'<li>결과물은 채팅창 안에서 사라짐</li>',
+'<li>AI가 내 파일·툴을 모름</li>',
+'<li>프롬프트는 개인 노트에 따로 보관</li>',
+'</ul>',
+'</div>',
+'<div style="background:#f0f7ed;border:1px solid #b4d1a8;border-radius:10px;padding:16px">',
+'<div style="font-size:12px;font-weight:700;color:#3a6b2e;margin-bottom:10px">오늘 배우는 Claude 방식</div>',
+'<ul style="font-size:13px;color:#3a5a30;padding-left:18px;line-height:1.9">',
+'<li>Projects에 컨텍스트를 한 번 저장하면 끝</li>',
+'<li>Artifacts로 결과물을 바로 파일화</li>',
+'<li>MCP로 내 파일·서비스를 직접 연결</li>',
+'<li>Skills 파일로 프롬프트가 팀 자산이 됨</li>',
+'</ul>',
+'</div>',
+'</div>',
+
+'<h2 class="section-heading">오늘 이 시간에 만들 것들</h2>',
+'<div class="demo-grid">',
+demo("📁 나만의 Project", "부서·업무별 컨텍스트를 저장해두는 지속적 작업 공간"),
+demo("⚡ Claude Code 환경", "터미널에서 AI와 협업하는 개발·문서 작업 환경"),
+demo("🔌 MCP 연결 2개", "파일시스템 + 외부 서비스를 Claude에 실시간 연결"),
+demo("📄 업무 Skill 파일", "내 반복 업무 프롬프트를 재사용 가능한 자산으로 변환"),
+'</div>',
+
+'<div class="callout">',
+'<div class="callout-title">💡 오늘 수업의 전제</div>',
+'ChatGPT나 Gemini를 써봤고, AI 프롬프트가 어색하지 않은 분들을 위한 과정입니다. "어떻게 Claude가 다른가"에 집중하고, 기초 챗봇 사용법은 빠르게 지나갑니다.',
+'</div>'
+].join('');
+
+/* ---------- */
+
+pages["0-1"] = [
+'<h1>오늘의 여정 · 4시간 아젠다</h1>',
+'<p class="page-desc">4시간 동안 Claude의 3개 레이어를 순서대로 쌓습니다. <b>Desktop(사용) → Code(확장) → MCP·Skills·Agents(자산화)</b>. 각 챕터는 독립적으로 완결되지만, 순서대로 쌓을수록 뒤가 더 강력해집니다.</p>',
+
+'<h2 class="section-heading">시간표</h2>',
+'<table>',
+'<thead><tr><th style="width:90px">챕터</th><th style="width:130px">시간</th><th>배울 것</th><th style="width:120px">핵심 산출물</th></tr></thead>',
+'<tbody>',
+'<tr><td><b>CH 00</b></td><td>0:00–0:20</td><td>왜 Claude인가, 오늘의 구조 이해</td><td>—</td></tr>',
+'<tr><td><b>CH 01</b></td><td>0:20–1:00</td><td>Claude Desktop · Projects + Artifacts</td><td>나만의 Project 1개</td></tr>',
+'<tr><td><b>CH 02</b></td><td>1:00–1:50</td><td>Claude Code · 터미널 AI 협업</td><td>Code 환경 셋업 + 실습</td></tr>',
+'<tr><td><b>CH 03</b></td><td>1:50–2:40</td><td>MCP · 도구 연결</td><td>MCP 서버 2개 연결</td></tr>',
+'<tr><td><b>CH 04</b></td><td>2:40–3:40</td><td>Skills & Agents · 자산화</td><td>Skill 파일 + Agent 정의</td></tr>',
+'<tr><td><b>CH 05</b></td><td>3:40–4:00</td><td>치트시트 · 30일 루틴</td><td>내일부터 쓸 루틴 카드</td></tr>',
+'</tbody></table>',
+
+'<h2 class="section-heading">오늘 수업의 3개 레이어</h2>',
+'<div class="step-grid">',
+'<div class="step-card">',
+'<div class="step-num">1</div>',
+'<div class="step-title">사용 레이어</div>',
+'<div class="step-desc">Claude Desktop에서 Projects·Artifacts로 일하는 방식을 바꿉니다. 기존 ChatGPT 사용 방식과 가장 큰 차이가 여기 있습니다.</div>',
+'</div>',
+'<div class="step-card">',
+'<div class="step-num">2</div>',
+'<div class="step-title">확장 레이어</div>',
+'<div class="step-desc">Claude Code로 터미널에서 직접 작업합니다. 코딩뿐 아니라 문서·파일 작업을 AI와 함께 처리할 수 있습니다.</div>',
+'</div>',
+'<div class="step-card">',
+'<div class="step-num">3</div>',
+'<div class="step-title">자산화 레이어</div>',
+'<div class="step-desc">MCP·Skills·Agents로 반복 업무를 파일과 구조로 만듭니다. 이게 Claude를 다른 AI와 차별화하는 핵심입니다.</div>',
+'</div>',
+'</div>',
+
+'<div class="callout">',
+'<div class="callout-title">🎯 오늘 끝나면 가능해지는 것</div>',
+'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:1.9">',
+'<li>내 부서 업무 맥락을 Projects에 한 번 저장하고 매번 재사용</li>',
+'<li>Claude Code로 문서·코드 수정을 터미널에서 처리</li>',
+'<li>파일시스템·Notion 등을 MCP로 직접 연결</li>',
+'<li>반복 프롬프트를 Skill 파일로 만들어 팀 전체에 공유</li>',
+'</ul>',
+'</div>',
+
+'<div class="callout" style="background:#fdf5ea;border-color:#c8a855">',
+'<div class="callout-title" style="color:#8a6a10">📦 사전 준비 사항</div>',
+'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:1.9;color:#5a4a20">',
+'<li>Claude.ai 계정 (Pro 플랜 권장 — Projects 기능 필요)</li>',
+'<li>Claude Desktop 앱 설치 (claude.ai/download)</li>',
+'<li>Node.js 18 이상 설치 (Claude Code 실습용)</li>',
+'<li>터미널(macOS: Terminal / Windows: PowerShell 또는 명령 프롬프트) 기본 사용 가능</li>',
+'</ul>',
+'</div>'
+].join('');
+
+/* ---------- CH 01 · Claude Desktop 핵심 ---------- */
+
+pages["1-1"] = [
+'<h1>Desktop UI · ChatGPT와 뭐가 다른가</h1>',
+'<p class="page-desc">Claude Desktop은 "더 나은 채팅창"이 아닙니다. <b>Projects(지속적 작업 공간)</b>와 <b>Artifacts(결과물 분리)</b>라는 두 구조가 기존 AI와 근본적으로 다릅니다.</p>',
+
+'<h2 class="section-heading">UI 한눈에 보기</h2>',
+'<div style="background:#1f1f1f;border-radius:12px;padding:14px;box-shadow:0 4px 16px rgba(0,0,0,0.15);margin:8px 0 20px">',
+'<div style="display:flex;gap:2px">',
+'<div style="width:220px;background:#2a2a2a;border-radius:8px;padding:14px 10px;color:#e3e3e3;font-size:12px">',
+'<div style="display:flex;align-items:center;gap:8px;padding:6px 10px;color:#e3a0aa;font-weight:700;margin-bottom:10px;font-size:13px">✦ Claude</div>',
+'<div style="padding:6px 10px;color:#9aa0a6;font-size:11px;letter-spacing:0.05em;margin-bottom:4px">PROJECTS</div>',
+'<div style="padding:8px 10px;background:#3c2a2e;border-radius:6px;color:#e3a0aa;font-size:12px;margin-bottom:3px">📁 마케팅 Q3 캠페인</div>',
+'<div style="padding:8px 10px;color:#c4c7c5;font-size:12px;margin-bottom:3px">📁 품질 월례 보고</div>',
+'<div style="padding:8px 10px;color:#c4c7c5;font-size:12px;margin-bottom:10px">📁 신규 서비스 기획</div>',
+'<div style="padding:6px 10px;color:#9aa0a6;font-size:11px;letter-spacing:0.05em;margin-bottom:4px">최근 대화</div>',
+'<div style="padding:8px 10px;color:#c4c7c5;font-size:12px;margin-bottom:3px">계약서 검토 요청</div>',
+'<div style="padding:8px 10px;color:#c4c7c5;font-size:12px">이메일 초안 작성</div>',
+'</div>',
+'<div style="flex:1;background:#202124;border-radius:8px;padding:24px;color:#e3e3e3;font-size:13px;position:relative;min-height:260px">',
+'<div style="position:absolute;top:12px;right:12px;background:#3c4043;padding:4px 10px;border-radius:12px;font-size:11px;color:#c4c7c5">Claude 3.7 Sonnet ▾</div>',
+'<div style="margin-bottom:16px">',
+'<div style="font-size:11px;color:#9aa0a6;margin-bottom:6px">PROJECT 지식</div>',
+'<div style="background:#2d2e31;padding:10px 12px;border-radius:6px;font-size:12px;color:#c4c7c5;line-height:1.6">마케팅 Q3 캠페인 배경, 타깃 고객 데이터, 브랜드 가이드 (저장됨)</div>',
+'</div>',
+'<div style="background:#2d2e31;padding:12px 14px;border-radius:18px 18px 18px 4px;display:inline-block;max-width:80%;font-size:13px;line-height:1.6;margin-bottom:12px">이번 캠페인 슬로건 5개 뽑아줘.</div>',
+'<div style="margin-top:8px;background:#3c4043;padding:12px 16px;border-radius:4px 18px 18px 18px;font-size:12px;line-height:1.65;color:#e3e3e3">Project에 저장된 배경 정보를 바탕으로 Q3 캠페인 슬로건 5개 제안드립니다...</div>',
+'<div style="margin-top:20px;background:#303134;border:1px solid #3c4043;border-radius:24px;padding:10px 16px;color:#9aa0a6;font-size:12px">메시지 입력 ⬆</div>',
+'</div>',
+'</div>',
+'</div>',
+'<div style="font-size:11px;color:#9aa0a6;margin-top:6px;text-align:center">※ Claude Desktop UI 목업 — 왼쪽 Projects 패널이 핵심 차별점</div>',
+
+'<h2 class="section-heading">ChatGPT vs Claude · 구조 비교</h2>',
+'<table>',
+'<thead><tr><th>항목</th><th>ChatGPT / Gemini</th><th>Claude (오늘 배울 것)</th></tr></thead>',
+'<tbody>',
+'<tr><td><b>업무 맥락 유지</b></td><td>매 대화마다 다시 설명</td><td>Project에 저장 → 영구 유지</td></tr>',
+'<tr><td><b>결과물 관리</b></td><td>채팅창 안에 묻힘</td><td>Artifacts로 분리 · 다운로드 가능</td></tr>',
+'<tr><td><b>파일 연결</b></td><td>업로드 후 사라짐</td><td>MCP로 실시간 연결 (CH 03)</td></tr>',
+'<tr><td><b>반복 작업</b></td><td>매번 프롬프트 재입력</td><td>Skills 파일로 저장·재사용 (CH 04)</td></tr>',
+'<tr><td><b>자동화</b></td><td>별도 앱 필요</td><td>Agents로 위임 (CH 04)</td></tr>',
+'</tbody></table>',
+
+'<div class="callout">',
+'<div class="callout-title">🎯 이 챕터 끝나면 가능해지는 것</div>',
+'<ul style="margin:4px 0;padding-left:18px;font-size:14px;line-height:1.9">',
+'<li>내 업무용 Project를 만들고 배경 정보를 한 번만 저장</li>',
+'<li>대화 결과를 Artifact로 뽑아 파일로 저장·공유</li>',
+'</ul>',
+'<p style="margin-top:8px;font-size:13px;color:#6b5e5a">이어지는 순서: <b>1-2</b> Projects 실습 → <b>1-3</b> Artifacts 실습</p>',
+'</div>'
+].join('');
+
+/* ---------- */
+
+pages["1-2"] = [
+'<h1>Projects · 컨텍스트 재사용</h1>',
+'<p class="page-desc">Projects는 "이 업무를 Claude와 계속 함께 한다"는 선언입니다. 배경 정보를 한 번 저장해두면 해당 Project 안의 모든 대화에서 Claude가 그 맥락을 기억합니다.</p>',
+
+'<div class="callout">',
+'<div class="callout-title">🎯 실습 목표</div>',
+'내 실제 업무 하나를 골라 Project를 만들고, 배경 정보를 저장합니다. 실습 후 같은 질문을 일반 대화 vs Project 대화에서 비교해봅니다.',
+'</div>',
+
+'<h2 class="section-heading">만드는 순서 — 4단계</h2>',
+'<div class="step-grid">',
+'<div class="step-card">',
+'<div class="step-num">1</div>',
+'<div class="step-title">Project 생성</div>',
+'<div class="step-desc">사이드바 Projects 영역 → "+ 새 Project" 클릭. 이름 입력 (예: "마케팅 Q3", "품질 월례 보고").</div>',
+'</div>',
+'<div class="step-card">',
+'<div class="step-num">2</div>',
+'<div class="step-title">Project 지식 입력</div>',
+'<div class="step-desc">Project 설정 → "Project 지식" 섹션에 배경 정보 붙여넣기. 아래 템플릿을 그대로 활용해도 됩니다.</div>',
+'</div>',
+'<div class="step-card">',
+'<div class="step-num">3</div>',
+'<div class="step-title">첫 대화 시작</div>',
+'<div class="step-desc">Project 안에서 새 대화 시작. Claude가 저장된 맥락을 자동으로 참조합니다.</div>',
+'</div>',
+'<div class="step-card">',
+'<div class="step-num">4</div>',
+'<div class="step-title">비교 테스트</div>',
+'<div class="step-desc">Project 밖 일반 채팅에서 같은 질문. 답변 품질 차이를 직접 확인합니다.</div>',
+'</div>',
+'</div>',
+
+'<h2 class="section-heading">Project 지식 템플릿 — 복사해서 쓰기</h2>',
+promptBlock('Project 지식 — 내 업무 맥락 템플릿',
+`## 나(역할)
+- 이름/직책: [예: 마케팅팀 대리 김OO]
+- 주요 업무: [예: SNS 콘텐츠 기획, 캠페인 성과 분석]
+- 자주 쓰는 도구: [예: 사내 그룹웨어, 엑셀, PPT]
+
+## 이 Project의 목적
+[예: Q3 캠페인 전체 기획·실행 관련 작업]
+
+## 배경 정보
+- 대상 고객: [예: 2030 직장인, 건강 관심 높음]
+- 브랜드 톤: [예: 친근하되 전문적, 과장 없이 솔직하게]
+- 주요 제약: [예: 예산 300만원, 게시 플랫폼은 인스타그램·블로그]
+
+## Claude에게 요청할 때 기본 규칙
+- 결과물은 항상 한국어로
+- 초안을 먼저 주고, 내가 피드백하면 수정
+- 숫자·데이터 근거가 있으면 함께 제시`),
+
+'<h2 class="section-heading">테스트해보기</h2>',
+'<div class="demo-grid">',
+demo('테스트 A — 간단한 요청', '"이번 캠페인 슬로건 후보 5개 뽑아줘" — Project 안에서 물어보면 저장된 타깃·브랜드 톤을 반영한 결과가 나옵니다.'),
+demo('테스트 B — 반복 작업', '"지난주 회의 내용 요약해줘" — 회의록을 붙여넣으면 배경 맥락을 알고 있어 훨씬 정확한 요약이 나옵니다.'),
+demo('비교 확인', '같은 질문을 Project 밖 일반 채팅에서 해보세요. 맥락 없는 답변과의 차이가 바로 Projects의 가치입니다.'),
+'</div>',
+
+'<h2 class="section-heading">활용 팁</h2>',
+'<div class="demo-grid">',
+demo('업무별로 Project 분리', '하나의 Project에 여러 업무를 섞으면 맥락이 희석됩니다. "월례 보고", "채용 공고", "교육 자료" 식으로 목적별로 나눕니다.'),
+demo('파일 첨부도 가능', 'Project 안에 PDF·엑셀 파일을 업로드해두면 Claude가 파일 내용까지 참조합니다. 제품 스펙시트, 브랜드 가이드 등에 유용합니다.'),
+demo('팀 공유', 'Claude Pro 플랜에서는 Project를 팀원과 공유할 수 있습니다. 팀 공통 맥락을 한 곳에서 관리합니다.'),
+'</div>',
+
+'<div class="callout">',
+'<div class="callout-title">⚠️ 주의사항</div>',
+'Project 지식에 <b>개인정보(고객 이름, 주민번호 등)나 사내 기밀 정보</b>를 그대로 입력하지 마십시오. 일반화된 구조 정보(역할, 브랜드 방향, 업무 유형)만 저장하는 것을 권장합니다. 사내 AI 정책을 먼저 확인하세요.',
+'</div>'
+].join('');
+
+/* ---------- */
+
+pages["1-3"] = [
+'<h1>Artifacts · 결과물을 자산으로</h1>',
+'<p class="page-desc">Artifacts는 대화 중에 생성된 결과물을 <b>채팅창과 분리해서 독립된 파일처럼 관리</b>하는 기능입니다. 긴 문서, 코드, 표 같은 결과물이 채팅 히스토리에 묻히지 않고 오른쪽 패널에 분리되어 나타납니다.</p>',
+
+'<div class="callout">',
+'<div class="callout-title">🎯 실습 목표</div>',
+'보고서 초안 하나를 Claude와 함께 작성하고 Artifact로 뽑아냅니다. Artifact를 수정·다운로드하는 흐름을 익힙니다.',
+'</div>',
+
+'<h2 class="section-heading">Artifacts가 뭔가 — UI 목업</h2>',
+'<div style="background:#1f1f1f;border-radius:12px;padding:14px;box-shadow:0 4px 16px rgba(0,0,0,0.12);margin:8px 0 20px">',
+'<div style="display:flex;gap:8px">',
+'<div style="flex:1;background:#202124;border-radius:8px;padding:20px;color:#e3e3e3;font-size:13px;min-height:220px">',
+'<div style="font-size:11px;color:#9aa0a6;margin-bottom:10px">대화창</div>',
+'<div style="background:#2d2e31;padding:12px;border-radius:18px 18px 18px 4px;font-size:12px;line-height:1.6;margin-bottom:10px;max-width:85%">Q3 캠페인 성과 보고서 초안 만들어줘. 목차, 요약, 주요 지표 섹션 포함해줘.</div>',
+'<div style="font-size:12px;color:#c4c7c5;line-height:1.7">알겠습니다. 보고서 초안을 작성했습니다.<br><span style="color:#8ab4f8;cursor:pointer">→ 오른쪽 패널에서 확인하세요</span></div>',
+'</div>',
+'<div style="width:260px;background:#2a2a2a;border-radius:8px;padding:16px;color:#e3e3e3;font-size:12px">',
+'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">',
+'<span style="font-size:11px;color:#9aa0a6">ARTIFACT</span>',
+'<span style="background:#8B1C2B;color:#fff;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:700">복사 / 다운로드</span>',
+'</div>',
+'<div style="background:#303134;border-radius:6px;padding:12px;line-height:1.7;font-size:12px">',
+'<div style="font-weight:700;margin-bottom:6px;color:#e3e3e3">Q3 캠페인 성과 보고서</div>',
+'<div style="color:#9aa0a6;font-size:11px">1. 개요 및 요약</div>',
+'<div style="color:#9aa0a6;font-size:11px">2. 주요 성과 지표</div>',
+'<div style="color:#9aa0a6;font-size:11px">3. 채널별 분석</div>',
+'<div style="color:#9aa0a6;font-size:11px">4. 다음 분기 제언</div>',
+'</div>',
+'</div>',
+'</div>',
+'</div>',
+'<div style="font-size:11px;color:#9aa0a6;margin-top:6px;text-align:center">※ Artifact는 오른쪽 패널에 분리되어 나타납니다</div>',
+
+'<h2 class="section-heading">Artifact 활용 순서 — 4단계</h2>',
+'<div class="step-grid">',
+'<div class="step-card">',
+'<div class="step-num">1</div>',
+'<div class="step-title">결과물 요청</div>',
+'<div class="step-desc">긴 문서·코드·표를 요청할 때 "Artifact로 만들어줘" 또는 "문서로 작성해줘"라고 명시하면 자동으로 Artifact 패널에 표시됩니다.</div>',
+'</div>',
+'<div class="step-card">',
+'<div class="step-num">2</div>',
+'<div class="step-title">실시간 수정</div>',
+'<div class="step-desc">Artifact를 보면서 대화창에서 "3번 항목에 수치 추가해줘" 식으로 수정 요청. Artifact가 실시간으로 업데이트됩니다.</div>',
+'</div>',
+'<div class="step-card">',
+'<div class="step-num">3</div>',
+'<div class="step-title">직접 편집</div>',
+'<div class="step-desc">Artifact 패널에서 직접 텍스트를 수정할 수도 있습니다. AI 도움과 직접 편집을 자유롭게 넘나들 수 있습니다.</div>',
+'</div>',
+'<div class="step-card">',
+'<div class="step-num">4</div>',
+'<div class="step-title">다운로드·공유</div>',
+'<div class="step-desc">완성된 Artifact는 복사 또는 다운로드. 마크다운 문서, HTML, 코드 파일 등 형식에 따라 저장합니다.</div>',
+'</div>',
+'</div>',
+
+'<h2 class="section-heading">지금 해보기 — 보고서 초안 만들기</h2>',
+promptBlock('Artifact 실습 프롬프트',
+`아래 내용을 바탕으로 팀 내부 공유용 주간 업무 보고서 초안을 Artifact로 작성해줘.
+
+형식:
+- 제목: [날짜] 주간 업무 보고
+- 섹션: 이번 주 완료 / 진행 중 / 다음 주 계획 / 이슈·요청 사항
+- 각 항목은 불릿 형태, 간결하게
+
+내용:
+- 완료: 월례 보고서 작성 완료, 협력사 미팅 진행
+- 진행: 신규 프로세스 문서화 (60% 완료)
+- 계획: 부서 교육 자료 초안 작성
+- 이슈: 시스템 점검 일정 확인 필요`),
+
+'<h2 class="section-heading">Artifacts 유형 3가지</h2>',
+'<div class="demo-grid">',
+demo('문서 (Markdown)', '보고서, 기획안, 이메일 초안 등. 마크다운 형식으로 저장되어 나중에 편집도 쉽습니다.'),
+demo('코드', 'Python, JavaScript, SQL 등 코드 조각. 실행 버튼으로 바로 결과 확인도 가능합니다.'),
+demo('HTML', '간단한 대시보드, 프로토타입 페이지. 브라우저에서 바로 열 수 있습니다.'),
+'</div>',
+
+'<div class="callout">',
+'<div class="callout-title">💡 Artifacts가 특히 유용한 상황</div>',
+'3페이지 이상의 긴 문서, 반복 수정이 필요한 보고서·기획안, 팀원에게 공유할 결과물 작성 시 Artifacts를 적극 활용하면 작업 흐름이 크게 달라집니다.',
+'</div>'
+].join('');
+
+/* ===================== END CH 00–01 ===================== */
+
+/* ---------- PLACEHOLDERS for CH 02–05 (will be filled next) ---------- */
+pages["2-1"] = '<h1>왜 터미널에서 AI를 쓰나</h1><p class="page-desc">챕터 생성 진행 중입니다. CH 02 승인 후 내용이 채워집니다.</p>';
+pages["2-2"] = '<h1>Claude Code 설치 · 첫 실행</h1><p class="page-desc">챕터 생성 진행 중입니다.</p>';
+pages["2-3"] = '<h1>실제 프로젝트에서 코드 수정하기</h1><p class="page-desc">챕터 생성 진행 중입니다.</p>';
+pages["3-1"] = '<h1>MCP가 뭐야 · Claude에 도구를 꽂다</h1><p class="page-desc">챕터 생성 진행 중입니다. CH 03 승인 후 내용이 채워집니다.</p>';
+pages["3-2"] = '<h1>파일시스템 MCP 연결</h1><p class="page-desc">챕터 생성 진행 중입니다.</p>';
+pages["3-3"] = '<h1>외부 서비스 MCP 연결 (Notion/GitHub)</h1><p class="page-desc">챕터 생성 진행 중입니다.</p>';
+pages["4-1"] = '<h1>Skill · 반복 프롬프트를 파일로</h1><p class="page-desc">챕터 생성 진행 중입니다. CH 04 승인 후 내용이 채워집니다.</p>';
+pages["4-2"] = '<h1>내 업무 Skill 하나 만들기</h1><p class="page-desc">챕터 생성 진행 중입니다.</p>';
+pages["4-3"] = '<h1>서브에이전트 · 일을 위임하는 법</h1><p class="page-desc">챕터 생성 진행 중입니다.</p>';
+pages["4-4"] = '<h1>내 전용 에이전트 만들기</h1><p class="page-desc">챕터 생성 진행 중입니다.</p>';
+pages["5"]   = '<h1>손에 쥐고 가는 것 · 30일 루틴</h1><p class="page-desc">챕터 생성 진행 중입니다. CH 05 승인 후 내용이 채워집니다.</p>';
+
+/* ===================== CORE SYSTEM ===================== */
+function renderNav() {
+  const nav = document.getElementById('nav');
+  let html = '';
+  chapters.forEach((c, ci) => {
+    html += '<div class="nav-chapter' + (ci === 0 ? ' open' : '') + '">';
+    html += '<div class="nav-chapter-header" onclick="toggleChapter(this)">';
+    html +=   '<span class="ch-num">' + (c.num || ('CH ' + ci.toString().padStart(2,'0'))) + '</span>';
+    html +=   '<span class="ch-title">' + c.title + '</span>';
+    html +=   '<span class="ch-time">' + (c.time || '') + '</span>';
+    html +=   '<span class="ch-caret">▾</span>';
+    html += '</div>';
+    html += '<div class="sections">';
+    c.sections.forEach(s => {
+      html += '<div class="section-item" data-id="' + s.id + '" onclick="go(\'' + s.id + '\')">';
+      html +=   '<span class="dot"></span>';
+      html +=   '<span class="title">' + s.title + '</span>';
+      html +=   '<span class="tag ' + typeClass[s.type] + '">' + (s.label || typeLabel[s.type]) + '</span>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+  });
+  nav.innerHTML = html;
+}
+function toggleChapter(el) { el.parentElement.classList.toggle('open'); }
+
+function findSection(id) {
+  for (const c of chapters) {
+    for (const s of c.sections) if (s.id === id) return { chapter: c, section: s };
+  }
+  return null;
+}
+function flatSections() {
+  const out = [];
+  chapters.forEach(c => c.sections.forEach(s => out.push({ chapter: c, section: s })));
+  return out;
+}
+function renderPage(id) {
+  const content = document.getElementById('content');
+  const bc = document.getElementById('breadcrumb');
+  if (!pages[id]) { content.innerHTML = '<h1>페이지를 찾을 수 없습니다</h1>'; return; }
+  content.innerHTML = pages[id];
+
+  const found = findSection(id);
+  if (found) {
+    bc.innerHTML = '<span>' + found.chapter.title + '</span><span class="current">' + found.section.title + '</span>';
+  }
+
+  document.querySelectorAll('.section-item').forEach(el => el.classList.remove('active'));
+  const active = document.querySelector('.section-item[data-id="' + id + '"]');
+  if (active) {
+    active.classList.add('active');
+    active.closest('.nav-chapter').classList.add('open');
+  }
+
+  const flat = flatSections();
+  const idx = flat.findIndex(x => x.section.id === id);
+  const prev = idx > 0 ? flat[idx - 1] : null;
+  const next = idx < flat.length - 1 ? flat[idx + 1] : null;
+  let nav = '<div class="footer-nav">';
+  nav += prev
+    ? '<button class="nav-btn" onclick="go(\'' + prev.section.id + '\')">← ' + prev.section.title + '</button>'
+    : '<button class="nav-btn disabled">← 처음</button>';
+  nav += next
+    ? '<button class="nav-btn next" onclick="go(\'' + next.section.id + '\')">' + next.section.title + ' →</button>'
+    : '<button class="nav-btn next disabled">끝 →</button>';
+  nav += '</div>';
+  content.innerHTML += nav;
+  window.scrollTo(0, 0);
+}
+function go(id) {
+  location.hash = id;
+  renderPage(id);
+  if (window.innerWidth <= 900) document.getElementById('sidebar').classList.remove('open');
+}
+function setFont(delta) {
+  const sizes = [14, 15, 16];
+  document.body.style.fontSize = sizes[delta + 1] + 'px';
+  document.querySelectorAll('.font-ctrl button').forEach((b, i) => b.classList.toggle('active', i === delta + 1));
+}
+function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+
+renderNav();
+const initialId = (location.hash && location.hash.slice(1)) || (chapters[0] && chapters[0].sections[0] && chapters[0].sections[0].id) || '';
+if (initialId) renderPage(initialId);
+window.addEventListener('hashchange', () => renderPage(location.hash.slice(1)));
+</script>
+</body>
+</html>
